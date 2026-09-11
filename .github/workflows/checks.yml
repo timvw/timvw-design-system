@@ -34,6 +34,9 @@ jobs:
           VISUAL_TESTS: 'true'
           UPDATE_SNAPSHOTS: ${{ inputs.update_snapshots || 'false' }}
         run: |
+          # Actions mounts a home directory owned by pwuser into this root container.
+          # Firefox requires the home directory owner to match the browser process.
+          chown "$(id -u):$(id -g)" "$HOME"
           export NODE_PATH="$RUNNER_TEMP/tvw-checks/node_modules"
           if [ "$UPDATE_SNAPSHOTS" = "true" ] || [ ! -d tests/snapshots ]; then
             node "$RUNNER_TEMP/tvw-checks/node_modules/@playwright/test/cli.js" test --config tests/browser.config.cjs --update-snapshots
