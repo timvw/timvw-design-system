@@ -14,6 +14,8 @@ For a component change:
 
 Serve the repository using any static HTTP server. Open `/tests/` and run the browser-native regression checks. No test libraries or installation are needed. Run the tests in the browsers you intend to support.
 
+Release-navigation regressions can also be checked with `python3 -m unittest discover -s scripts -p 'test_*.py'` (standard library only).
+
 The regression page includes 20 checks covering tabs, dialogs, loading, themes, validation, tables, menus, tooltips, and notifications.
 
 Also check the showcase and complete example pages manually:
@@ -35,7 +37,7 @@ The project has no build step or CI framework. The regression page tests behavio
 
 ## Publishing a demo version
 
-Edit the current files at the repository root. Do not edit files inside existing `vMAJOR.MINOR.PATCH/` folders; they are frozen demos. Their `release.json` files identify the source revision and checksums. Versioned component CSS and JavaScript must match their recorded source revision.
+Edit the current files at the repository root. Do not edit component code or examples inside existing `vMAJOR.MINOR.PATCH/` folders; they are frozen demos. Release-navigation markup is the exception: use `python3 scripts/demo-release.py --refresh-navigation` for navigation-only corrections. This updates only the version picker and shared navigation script reference, preserving the initial publication hashes and updating affected current checksums. Their `release.json` files identify the source revision and checksums. Versioned component CSS and JavaScript must match their recorded source revision.
 
 To publish a new version:
 
@@ -45,4 +47,4 @@ To publish a new version:
 4. Run `python3 scripts/demo-release.py --version VERSION --ref HEAD`, replacing `VERSION` with the version number without a `v` prefix. This copies an explicit set of public files from the commit and adds the archive toolbar. It refuses to overwrite an existing release.
 5. Verify the new snapshot and its local links, then commit the new release folder and push both commits together. GitHub Pages publishes the latest demo and all archives.
 
-The helper uses only Python's standard library and Git. It is an optional release-maintenance utility; no tooling or build step is required by the published HTML, CSS, or JavaScript. Existing archives retain their navigation snapshot; the Latest link always leads to the current release list.
+The helper uses only Python's standard library and Git. It is an optional release-maintenance utility; no tooling or build step is required by the published HTML, CSS, or JavaScript. All demos use the shared `js/demo-versions.js` to read the root `releases.json` with cache revalidation. New releases become available in archived menus without rebuilding their components. Static archived Latest links must not embed a version number. Verify the picker with a simulated future catalog and a failed request; both must retain the correct Latest destination. The shared navigation module must remain independent of any versioned component API.

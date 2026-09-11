@@ -4,7 +4,7 @@ The component source is ordinary HTML, CSS, and JavaScript. There is no framewor
 
 ## Files and initialization
 
-Copy `css/timvw.css` and `css/components.css`, the **whole `js/` directory**, and `icons.svg` into your project. The small modules imported by `js/timvw.js` must remain beside it. `js/docs.js` is showcase-only and can be omitted. Keep the license and attribution files described in README.md.
+Copy `css/timvw.css` and `css/components.css`, the **whole `js/` directory**, and `icons.svg` into your project. The small modules imported by `js/timvw.js` must remain beside it. `js/docs.js` and `js/demo-versions.js` are showcase-only and can be omitted. Keep the license and attribution files described in README.md.
 
 ```html
 <link rel="stylesheet" href="./css/timvw.css">

@@ -27,11 +27,11 @@ def git(*args):
     return subprocess.check_output(['git', '-C', str(ROOT), *args])
 
 
-def header(catalog, current=None):
+def version_picker(catalog, current=None):
     prefix = '../' if current else './'
     latest = catalog['latest']
     label = f'v{current}' if current else f'Latest · v{latest}'
-    links = [(prefix, f'Latest · v{latest}', 'Current development', current is None)]
+    links = [(prefix, 'Latest', 'Current development', current is None)]
     links += [(f'{prefix}v{item["version"]}/', f'v{item["version"]}',
                item['description'], item['version'] == current)
               for item in catalog['versions']]
@@ -39,9 +39,25 @@ def header(catalog, current=None):
         f'<a href="{html.escape(url)}"' + (' aria-current="page"' if active else '')
         + f'><strong>{html.escape(name)}</strong><small>{html.escape(description)}</small></a>'
         for url, name, description, active in links)
-    picker = (f'<details class="docs-version" data-version-picker><summary aria-label="Demo version: {label}">{label}</summary>'
+    return (f'<details class="docs-version" data-version-picker data-demo-version="{current or "latest"}"><summary aria-label="Demo version: {label}">{label}</summary>'
               f'<nav aria-label="Demo versions">{choices}</nav></details>')
-    return (ROOT / 'scripts/demo-header.html').read_text().replace('{{VERSION_PICKER}}', picker).rstrip()
+
+
+def header(catalog, current=None):
+    return (ROOT / 'scripts/demo-header.html').read_text().replace('{{VERSION_PICKER}}', version_picker(catalog, current)).rstrip()
+
+
+def navigation(source, catalog, current=None):
+    updated, count = re.subn(r'<details class="docs-version".*?</details>',
+                            lambda _: version_picker(catalog, current), source, count=1, flags=re.S)
+    if count != 1:
+        raise ValueError('Expected exactly one version picker')
+    script = f'<script type="module" src="{"../" if current else "./"}js/demo-versions.js"></script>'
+    if re.search(r'<script[^>]+src="[^"]*/demo-versions\.js[^>]*></script>', updated):
+        updated = re.sub(r'<script[^>]+src="[^"]*/demo-versions\.js[^>]*></script>', lambda _: script, updated)
+    else:
+        updated = updated.replace('</head>', f'  {script}\n</head>', 1)
+    return updated
 
 
 def page(source, catalog, current=None):
@@ -64,16 +80,42 @@ def page(source, catalog, current=None):
         updated = updated.replace('</header>', '</header>\n'
             f'<aside class="docs-archive" aria-label="Archived demo"><p>Frozen demo · v{current}. '
             '<a href="../">View the latest version →</a></p></aside>', 1)
-    return updated
+    return navigation(updated, catalog, current)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--latest', action='store_true', help='Refresh only the current demo header and version label')
+    parser.add_argument('--refresh-navigation', action='store_true', help='Refresh archive navigation only; preserve component assets and record original publication hashes')
     parser.add_argument('--version', help='Version to freeze, e.g. 0.3.0')
     parser.add_argument('--ref', help='Committed source revision to freeze')
     args = parser.parse_args()
     catalog = json.loads((ROOT / 'releases.json').read_text())
+    if args.refresh_navigation:
+        if args.latest or args.version or args.ref:
+            parser.error('--refresh-navigation cannot be combined with other options')
+        for folder in sorted(ROOT.glob('v*.*.*')):
+            manifest_path = folder / 'release.json'
+            if not manifest_path.is_file(): continue
+            manifest = json.loads(manifest_path.read_text())
+            changes = {}
+            for name in ('index.html', 'components.html'):
+                target = folder / name
+                if not target.exists(): continue
+                source = target.read_text()
+                updated = navigation(source, catalog, manifest['version'])
+                if updated != source: changes[name] = updated
+            if not changes: continue
+            manifest.setdefault('initial_published_sha256', dict(manifest['published_sha256']))
+            for name, updated in changes.items():
+                target = folder / name
+                target.write_text(updated)
+                manifest['published_sha256'][name] = hashlib.sha256(target.read_bytes()).hexdigest()
+            manifest['archive_chrome'] = 'Component assets frozen; version navigation reads the shared site release catalog.'
+            manifest['shared_navigation'] = '../js/demo-versions.js'
+            manifest_path.write_text(json.dumps(manifest, indent=2) + '\n')
+            print(f'Refreshed navigation in {folder.name}; component assets preserved.')
+        return
     if args.latest:
         if args.version or args.ref:
             parser.error('--latest cannot be combined with --version or --ref')
@@ -106,7 +148,7 @@ def main():
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(data)
             original_hashes[name] = hashlib.sha256(data).hexdigest()
-        # The archive toolbar is added once. All assets then live inside this folder.
+        # Component assets live inside the archive; release navigation uses the shared site catalog.
         (stage / 'index.html').write_text(page((stage / 'index.html').read_text(), catalog, args.version))
         if (stage / 'components.html').exists():
             (stage / 'components.html').write_text(page((stage / 'components.html').read_text(), catalog, args.version))
@@ -116,7 +158,8 @@ def main():
                  for path in sorted(stage.rglob('*')) if path.is_file()}
         (stage / 'release.json').write_text(json.dumps({
             'version': args.version, 'source_commit': commit,
-            'archive_chrome': 'Version navigation and theme icons added at snapshot creation.',
+            'archive_chrome': 'Component assets frozen; version navigation reads the shared site release catalog.',
+            'shared_navigation': '../js/demo-versions.js',
             'original_source_sha256': original_hashes, 'published_sha256': files,
         }, indent=2) + '\n')
         stage.rename(target)

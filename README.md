@@ -33,7 +33,7 @@ python3 -m http.server 8080
 
 Open `http://localhost:8080` for the component showcase. HTML and CSS also work from disk; browsers restrict JavaScript module loading on `file://` URLs. Python is just an optional local server, not a project dependency.
 
-The showcase provides live examples and copyable source. `docs.css`, `demo-controls.css`, and `js/docs.js` belong only to the showcase; consumers don't need them. The sun, moon, and computer buttons select light, dark, or system appearance. Your choice is remembered across demo versions; system mode follows OS changes.
+The showcase provides live examples and copyable source. `docs.css`, `demo-controls.css`, `js/docs.js`, and `js/demo-versions.js` belong only to the showcase; consumers don't need them. The sun, moon, and computer buttons select light, dark, or system appearance. Your choice is remembered across demo versions; system mode follows OS changes.
 
 ## Demo hosting
 
@@ -49,7 +49,7 @@ The header's version switcher links to the latest demo and frozen releases:
 | [v0.2.0](https://timvw.github.io/timvw-design-system/v0.2.0/) | QuantumBlack palette components |
 | [v0.1.0](https://timvw.github.io/timvw-design-system/v0.1.0/) | Original blue palette components |
 
-Each release folder contains its own component CSS, JavaScript, examples, and licenses. The archived demos received version navigation and theme icons when first archived; their component files match the recorded source revision. Everything in a release folder is frozen after publication. `release.json` records the source commit and SHA-256 checksums. Archived version menus show the versions known when they were created and always link back to Latest.
+Each release folder contains its own component CSS, JavaScript, examples, and licenses. The archived demos received version navigation and theme icons when first archived; their component files match the recorded source revision. Component assets and examples are frozen after publication; the release-navigation markup is maintained separately. All version pickers load the shared root `releases.json` through `js/demo-versions.js`, so archived pages display the current latest release and available versions. Without JavaScript or when the catalog cannot load, the static “Latest” link still leads to the current demo without displaying an outdated version number. `release.json` records the source commit and current file checksums; navigation-only corrections retain the initial publication checksums in `initial_published_sha256`.
 
 Maintainers can create future snapshots with the optional Python standard-library utility documented in [CONTRIBUTING.md](CONTRIBUTING.md). It is not needed to use or serve the design system.
 
