@@ -1,0 +1,37 @@
+{
+  "version": "0.2.0",
+  "source_commit": "963efa68b33c30d16ef191bfa85e43e310922202",
+  "archive_chrome": "Version navigation and theme icons added at snapshot creation.",
+  "original_source_sha256": {
+    "index.html": "a93003c9758989c591b9b2f2da580c683796f1dfd34eea8a5e023aba2ec45c07",
+    "docs.css": "ed05595c58f4dbb3eb7011564fed8ef265d6e6056592f4db56c6cd1a85b5063d",
+    "favicon.svg": "a7a05acabadec282f1a482e39829243afab19dd4c492246fec5fad2176a70efa",
+    "starter.html": "1b2848cbbfd48b608b9c9a19225124de3b3141893bd3a0c680784e5d17f9e762",
+    "css/timvw.css": "dd4b5ac3b70cfeee4884c73e4c6b8f1a858c1e8ad1b722655f1a26c926cca603",
+    "js/timvw.js": "9ab1d06e1eb2065416150095d24a82fa6c568ba2a73791d6f2df11ea0f6b997c",
+    "README.md": "c4ac61e741a2fb9f14e57c2f93fcd70e594dae9946729e889cd410ef20dc1879",
+    "CONTRIBUTING.md": "1d4faafa864cc28373444c943498d1ab2e8122f2245cdc52d053c11fb842c860",
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "THIRD_PARTY_NOTICES.md": "3ab4e0ccdcde9efc5ad1494223659f5d8c0b133fa502c379100ce381a46f8f21",
+    "third-party/quantumblack-LICENSE.txt": "41a119da2c5cf00b4cdf4f186fd3bed343f23375d0ed6afe349ab0b1282ad9b1",
+    "tests/index.html": "a23eed9629cf071ed8fb2c2c27cfd1c3ab067a974a97cd3be5a75ac47b5dbcf3",
+    "tests/tests.js": "f14c0b948a79a35621afd508f18b4b77a273506c25b1359509ebc2f8b929ef98"
+  },
+  "published_sha256": {
+    "CONTRIBUTING.md": "1d4faafa864cc28373444c943498d1ab2e8122f2245cdc52d053c11fb842c860",
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "README.md": "c4ac61e741a2fb9f14e57c2f93fcd70e594dae9946729e889cd410ef20dc1879",
+    "THIRD_PARTY_NOTICES.md": "3ab4e0ccdcde9efc5ad1494223659f5d8c0b133fa502c379100ce381a46f8f21",
+    "css/timvw.css": "dd4b5ac3b70cfeee4884c73e4c6b8f1a858c1e8ad1b722655f1a26c926cca603",
+    "demo-controls.css": "f03182404846efb4cb5399b7b3ab839ea666b6f671db008a137a20b839912752",
+    "docs.css": "ed05595c58f4dbb3eb7011564fed8ef265d6e6056592f4db56c6cd1a85b5063d",
+    "favicon.svg": "a7a05acabadec282f1a482e39829243afab19dd4c492246fec5fad2176a70efa",
+    "index.html": "3223e83109575491ce46d625a6f46e8fc574f282cde382dcfaea88acf7339007",
+    "js/docs.js": "3cb3b078cdf54fe2645ba08791fcaa6581db01d61b8d3bbb7f3c6d957f8bb3bc",
+    "js/timvw.js": "9ab1d06e1eb2065416150095d24a82fa6c568ba2a73791d6f2df11ea0f6b997c",
+    "starter.html": "1b2848cbbfd48b608b9c9a19225124de3b3141893bd3a0c680784e5d17f9e762",
+    "tests/index.html": "a23eed9629cf071ed8fb2c2c27cfd1c3ab067a974a97cd3be5a75ac47b5dbcf3",
+    "tests/tests.js": "f14c0b948a79a35621afd508f18b4b77a273506c25b1359509ebc2f8b929ef98",
+    "third-party/quantumblack-LICENSE.txt": "41a119da2c5cf00b4cdf4f186fd3bed343f23375d0ed6afe349ab0b1282ad9b1"
+  }
+}

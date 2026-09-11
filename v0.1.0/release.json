@@ -1,0 +1,33 @@
+{
+  "version": "0.1.0",
+  "source_commit": "3087cd757f2902404bc2c35f6eeeeef699697e1a",
+  "archive_chrome": "Version navigation and theme icons added at snapshot creation.",
+  "original_source_sha256": {
+    "index.html": "17a47882bba1da18797f4a4196cd709a029b345b62c43a5df4ea19003d9ba038",
+    "docs.css": "0af228428349f1e12376485814db45a6260abd0f4fe53cc79e079140e573d175",
+    "favicon.svg": "13b2c09459da765afaf55d22d92784d00a7188d783d013aec7ee12d895254ecf",
+    "starter.html": "1b2848cbbfd48b608b9c9a19225124de3b3141893bd3a0c680784e5d17f9e762",
+    "css/timvw.css": "9d4916cfdb0d39bd6b4c56fa88fe2d45bfb6f74f03d332acb416c92e34f6c2a8",
+    "js/timvw.js": "9ab1d06e1eb2065416150095d24a82fa6c568ba2a73791d6f2df11ea0f6b997c",
+    "README.md": "0c0d2369bf975eaa7fffd8b7e5c64cbde7e4412265fdb851e9b980ec41c67b95",
+    "CONTRIBUTING.md": "1d4faafa864cc28373444c943498d1ab2e8122f2245cdc52d053c11fb842c860",
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "tests/index.html": "a23eed9629cf071ed8fb2c2c27cfd1c3ab067a974a97cd3be5a75ac47b5dbcf3",
+    "tests/tests.js": "f14c0b948a79a35621afd508f18b4b77a273506c25b1359509ebc2f8b929ef98"
+  },
+  "published_sha256": {
+    "CONTRIBUTING.md": "1d4faafa864cc28373444c943498d1ab2e8122f2245cdc52d053c11fb842c860",
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "README.md": "0c0d2369bf975eaa7fffd8b7e5c64cbde7e4412265fdb851e9b980ec41c67b95",
+    "css/timvw.css": "9d4916cfdb0d39bd6b4c56fa88fe2d45bfb6f74f03d332acb416c92e34f6c2a8",
+    "demo-controls.css": "f03182404846efb4cb5399b7b3ab839ea666b6f671db008a137a20b839912752",
+    "docs.css": "0af228428349f1e12376485814db45a6260abd0f4fe53cc79e079140e573d175",
+    "favicon.svg": "13b2c09459da765afaf55d22d92784d00a7188d783d013aec7ee12d895254ecf",
+    "index.html": "748b1690ef73af6179b451a1fdb4b53161291f7528456ab08a8d13382a0736e0",
+    "js/docs.js": "3cb3b078cdf54fe2645ba08791fcaa6581db01d61b8d3bbb7f3c6d957f8bb3bc",
+    "js/timvw.js": "9ab1d06e1eb2065416150095d24a82fa6c568ba2a73791d6f2df11ea0f6b997c",
+    "starter.html": "1b2848cbbfd48b608b9c9a19225124de3b3141893bd3a0c680784e5d17f9e762",
+    "tests/index.html": "a23eed9629cf071ed8fb2c2c27cfd1c3ab067a974a97cd3be5a75ac47b5dbcf3",
+    "tests/tests.js": "f14c0b948a79a35621afd508f18b4b77a273506c25b1359509ebc2f8b929ef98"
+  }
+}
