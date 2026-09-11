@@ -17,3 +17,9 @@ Adaptations by Tim Van Wassenhove:
 - Standalone native CSS declarations; no Tailwind directives, framework aliases, upstream component implementations, fonts, or logos imported.
 
 No upstream `NOTICE` file was present in the source tree at the pinned revision. This document records the attribution and modifications for the selected palette material. It does not alter the Apache license or grant rights to McKinsey names, logos, or trademarks. This project is not affiliated with or endorsed by McKinsey & Company.
+
+## GitHub mark (Octicons)
+
+The `github` symbol in `icons.svg` uses Octicons’ `mark-github-16` SVG, Copyright (c) 2026 GitHub Inc., under the MIT License. The full license is preserved in [third-party/octicons-LICENSE.txt](third-party/octicons-LICENSE.txt).
+
+Source: [mark-github-16.svg](https://github.com/primer/octicons/blob/d5d6d581a1f8ff88971979321e4953a23e08bbca/icons/mark-github-16.svg), commit `d5d6d581a1f8ff88971979321e4953a23e08bbca`. The path is unchanged; it is wrapped in an SVG symbol with inherited fill and no stroke. The mark identifies links to this project’s GitHub repository.

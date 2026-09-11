@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 PUBLIC_FILES = (
     'index.html', 'docs.css', 'favicon.svg', 'starter.html',
     'css/timvw.css', 'js/timvw.js', 'README.md', 'CONTRIBUTING.md', 'LICENSE',
-    'THIRD_PARTY_NOTICES.md', 'third-party/quantumblack-LICENSE.txt',
+    'THIRD_PARTY_NOTICES.md', 'third-party/quantumblack-LICENSE.txt', 'third-party/octicons-LICENSE.txt',
     'tests/index.html', 'tests/tests.js',
     'components.html', 'COMPONENTS.md', 'icons.svg', 'css/components.css',
     'js/controls.js', 'js/overlays.js', 'js/table.js', 'tests/extended.js',

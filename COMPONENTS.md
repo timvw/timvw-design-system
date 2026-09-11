@@ -25,7 +25,7 @@ Live markup examples are in [components.html](components.html). Attributes begin
 
 | Component | Markup and variants | Behavior and accessibility |
 | --- | --- | --- |
-| Icons | `.tvw-icon`, optional `--lg`; `<use href="./icons.svg#search">` | Decorative SVGs use `aria-hidden="true"`. Name the surrounding action. The sprite provides sun, moon, computer, search, close, check, plus, menu, more, arrow-right, chevron-down, info, warning, folder, download, copy, delete, settings, dashboard, and eye. |
+| Icons | `.tvw-icon`, optional `--lg`; `<use href="./icons.svg#search">` | Decorative SVGs use `aria-hidden="true"`. Name the surrounding action. The sprite provides sun, moon, computer, search, close, check, plus, menu, more, arrow-right, chevron-down, info, warning, folder, download, copy, delete, settings, dashboard, eye, and github. The GitHub mark comes from Octicons under MIT; retain its attribution. |
 | Buttons | `.tvw-button` with `--sm`, `--lg`, `--icon`, `--secondary`, `--quiet`, or `--danger` | Native button keyboard behavior. Icon buttons need accessible names. Use `disabled` for unavailable buttons; use links for navigation. Small buttons are intended for compact layouts; prefer default 44px controls for touch. |
 | Loading | `setBusy(button, true, 'Saving…')`, then `setBusy(button, false)` | Preserves original child nodes, listeners, disabled state, and `aria-busy`. Announce completion separately. Use `finally` so a failed operation also restores the button. |
 | Switches | Native checkbox with `role="switch"` inside `.tvw-switch`, followed by `.tvw-switch-track` | Space toggles; the label supplies the name. Supports checked, unchecked, focused, and disabled states. |
