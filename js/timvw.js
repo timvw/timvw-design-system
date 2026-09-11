@@ -1,4 +1,10 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
+import { initControls } from './controls.js';
+import { initOverlays } from './overlays.js';
+import { initTables } from './table.js';
+export { setTheme, getTheme, setBusy } from './controls.js';
+export { notify } from './overlays.js';
+export { getTable } from './table.js';
 const initializedTabs = new WeakSet();
 const initializedTriggers = new WeakSet();
 const initializedDialogs = new WeakSet();
@@ -6,6 +12,9 @@ const openers = new WeakMap();
 
 /** Enhance tabs and dialog triggers within a Document or Element. Safe to call again. */
 export function init(root = document) {
+  initControls(root);
+  initOverlays(root);
+  initTables(root);
   root.querySelectorAll('[data-tvw-tabs]').forEach((group) => {
     if (initializedTabs.has(group)) return;
     const list = group.querySelector('[data-tvw-tablist]');
@@ -52,7 +61,10 @@ export function init(root = document) {
     button.hidden = false;
     button.addEventListener('click', () => {
       if (dialog.open) return;
-      openers.set(dialog, button);
+      const parentPopover = button.closest('[popover]');
+      const returnTarget = parentPopover && [...button.ownerDocument.querySelectorAll('[popovertarget]')]
+        .find(trigger => trigger.getAttribute('popovertarget') === parentPopover.id && trigger.getAttribute('popovertargetaction') !== 'hide');
+      openers.set(dialog, returnTarget || button);
       dialog.showModal();
     });
     if (!initializedDialogs.has(dialog)) {

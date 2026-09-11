@@ -1,31 +1,7 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { init } from './timvw.js';
+import { init, notify, setBusy } from './timvw.js?v=0.4.0';
 
 init();
-
-const theme = document.querySelector('[data-theme-picker]');
-const themeButtons = [...theme.querySelectorAll('[data-theme]')];
-const preference = window.matchMedia('(prefers-color-scheme: dark)');
-let savedTheme;
-try { savedTheme = localStorage.getItem('tvw-theme'); } catch { /* Storage is optional. */ }
-let selectedTheme = ['light', 'dark'].includes(savedTheme) ? savedTheme : 'system';
-function applyTheme() {
-  document.documentElement.dataset.tvwTheme = selectedTheme === 'system'
-    ? (preference.matches ? 'dark' : 'light') : selectedTheme;
-  themeButtons.forEach((button) => {
-    button.setAttribute('aria-pressed', String(button.dataset.theme === selectedTheme));
-  });
-}
-applyTheme();
-theme.hidden = false;
-themeButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    selectedTheme = button.dataset.theme;
-    applyTheme();
-    try { localStorage.setItem('tvw-theme', selectedTheme); } catch { /* Storage is optional. */ }
-  });
-});
-preference.addEventListener('change', applyTheme);
 
 const versions = document.querySelector('[data-version-picker]');
 document.addEventListener('click', (event) => {
@@ -53,3 +29,17 @@ document.querySelectorAll('[data-copy]').forEach((button) => {
     }
   });
 });
+
+// Interactive examples on the component reference page.
+document.querySelectorAll('[data-demo-toast]').forEach(button => button.addEventListener('click', () => {
+  notify(button.dataset.demoToast || 'Example notification.', { tone: button.dataset.tone || 'info', duration: 6000 });
+}));
+document.querySelectorAll('[data-demo-loading]').forEach(button => button.addEventListener('click', async () => {
+  setBusy(button, true, 'Loading preview…');
+  await new Promise(resolve => setTimeout(resolve, 900));
+  setBusy(button, false); notify('Loading preview finished.', { tone: 'success', duration: 5000 });
+}));
+document.querySelectorAll('[data-demo-validation]').forEach(form => form.addEventListener('tvw:valid-submit', event => {
+  event.preventDefault(); notify('The example form is valid. Nothing was sent.', { tone: 'success' });
+}));
+document.querySelectorAll('[data-tvw-js-only]').forEach(element => { element.hidden = false; });

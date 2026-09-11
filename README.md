@@ -8,10 +8,11 @@ The theme adapts QuantumBlack’s mist and slate palettes, monochrome actions, a
 
 ## Start using it
 
-Copy `css/timvw.css` and, if you need tabs or dialogs, `js/timvw.js` into your project. Keep [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and the referenced upstream license with redistributed copies. Start from [starter.html](starter.html) or use this markup:
+Copy `css/timvw.css`, plus `css/components.css` for the extended components and `icons.svg` for icons. For interactive components, copy `js/timvw.js`, `js/controls.js`, `js/overlays.js`, and `js/table.js` together, keeping their relative paths. Keep [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and the referenced upstream license with redistributed copies. Start from [starter.html](starter.html) or use this markup:
 
 ```html
 <link rel="stylesheet" href="./css/timvw.css">
+<link rel="stylesheet" href="./css/components.css">
 <body class="tvw">
   <main>
     <h1>Hello, timvw.</h1>
@@ -43,6 +44,7 @@ The header's version switcher links to the latest demo and frozen releases:
 | Demo | Contents |
 | --- | --- |
 | [Latest](https://timvw.github.io/timvw-design-system/) | The current demo, updated from `main` |
+| [v0.4.0](https://timvw.github.io/timvw-design-system/v0.4.0/) | Application components and complete settings, projects, and dashboard examples |
 | [v0.3.0](https://timvw.github.io/timvw-design-system/v0.3.0/) | QuantumBlack palette, version navigation, and theme icons |
 | [v0.2.0](https://timvw.github.io/timvw-design-system/v0.2.0/) | QuantumBlack palette components |
 | [v0.1.0](https://timvw.github.io/timvw-design-system/v0.1.0/) | Original blue palette components |
@@ -52,6 +54,12 @@ Each release folder contains its own component CSS, JavaScript, examples, and li
 Maintainers can create future snapshots with the optional Python standard-library utility documented in [CONTRIBUTING.md](CONTRIBUTING.md). It is not needed to use or serve the design system.
 
 ## Components
+
+[Extended component reference](components.html) provides copyable examples for icons, button sizes and loading states, switches, segmented controls, theme pickers, breadcrumbs, pagination, empty states, warning/info feedback, richer inputs, validation, menus, popovers, tooltips, drawers, notifications, interactive tables, and responsive application layouts. See [COMPONENTS.md](COMPONENTS.md) for their markup contracts, APIs, and keyboard behavior.
+
+Complete examples combine these patterns: [Settings](examples/settings.html), [Projects](examples/projects.html), and [Dashboard](examples/dashboard.html). They use local sample data and optional browser storage. The project example supports creation, status/progress editing, search, filters, numeric/date sorting, pagination, selection, deletion, and JSON download. No backend is needed; these are examples of browser interactions, not an authentication or production data service.
+
+The original foundation remains available:
 
 | Component | Markup / class | Behavior |
 | --- | --- | --- |
@@ -80,9 +88,9 @@ The stylesheet exposes `--tvw-*` custom properties on `:root`. Add overrides in 
 }
 ```
 
-Set `data-tvw-theme="dark"` on `<html>` for dark mode; omit it or set `light` for light mode. Theme selection and local preference storage in the showcase are examples, not automatic behavior in the component module. The library defaults to light.
+Set `data-tvw-theme="dark"` on `<html>` for dark mode; omit it or set `light` for light mode. The library defaults to light. Initializing a `[data-tvw-theme-picker]` or calling `setTheme()` enables remembered light/dark/system selection; all pickers stay synchronized and system mode follows OS changes. See [COMPONENTS.md](COMPONENTS.md) for the reusable picker.
 
-Color tokens include `bg`, `surface`, `subtle`, `text`, `muted`, `border`, `control-border`, `accent`, `accent-hover`, `on-accent`, `link`, `highlight`, `on-highlight`, `focus`, `success`, and `danger`, each prefixed with `--tvw-`. `--tvw-accent` controls monochrome action fills; `--tvw-link` supplies readable blue/cyan text; `--tvw-highlight` is the decorative cyan. Muted text and input borders use adjusted opacity for contrast on our surfaces. Spacing tokens are `--tvw-space-1`, `2`, `3`, `4`, `6`, `8`, and `12`, based on quarter-rem increments. Typography, radius, and shadow also have tokens.
+Color tokens include `bg`, `surface`, `subtle`, `text`, `muted`, `border`, `control-border`, `accent`, `accent-hover`, `on-accent`, `link`, `highlight`, `on-highlight`, `focus`, `success`, `danger`, `warning`, and `info`, each prefixed with `--tvw-`. `--tvw-accent` controls monochrome action fills; `--tvw-link` supplies readable blue/cyan text; `--tvw-highlight` is the decorative cyan. Muted text and input borders use adjusted opacity for contrast on our surfaces. Spacing tokens are `--tvw-space-1`, `2`, `3`, `4`, `6`, `8`, and `12`, based on quarter-rem increments. Typography, radius, and shadow also have tokens.
 
 `.tvw-stack` creates a vertical grid; `.tvw-cluster` creates a wrapping horizontal group. Both use spacing tokens. `.tvw-muted`, `.tvw-sr-only`, and `.tvw-skip` cover secondary text, visually hidden labels, and skip links.
 
@@ -96,7 +104,7 @@ init(); // Enhance descendants of document.
 init(document.getElementById('new-content')); // Enhance descendants of a container.
 ```
 
-Call `init()` after markup is available. Repeated calls on existing components are safe. The root itself is not selected; pass the parent container when adding a component. Replacing a component's internal markup after initialization is not supported; replace the whole component and initialize its parent instead.
+Call `init()` after markup is available. Repeated calls on existing components are safe. The root itself is not selected; pass the parent container when adding a component. For table row updates, call `getTable(container).refresh()`. Otherwise, replacing a component's internal markup after initialization is not supported; replace the whole component and initialize its parent instead.
 
 Tabs require a `data-tvw-tabs` container, a `data-tvw-tablist` with a label, and buttons with unique IDs and `aria-controls` pointing to panels inside the container. Keep the tablist `hidden` and all panels visible in the source. Initialization adds the tab roles, reveals the controls, and selects the first panel. Arrow keys use automatic activation; Home and End select the first and last tabs. Right-to-left direction and vertical tablists (`aria-orientation="vertical"`) are supported. Nested tabsets and disabled tabs are outside the initial component contract.
 
@@ -106,7 +114,7 @@ Dialog triggers use `data-tvw-open="dialog-id"` and start `hidden`. Give the nat
 
 The foundation includes visible focus, reduced-motion and forced-color accommodations, native semantics, and keyboard support for enhanced controls. This is not an accessibility certification. Verify your content, contrast after customization, screen-reader behavior, and complete workflows.
 
-Target browsers must support CSS cascade layers, custom properties, OKLCH colors, ES modules, and native `dialog.showModal()`. There are no polyfills. Accordions, form controls, and all tab content remain available without JavaScript; dialog triggers stay hidden. The showcase's copy button requires the Clipboard API and a secure context (HTTPS or localhost); source can always be selected manually.
+Target browsers must support CSS cascade layers, custom properties, OKLCH colors, ES modules, and native `dialog.showModal()`. Extended components also use CSS `:has()` and the native Popover API. There are no polyfills. Accordions, form controls, and all tab content remain available without JavaScript; dialog triggers stay hidden. The showcase's copy button requires the Clipboard API and a secure context (HTTPS or localhost); source can always be selected manually.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for a manual review checklist and the browser-native regression page in [tests/index.html](tests/index.html).
 

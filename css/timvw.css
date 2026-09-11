@@ -26,6 +26,12 @@
     --tvw-focus: #0369a1;
     --tvw-success: #166534;
     --tvw-danger: #b91c1c;
+    --tvw-warning: #92400e;
+    --tvw-info: #0369a1;
+    --tvw-danger-fill: #b91c1c;
+    --tvw-danger-hover: #991b1b;
+    --tvw-content-width: 76rem;
+    --tvw-sidebar-width: 15rem;
     --tvw-radius: .5rem;
     --tvw-space-1: .25rem;
     --tvw-space-2: .5rem;
@@ -52,6 +58,8 @@
     --tvw-focus: #38bdf8;
     --tvw-success: #4ade80;
     --tvw-danger: #f87171;
+    --tvw-warning: #fbbf24;
+    --tvw-info: #38bdf8;
     --tvw-shadow: 0 16px 48px rgb(0 0 0 / .3);
   }
 }

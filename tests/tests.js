@@ -1,5 +1,6 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
 import { init } from '../js/timvw.js';
+import { runExtendedChecks } from './extended.js';
 
 const fixtures = document.getElementById('fixtures');
 const summary = document.getElementById('summary');
@@ -23,6 +24,8 @@ function tabs(prefix) {
 
 run.addEventListener('click', async () => {
   run.disabled = true;
+  delete summary.dataset.failures;
+  summary.textContent = 'Running…';
   results.replaceChildren();
   fixtures.innerHTML = tabs('test') + tabs('other') + `
     <button type="button" data-tvw-open="test-dialog" hidden>Open test dialog</button>
@@ -108,6 +111,7 @@ run.addEventListener('click', async () => {
     await frame(); await frame();
     assert(!dialog.open && document.activeElement === opener, 'Focus did not return');
   });
+  await runExtendedChecks(check, fixtures);
   fixtures.replaceChildren();
   summary.textContent = `${passed} passed, ${failed} failed.`;
   summary.dataset.failures = String(failed);

@@ -1,8 +1,21 @@
 {
-  "latest": "0.3.0",
+  "latest": "0.4.0",
   "versions": [
-    { "version": "0.3.0", "description": "Versioned demos & theme icons" },
-    { "version": "0.2.0", "description": "QuantumBlack palette" },
-    { "version": "0.1.0", "description": "Original blue palette" }
+    {
+      "version": "0.4.0",
+      "description": "Application components & complete examples"
+    },
+    {
+      "version": "0.3.0",
+      "description": "Versioned demos & theme icons"
+    },
+    {
+      "version": "0.2.0",
+      "description": "QuantumBlack palette"
+    },
+    {
+      "version": "0.1.0",
+      "description": "Original blue palette"
+    }
   ]
 }

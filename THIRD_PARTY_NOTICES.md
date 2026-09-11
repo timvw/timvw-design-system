@@ -10,7 +10,7 @@ Source: [src/styles/globals.css](https://github.com/mckinsey/quantumblack-design
 
 Adaptations by Tim Van Wassenhove:
 
-- Selected mist, slate, cyan, sky, green, and red values mapped to the smaller `--tvw-*` semantic token set.
+- Selected mist, slate, cyan, sky, green, amber, and red values mapped to the smaller `--tvw-*` semantic token set.
 - Mist-100 / white light surfaces and slate-900 / slate-800 dark surfaces; slate-950 / white primary actions.
 - Separate link and decorative highlight tokens, with darker sky links and focus outlines in light mode for contrast.
 - Adjusted muted-text and control-border opacity for this component set's surfaces; green-800 success text in light mode keeps badges readable on the subtle surface.

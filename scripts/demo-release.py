@@ -15,6 +15,10 @@ PUBLIC_FILES = (
     'css/timvw.css', 'js/timvw.js', 'README.md', 'CONTRIBUTING.md', 'LICENSE',
     'THIRD_PARTY_NOTICES.md', 'third-party/quantumblack-LICENSE.txt',
     'tests/index.html', 'tests/tests.js',
+    'components.html', 'COMPONENTS.md', 'icons.svg', 'css/components.css',
+    'js/controls.js', 'js/overlays.js', 'js/table.js', 'tests/extended.js',
+    'examples/settings.html', 'examples/projects.html', 'examples/dashboard.html',
+    'examples/examples.css', 'examples/app.js', 'examples/data.js',
 )
 REQUIRED = {'index.html', 'docs.css', 'css/timvw.css', 'js/timvw.js', 'LICENSE'}
 
@@ -55,6 +59,8 @@ def page(source, catalog, current=None):
     if current:
         updated = updated.replace('<title>timvw · Design system</title>',
                                   f'<title>timvw v{current} · Design system</title>')
+        updated = updated.replace('<title>Application components · timvw</title>',
+                                  f'<title>Application components · timvw v{current}</title>')
         updated = updated.replace('</header>', '</header>\n'
             f'<aside class="docs-archive" aria-label="Archived demo"><p>Frozen demo · v{current}. '
             '<a href="../">View the latest version →</a></p></aside>', 1)
@@ -71,9 +77,10 @@ def main():
     if args.latest:
         if args.version or args.ref:
             parser.error('--latest cannot be combined with --version or --ref')
-        target = ROOT / 'index.html'
-        target.write_text(page(target.read_text(), catalog))
-        print('Updated latest demo header.')
+        for name in ('index.html', 'components.html'):
+            target = ROOT / name
+            if target.exists(): target.write_text(page(target.read_text(), catalog))
+        print('Updated latest demo headers.')
         return
     if not args.version or not args.ref or not re.fullmatch(r'\d+\.\d+\.\d+', args.version):
         parser.error('Provide --version MAJOR.MINOR.PATCH and --ref COMMIT')
@@ -101,6 +108,8 @@ def main():
             original_hashes[name] = hashlib.sha256(data).hexdigest()
         # The archive toolbar is added once. All assets then live inside this folder.
         (stage / 'index.html').write_text(page((stage / 'index.html').read_text(), catalog, args.version))
+        if (stage / 'components.html').exists():
+            (stage / 'components.html').write_text(page((stage / 'components.html').read_text(), catalog, args.version))
         for name in ('demo-controls.css', 'js/docs.js'):
             (stage / name).write_bytes((ROOT / name).read_bytes())
         files = {str(path.relative_to(stage)): hashlib.sha256(path.read_bytes()).hexdigest()
