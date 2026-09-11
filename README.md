@@ -1,14 +1,14 @@
 # timvw design system
 
-An original design system for timvw projects, written in plain HTML, CSS, and JavaScript. No frameworks, runtime dependencies, package installation, or build step.
+A design system for timvw projects, written in plain HTML, CSS, and JavaScript. No frameworks, runtime dependencies, package installation, or build step.
 
-The theme combines ink and blue, system fonts, semantic color tokens, light and dark palettes, and native browser controls.
+The theme adapts QuantumBlack’s mist and slate palettes, monochrome actions, and cyan highlights to independent vanilla components. It uses system fonts, semantic color tokens, light and dark modes, and native browser controls.
 
 [Explore the live component showcase](https://timvw.github.io/timvw-design-system/).
 
 ## Start using it
 
-Copy `css/timvw.css` and, if you need tabs or dialogs, `js/timvw.js` into your project. Keep [LICENSE](LICENSE) with redistributed copies. Start from [starter.html](starter.html) or use this markup:
+Copy `css/timvw.css` and, if you need tabs or dialogs, `js/timvw.js` into your project. Keep [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and the referenced upstream license with redistributed copies. Start from [starter.html](starter.html) or use this markup:
 
 ```html
 <link rel="stylesheet" href="./css/timvw.css">
@@ -69,7 +69,7 @@ The stylesheet exposes `--tvw-*` custom properties on `:root`. Add overrides in 
 
 Set `data-tvw-theme="dark"` on `<html>` for dark mode; omit it or set `light` for light mode. Theme selection and local preference storage in the showcase are examples, not automatic behavior in the component module. The library defaults to light.
 
-Color tokens include `bg`, `surface`, `subtle`, `text`, `muted`, `border`, `control-border`, `accent`, `accent-hover`, `on-accent`, `focus`, `success`, and `danger`, each prefixed with `--tvw-`. Spacing tokens are `--tvw-space-1`, `2`, `3`, `4`, `6`, `8`, and `12`, based on quarter-rem increments. Typography, radius, and shadow also have tokens.
+Color tokens include `bg`, `surface`, `subtle`, `text`, `muted`, `border`, `control-border`, `accent`, `accent-hover`, `on-accent`, `link`, `highlight`, `on-highlight`, `focus`, `success`, and `danger`, each prefixed with `--tvw-`. `--tvw-accent` controls monochrome action fills; `--tvw-link` supplies readable blue/cyan text; `--tvw-highlight` is the decorative cyan. Muted text and input borders use adjusted opacity for contrast on our surfaces. Spacing tokens are `--tvw-space-1`, `2`, `3`, `4`, `6`, `8`, and `12`, based on quarter-rem increments. Typography, radius, and shadow also have tokens.
 
 `.tvw-stack` creates a vertical grid; `.tvw-cluster` creates a wrapping horizontal group. Both use spacing tokens. `.tvw-muted`, `.tvw-sr-only`, and `.tvw-skip` cover secondary text, visually hidden labels, and skip links.
 
@@ -93,7 +93,7 @@ Dialog triggers use `data-tvw-open="dialog-id"` and start `hidden`. Give the nat
 
 The foundation includes visible focus, reduced-motion and forced-color accommodations, native semantics, and keyboard support for enhanced controls. This is not an accessibility certification. Verify your content, contrast after customization, screen-reader behavior, and complete workflows.
 
-Target browsers must support CSS cascade layers, custom properties, ES modules, and native `dialog.showModal()`. There are no polyfills. Accordions, form controls, and all tab content remain available without JavaScript; dialog triggers stay hidden. The showcase's copy button requires the Clipboard API and a secure context (HTTPS or localhost); source can always be selected manually.
+Target browsers must support CSS cascade layers, custom properties, OKLCH colors, ES modules, and native `dialog.showModal()`. There are no polyfills. Accordions, form controls, and all tab content remain available without JavaScript; dialog triggers stay hidden. The showcase's copy button requires the Clipboard API and a secure context (HTTPS or localhost); source can always be selected manually.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for a manual review checklist and the browser-native regression page in [tests/index.html](tests/index.html).
 
@@ -101,4 +101,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for a manual review checklist and the bro
 
 Copyright 2026 Tim Van Wassenhove. Licensed under [Apache-2.0](LICENSE).
 
-Independently implemented. The [QuantumBlack Design System](https://github.com/mckinsey/quantumblack-design-system) inspired the idea of an open design system, and [Plain Vanilla](https://plainvanillaweb.com/) informed the platform-first approach. No upstream component code, assets, or documentation are included. This project is not affiliated with or endorsed by McKinsey & Company.
+The components are independently implemented. Color tokens are adapted from the [QuantumBlack Design System](https://github.com/mckinsey/quantumblack-design-system), Copyright 2026 McKinsey & Company, under Apache-2.0. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the pinned source and adaptations. No upstream component implementation or framework dependencies are included. [Plain Vanilla](https://plainvanillaweb.com/) informed the platform-first approach. This project is not affiliated with or endorsed by McKinsey & Company.

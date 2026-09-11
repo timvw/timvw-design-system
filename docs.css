@@ -1,7 +1,7 @@
 /* Showcase layout only. Consumers need css/timvw.css, not this file. */
 .docs-header { height: 5rem; border-bottom: 1px solid var(--tvw-border); background: var(--tvw-surface); display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-inline: 2rem; }
 .docs-brand { display: flex; align-items: center; gap: .875rem; text-decoration: none; color: var(--tvw-text) !important; }
-.docs-mark { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; background: var(--tvw-accent); color: var(--tvw-on-accent); border-radius: .375rem; font: 750 1rem var(--tvw-mono); }
+.docs-mark { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; background: var(--tvw-highlight); color: var(--tvw-on-highlight); border-radius: .375rem; font: 750 1rem var(--tvw-mono); }
 .docs-brand strong { letter-spacing: -.04em; font-size: 1.25rem; }
 .docs-brand small { display: block; font-size: .875rem; color: var(--tvw-muted); }
 .docs-shell { display: grid; grid-template-columns: 15rem minmax(0, 1fr); max-width: 96rem; margin-inline: auto; }
@@ -14,7 +14,7 @@
 .docs-label:first-child { margin-top: 0; }
 .docs-main { min-width: 0; padding: 3rem clamp(1.25rem, 4vw, 4rem); max-width: 76rem; }
 .docs-intro { border-bottom: 1px solid var(--tvw-border); padding-bottom: 2rem; margin-bottom: 2.5rem; }
-.docs-kicker { color: var(--tvw-accent); font: 600 .875rem var(--tvw-mono); margin-bottom: 1rem; }
+.docs-kicker { color: var(--tvw-link); font: 600 .875rem var(--tvw-mono); margin-bottom: 1rem; }
 .docs-lead { font-size: 1.125rem; max-width: 42rem; color: var(--tvw-muted); }
 .docs-section { scroll-margin-top: 2rem; margin-block: 0 3.5rem; }
 .docs-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 1rem; justify-content: space-between; margin-bottom: .5rem; }
@@ -22,7 +22,7 @@
 .docs-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
 .docs-demo { padding: 1.5rem; background: var(--tvw-surface); border: 1px solid var(--tvw-border); border-radius: var(--tvw-radius); }
 .docs-code { margin-top: .75rem; }
-.docs-code summary { padding-block: .5rem; color: var(--tvw-accent); cursor: pointer; }
+.docs-code summary { padding-block: .5rem; color: var(--tvw-link); cursor: pointer; }
 .docs-code pre { margin-block: .5rem; }
 .docs-swatches { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
 .docs-swatch { border: 1px solid var(--tvw-border); border-radius: var(--tvw-radius); overflow: hidden; background: var(--tvw-surface); }

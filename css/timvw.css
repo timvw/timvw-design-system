@@ -1,4 +1,8 @@
-/* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
+/* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0
+ * Color tokens adapted from QuantumBlack Design System, Copyright 2026 McKinsey & Company.
+ * Modified: selected palette values mapped to vanilla --tvw-* tokens; link, focus,
+ * and control-border pairings adjusted for this component set. See THIRD_PARTY_NOTICES.md.
+ */
 @layer timvw.tokens, timvw.base, timvw.components, timvw.utilities;
 
 @layer timvw.tokens {
@@ -6,19 +10,22 @@
     color-scheme: light;
     --tvw-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --tvw-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
-    --tvw-bg: #f5f7fb;
+    --tvw-bg: oklch(98.54% 0.0013 286.38);
     --tvw-surface: #ffffff;
-    --tvw-subtle: #edf1f8;
-    --tvw-text: #172338;
-    --tvw-muted: #536279;
-    --tvw-border: #c0cad9;
-    --tvw-control-border: #78869b;
-    --tvw-accent: #194cce;
-    --tvw-accent-hover: #123ca7;
+    --tvw-subtle: oklch(94.49% 0.0025 228.79);
+    --tvw-text: oklch(20.64% 0.0205 271.56 / calc(224 / 255));
+    --tvw-muted: oklch(20.64% 0.0205 271.56 / .66);
+    --tvw-border: oklch(20.64% 0.0205 271.56 / calc(41 / 255));
+    --tvw-control-border: oklch(20.64% 0.0205 271.56 / .54);
+    --tvw-accent: oklch(18.46% 0.0187 274.71);
+    --tvw-accent-hover: oklch(30.29% 0.0203 273.16);
     --tvw-on-accent: #ffffff;
-    --tvw-focus: #194cce;
-    --tvw-success: #14613e;
-    --tvw-danger: #ae2435;
+    --tvw-link: #0369a1;
+    --tvw-highlight: oklch(69.89% 0.1572 238.91);
+    --tvw-on-highlight: oklch(18.46% 0.0187 274.71);
+    --tvw-focus: #0369a1;
+    --tvw-success: #166534;
+    --tvw-danger: #b91c1c;
     --tvw-radius: .5rem;
     --tvw-space-1: .25rem;
     --tvw-space-2: .5rem;
@@ -27,23 +34,24 @@
     --tvw-space-6: 1.5rem;
     --tvw-space-8: 2rem;
     --tvw-space-12: 3rem;
-    --tvw-shadow: 0 16px 48px rgb(10 25 50 / .12);
+    --tvw-shadow: 0 16px 48px oklch(20.64% 0.0205 271.56 / .12);
   }
   :root[data-tvw-theme="dark"] {
     color-scheme: dark;
-    --tvw-bg: #101722;
-    --tvw-surface: #182231;
-    --tvw-subtle: #223045;
-    --tvw-text: #edf3ff;
-    --tvw-muted: #b0bfd3;
-    --tvw-border: #62728a;
-    --tvw-control-border: #8798b0;
-    --tvw-accent: #a9c3ff;
-    --tvw-accent-hover: #cbdcff;
-    --tvw-on-accent: #102345;
-    --tvw-focus: #a9c3ff;
-    --tvw-success: #8cd8ad;
-    --tvw-danger: #ffa2ad;
+    --tvw-bg: oklch(20.64% 0.0205 271.56);
+    --tvw-surface: oklch(22.43% 0.022 272.68);
+    --tvw-subtle: oklch(27.1% 0.0227 273.84);
+    --tvw-text: rgb(255 255 255 / calc(224 / 255));
+    --tvw-muted: rgb(255 255 255 / .66);
+    --tvw-border: rgb(255 255 255 / calc(41 / 255));
+    --tvw-control-border: rgb(255 255 255 / calc(153 / 255));
+    --tvw-accent: #ffffff;
+    --tvw-accent-hover: oklch(90.27% 0.0035 247.86);
+    --tvw-on-accent: oklch(18.46% 0.0187 274.71);
+    --tvw-link: #38bdf8;
+    --tvw-focus: #38bdf8;
+    --tvw-success: #4ade80;
+    --tvw-danger: #f87171;
     --tvw-shadow: 0 16px 48px rgb(0 0 0 / .3);
   }
 }
@@ -56,7 +64,7 @@
   .tvw h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
   .tvw h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
   .tvw h3 { font-size: 1.125rem; }
-  .tvw a { color: var(--tvw-accent); text-underline-offset: .2em; }
+  .tvw a { color: var(--tvw-link); text-underline-offset: .2em; }
   .tvw :where(button,input,select,textarea) { font: inherit; }
   .tvw :where(button,summary) { cursor: pointer; }
   .tvw :focus-visible { outline: 3px solid var(--tvw-focus); outline-offset: 4px; }
@@ -78,9 +86,9 @@
   .tvw-button:hover:not(:disabled) { background: var(--tvw-accent-hover); }
   .tvw-button--secondary { background: var(--tvw-surface); color: var(--tvw-text); border-color: var(--tvw-border); }
   a.tvw-button--secondary { color: var(--tvw-text); }
-  a.tvw-button--quiet { color: var(--tvw-accent); }
+  a.tvw-button--quiet { color: var(--tvw-link); }
   .tvw-button--secondary:hover:not(:disabled) { background: var(--tvw-subtle); }
-  .tvw-button--quiet { background: transparent; color: var(--tvw-accent); }
+  .tvw-button--quiet { background: transparent; color: var(--tvw-link); }
   .tvw-button--quiet:hover:not(:disabled) { background: var(--tvw-subtle); }
   .tvw-button:disabled { opacity: .5; }
   .tvw-field { display: grid; gap: .375rem; }
@@ -127,7 +135,7 @@
   .tvw-tabs [role="tab"][aria-selected="true"] { border-bottom-color: var(--tvw-accent); color: var(--tvw-text); font-weight: 650; }
   .tvw-tabs [role="tablist"][aria-orientation="vertical"] { flex-direction: column; }
   .tvw-dialog { width: min(32rem, calc(100% - 2rem)); max-height: calc(100% - 2rem); overflow-y: auto; padding: 2rem; color: var(--tvw-text); background: var(--tvw-surface); border: 1px solid var(--tvw-border); border-radius: var(--tvw-radius); box-shadow: var(--tvw-shadow); }
-  .tvw-dialog::backdrop { background: rgb(7 15 30 / .65); }
+  .tvw-dialog::backdrop { background: oklch(20.64% 0.0205 271.56 / .65); }
   .tvw-progress { width: 100%; height: .75rem; accent-color: var(--tvw-accent); }
   .tvw-skip { position: fixed; z-index: 100; inset: .5rem auto auto .5rem; transform: translateY(-200%); background: var(--tvw-surface); padding: .75rem 1rem; }
   .tvw-skip:focus { transform: translateY(0); }
