@@ -1,5 +1,5 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { init, notify, setTheme, setBusy, getTable } from '../js/timvw.js?v=0.4.0';
+import { init, notify, setTheme, setBusy, getTable } from '../js/timvw.js?v=0.5.0';
 import { sampleProjects, readProjects, storeProjects } from './data.js';
 
 const currency = new Intl.NumberFormat('en', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
@@ -66,7 +66,7 @@ function drawRows() {
   const body = projectTable.querySelector('tbody');
   body.replaceChildren();
   const template = document.getElementById('project-row');
-  projects.forEach(project => {
+  projects.forEach((project, index) => {
     const row = template.content.firstElementChild.cloneNode(true);
     row.dataset.status = project.status;
     row.dataset.search = `${project.name} ${project.owner}`;
@@ -81,7 +81,17 @@ function drawRows() {
     row.querySelector('[data-project-budget]').textContent = currency.format(project.budget);
     row.querySelector('[data-project-budget]').dataset.sortValue = String(project.budget);
     row.querySelector('[data-project-due]').textContent = project.due;
-    body.append(row);
+    const expand = document.createElement('button'); expand.type = 'button';
+    expand.className = 'tvw-button tvw-button--quiet tvw-button--sm'; expand.textContent = 'Details';
+    expand.dataset.tvwExpand = ''; expand.setAttribute('aria-expanded', 'false');
+    expand.setAttribute('aria-label', `Expand details for ${project.name}`);
+    expand.setAttribute('aria-controls', `project-extra-${index}`); row.cells[1].append(' ', expand);
+    const detail = document.createElement('tr'); detail.id = `project-extra-${index}`; detail.dataset.tvwDetailRow = ''; detail.hidden = true;
+    const cell = document.createElement('td'); cell.colSpan = 6;
+    const team = Array.isArray(project.team) ? project.team.filter(name => typeof name === 'string').join(', ') : '';
+    const files = Array.isArray(project.attachments) ? project.attachments.map(file => typeof file?.name === 'string' ? file.name : '').filter(Boolean).join(', ') : '';
+    cell.textContent = `Completion: ${project.progress}%. Team: ${team || 'No additional members'}. Files: ${files || 'None'}.`;
+    detail.append(cell); body.append(row, detail);
   });
   getTable(projectTable)?.refresh();
   init(projectTable);

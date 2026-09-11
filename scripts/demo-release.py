@@ -19,6 +19,10 @@ PUBLIC_FILES = (
     'js/controls.js', 'js/overlays.js', 'js/table.js', 'tests/extended.js',
     'examples/settings.html', 'examples/projects.html', 'examples/dashboard.html',
     'examples/examples.css', 'examples/app.js', 'examples/data.js',
+    'patterns.html', 'explore.html', 'explore.css', 'catalog.json', 'QUALITY.md',
+    'js/select.js', 'js/files.js', 'js/workflow.js', 'js/patterns.js', 'js/explore.js',
+    'examples/create.html', 'examples/create.js', 'examples/website.html', 'examples/website.css',
+    'tests/workflows.js',
 )
 REQUIRED = {'index.html', 'docs.css', 'css/timvw.css', 'js/timvw.js', 'LICENSE'}
 
@@ -77,6 +81,8 @@ def page(source, catalog, current=None):
                                   f'<title>timvw v{current} · Design system</title>')
         updated = updated.replace('<title>Application components · timvw</title>',
                                   f'<title>Application components · timvw v{current}</title>')
+        updated = re.sub(r'<title>(Workflow components|Component explorer) · timvw</title>',
+                         lambda match: f'<title>{match.group(1)} · timvw v{current}</title>', updated)
         updated = updated.replace('</header>', '</header>\n'
             f'<aside class="docs-archive" aria-label="Archived demo"><p>Frozen demo · v{current}. '
             '<a href="../">View the latest version →</a></p></aside>', 1)
@@ -99,7 +105,7 @@ def main():
             if not manifest_path.is_file(): continue
             manifest = json.loads(manifest_path.read_text())
             changes = {}
-            for name in ('index.html', 'components.html'):
+            for name in ('index.html', 'components.html', 'patterns.html', 'explore.html'):
                 target = folder / name
                 if not target.exists(): continue
                 source = target.read_text()
@@ -119,7 +125,7 @@ def main():
     if args.latest:
         if args.version or args.ref:
             parser.error('--latest cannot be combined with --version or --ref')
-        for name in ('index.html', 'components.html'):
+        for name in ('index.html', 'components.html', 'patterns.html', 'explore.html'):
             target = ROOT / name
             if target.exists(): target.write_text(page(target.read_text(), catalog))
         print('Updated latest demo headers.')
@@ -150,8 +156,9 @@ def main():
             original_hashes[name] = hashlib.sha256(data).hexdigest()
         # Component assets live inside the archive; release navigation uses the shared site catalog.
         (stage / 'index.html').write_text(page((stage / 'index.html').read_text(), catalog, args.version))
-        if (stage / 'components.html').exists():
-            (stage / 'components.html').write_text(page((stage / 'components.html').read_text(), catalog, args.version))
+        for name in ('components.html', 'patterns.html', 'explore.html'):
+            if (stage / name).exists():
+                (stage / name).write_text(page((stage / name).read_text(), catalog, args.version))
         for name in ('demo-controls.css', 'js/docs.js'):
             (stage / name).write_bytes((ROOT / name).read_bytes())
         files = {str(path.relative_to(stage)): hashlib.sha256(path.read_bytes()).hexdigest()

@@ -1,7 +1,8 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
 /* Load after timvw.css. Optional extended components and application layouts. */
 @layer timvw.components {
-  .tvw-field { align-content: start; }
+  .tvw-stack { grid-template-columns: minmax(0, 1fr); }
+  .tvw-field { align-content: start; min-width: 0; }
   .tvw-icon { width: 1.25rem; height: 1.25rem; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.2em; }
   .tvw-icon--lg { width: 2rem; height: 2rem; }
   .tvw-button--sm { min-height: 2.25rem; padding: .4rem .75rem; font-size: .875rem; }
@@ -96,5 +97,49 @@
     .tvw-switch input:checked + .tvw-switch-track { background: Highlight; }
     .tvw-switch input:checked + .tvw-switch-track::before { background: HighlightText; }
     .tvw-segmented label:has(:checked), .tvw-theme-picker [aria-pressed="true"] { border: 2px solid Highlight; }
+  }
+}
+
+@layer timvw.components {
+  .tvw-combobox-chips { margin-bottom: .5rem; }
+  .tvw-combobox-list { position: fixed; inset: auto; margin: 0; padding: .375rem; overflow: auto; color: var(--tvw-text); background: var(--tvw-surface); border: 1px solid var(--tvw-control-border); border-radius: var(--tvw-radius); box-shadow: var(--tvw-shadow); }
+  .tvw-combobox-list [role="option"] { padding: .625rem .75rem; border-radius: .25rem; cursor: pointer; }
+  .tvw-combobox-list [role="option"]:hover, .tvw-combobox-list [aria-selected="true"] { background: var(--tvw-accent); color: var(--tvw-on-accent); }
+  .tvw-step-list { list-style: none; display: flex; flex-wrap: wrap; gap: .75rem; padding: 0; counter-reset: step; }
+  .tvw-step-list li { flex: 1; min-width: 8rem; padding: .75rem 0; border-top: 3px solid var(--tvw-border); color: var(--tvw-muted); }
+  .tvw-step-list [aria-current="step"] { border-color: var(--tvw-focus); color: var(--tvw-text); font-weight: 700; }
+  .tvw-step-list [data-complete] { border-color: var(--tvw-success); }
+  .tvw-file-drop { padding: 1.5rem; border: 1px dashed var(--tvw-control-border); border-radius: var(--tvw-radius); background: var(--tvw-surface); }
+  .tvw-file-drop[data-dragging] { outline: 3px solid var(--tvw-focus); background: var(--tvw-subtle); }
+  .tvw-file-list { list-style: none; padding: 0; margin-block: 1rem 0; }
+  .tvw-file-row { display: flex; align-items: start; justify-content: space-between; gap: 1rem; padding-block: 1rem; border-top: 1px solid var(--tvw-border); }
+  .tvw-file-row > div { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .tvw-file-row p { margin: .25rem 0; }
+  .tvw-skeleton { display: block; min-height: 1rem; border-radius: .25rem; background: var(--tvw-subtle); animation: tvw-pulse 1.5s ease-in-out infinite alternate; }
+  .tvw-skeleton--heading { height: 2rem; width: 60%; }
+  .tvw-skeleton--block { height: 9rem; }
+  @keyframes tvw-pulse { from { opacity: 1; } to { opacity: .45; } }
+  .tvw-avatar { position: relative; display: inline-grid; place-items: center; flex-shrink: 0; width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 1px solid var(--tvw-control-border); background: var(--tvw-subtle); color: var(--tvw-text); font-size: .875rem; font-weight: 700; overflow: hidden; }
+  .tvw-avatar--lg { width: 4rem; height: 4rem; font-size: 1.25rem; }
+  .tvw-avatar img { position: absolute; width: 100%; height: 100%; object-fit: cover; inset: 0; }
+  .tvw-avatar-group { display: flex; padding-left: .5rem; }
+  .tvw-avatar-group .tvw-avatar { margin-left: -.5rem; border: 2px solid var(--tvw-surface); }
+  .tvw-nav-group { padding-block: .5rem; }
+  .tvw-nav-group > summary { padding: .5rem .75rem; font-weight: 650; }
+  .tvw-nav-group .tvw-nav { margin-left: .75rem; border-left: 1px solid var(--tvw-border); padding-left: .5rem; }
+  .tvw-table [data-tvw-detail-row] > td { background: var(--tvw-subtle); padding: 1.5rem; }
+  .tvw-chart { margin: 0; }
+  .tvw-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .tvw-chart text { fill: var(--tvw-text); font: 13px var(--tvw-font); }
+  .tvw-chart .chart-grid { stroke: var(--tvw-border); stroke-dasharray: 3 4; }
+  .tvw-chart .chart-bar { fill: var(--tvw-info); }
+  .tvw-chart .chart-line { stroke: var(--tvw-info); stroke-width: 3; fill: none; }
+  .tvw-chart .chart-point { fill: var(--tvw-surface); stroke: var(--tvw-info); stroke-width: 2; }
+  @media (prefers-reduced-motion: reduce) { .tvw-skeleton { animation: none; } }
+  @media (forced-colors: active) {
+    .tvw-skeleton { background: GrayText; }
+    .tvw-combobox-list [aria-selected="true"] { outline: 2px solid Highlight; }
+    .tvw-chart .chart-bar { fill: CanvasText; }
+    .tvw-chart .chart-line, .tvw-chart .chart-point { stroke: CanvasText; }
   }
 }

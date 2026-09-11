@@ -1,6 +1,7 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
 import { init } from '../js/timvw.js';
 import { runExtendedChecks } from './extended.js';
+import { runWorkflowChecks } from './workflows.js';
 
 const fixtures = document.getElementById('fixtures');
 const summary = document.getElementById('summary');
@@ -112,6 +113,7 @@ run.addEventListener('click', async () => {
     assert(!dialog.open && document.activeElement === opener, 'Focus did not return');
   });
   await runExtendedChecks(check, fixtures);
+  await runWorkflowChecks(check, fixtures);
   fixtures.replaceChildren();
   summary.textContent = `${passed} passed, ${failed} failed.`;
   summary.dataset.failures = String(failed);

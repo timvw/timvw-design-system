@@ -1,6 +1,6 @@
 # Contributing
 
-Keep the system plain: semantic HTML, CSS, and small JavaScript modules. Do not introduce a package manager, framework, bundler, transpiler, external fonts, or runtime dependencies.
+Keep the system plain: semantic HTML, CSS, and small JavaScript modules. Do not introduce a package manager, framework, bundler, transpiler, external fonts, or runtime dependencies into the published system. Maintainer checks may install pinned test tools in an isolated temporary directory.
 
 For a component change:
 
@@ -16,7 +16,7 @@ Serve the repository using any static HTTP server. Open `/tests/` and run the br
 
 Release-navigation regressions can also be checked with `python3 -m unittest discover -s scripts -p 'test_*.py'` (standard library only).
 
-The regression page includes 20 checks covering tabs, dialogs, loading, themes, validation, tables, menus, tooltips, and notifications.
+The regression page includes 28 checks covering tabs, dialogs, loading, themes, validation, tables, menus, tooltips, and notifications.
 
 Also check the showcase and complete example pages manually:
 
@@ -33,7 +33,13 @@ Also check the showcase and complete example pages manually:
 - Inspect color contrast after changing tokens. Do not claim conformance based only on automated checks.
 - Confirm source examples can be copied into `starter.html` and work after updating duplicate IDs.
 
-The project has no build step or CI framework. The regression page tests behavior in the browser directly. Keep additions original, or explicitly document and comply with any third-party license before introducing third-party material.
+The project has no application build step. GitHub Actions installs pinned browser-test tooling in a temporary directory and runs static integrity checks, browser workflows, and visual comparisons. See [QUALITY.md](QUALITY.md) for baseline review and manual audit status. The regression page also tests behavior directly without installed test tools. Keep additions original, or explicitly document and comply with any third-party license before introducing third-party material.
+
+## Browser automation
+
+`tests/browser.config.cjs` runs the browser-native suite and complete workflows with Playwright 1.57.0. CI provisions its tools outside the repository. For local automation, provide `@playwright/test` from an isolated tooling directory through `NODE_PATH` (or set `PLAYWRIGHT_TEST_MODULE` to its entry point), then run the Playwright CLI with `test --config tests/browser.config.cjs`. The configuration starts a local Python HTTP server if needed. Visual checks are enabled with `VISUAL_TESTS=true` and require the pinned Linux baseline environment; other operating systems can run the behavior checks.
+
+Run `python3 scripts/check-site.py` for local links and archived checksums. Keep `catalog.json` and the static cards in `explore.html` synchronized when adding components. The static catalogue remains readable without JavaScript.
 
 ## Publishing a demo version
 

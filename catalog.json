@@ -1,0 +1,260 @@
+[
+  {
+    "title": "Get started",
+    "description": "Copy css/timvw.css into your project and add class=\"tvw\" to the body. For interactive components, copy js/timvw.js, js/controls.js, js/overlays.js, and js/table.js together, then call init(). See the component guide for optional styles and icons.",
+    "category": "Foundation",
+    "href": "./index.html#get-started"
+  },
+  {
+    "title": "Design tokens",
+    "description": "Mist whites, slate darks, and selective cyan highlights. Colors adapted from the QuantumBlack Design System, mapped to the timvw components.",
+    "category": "Foundation",
+    "href": "./index.html#tokens"
+  },
+  {
+    "title": "Typography",
+    "description": "System fonts, a comfortable reading rhythm, and monospace for code. No font downloads.",
+    "category": "Foundation",
+    "href": "./index.html#typography"
+  },
+  {
+    "title": "Buttons",
+    "description": "Use buttons for actions and links for navigation. Keep one primary action per group.",
+    "category": "Foundation",
+    "href": "./index.html#buttons"
+  },
+  {
+    "title": "Form controls",
+    "description": "Keep labels visible. Connect help and error text with aria-describedby; use native validation where possible.",
+    "category": "Foundation",
+    "href": "./index.html#forms"
+  },
+  {
+    "title": "Checkboxes & radios",
+    "description": "Use checkboxes for independent choices and radios for one choice from a named group.",
+    "category": "Foundation",
+    "href": "./index.html#choices"
+  },
+  {
+    "title": "Cards",
+    "description": "Group related content. Give each card a descriptive heading and a specific link when needed.",
+    "category": "Foundation",
+    "href": "./index.html#cards"
+  },
+  {
+    "title": "Badges & notices",
+    "description": "Pair color with clear text. Add role=\"status\" to dynamically updated feedback, or role=\"alert\" for urgent errors.",
+    "category": "Foundation",
+    "href": "./index.html#feedback"
+  },
+  {
+    "title": "Tables",
+    "description": "Use a caption and scoped headers. The surrounding region can scroll on narrow screens.",
+    "category": "Foundation",
+    "href": "./index.html#tables"
+  },
+  {
+    "title": "Navigation",
+    "description": "Use a labeled navigation landmark. On separate pages, mark the current page with aria-current=\"page\".",
+    "category": "Foundation",
+    "href": "./index.html#navigation"
+  },
+  {
+    "title": "Accordions",
+    "description": "Native details and summary work with keyboard, touch, and JavaScript disabled.",
+    "category": "Foundation",
+    "href": "./index.html#accordions"
+  },
+  {
+    "title": "Tabs",
+    "description": "Arrow keys change tabs; Home and End jump to the first and last. Without JavaScript, all sections stay readable.",
+    "category": "Foundation",
+    "href": "./index.html#tabs"
+  },
+  {
+    "title": "Dialogs",
+    "description": "The native modal contains keyboard focus and closes with Escape. Focus returns to the button that opened it.",
+    "category": "Foundation",
+    "href": "./index.html#dialogs"
+  },
+  {
+    "title": "Progress",
+    "description": "Provide an accessible label and a visible value. Omit value for indeterminate progress.",
+    "category": "Foundation",
+    "href": "./index.html#progress"
+  },
+  {
+    "title": "Accessibility is part of the markup.",
+    "description": "The components provide visible focus styles, native controls, and keyboard behavior for tabs and dialogs. Your content and integration still need testing.",
+    "category": "Foundation",
+    "href": "./index.html#accessibility"
+  },
+  {
+    "title": "Icons & button variants",
+    "description": "Copy icons.svg and reference a symbol with SVG use. Icon-only actions need an accessible name.",
+    "category": "Application",
+    "href": "./components.html#icons"
+  },
+  {
+    "title": "Switches",
+    "description": "Use a switch for an on/off preference. Native checkboxes retain keyboard and form behavior.",
+    "category": "Application",
+    "href": "./components.html#switches"
+  },
+  {
+    "title": "Segmented choices",
+    "description": "Use native radios for one selection. Arrow keys move between options; Tab enters and leaves the group.",
+    "category": "Application",
+    "href": "./components.html#segmented"
+  },
+  {
+    "title": "Theme picker",
+    "description": "The reusable picker remembers light, dark, or system appearance. Multiple pickers stay synchronized.",
+    "category": "Application",
+    "href": "./components.html#theme"
+  },
+  {
+    "title": "Breadcrumbs & pagination",
+    "description": "Use navigation landmarks and aria-current to mark the current location. These examples link to real example pages.",
+    "category": "Application",
+    "href": "./components.html#navigation"
+  },
+  {
+    "title": "Empty states",
+    "description": "Explain what is missing and give a useful next action.",
+    "category": "Application",
+    "href": "./components.html#empty"
+  },
+  {
+    "title": "Warning & information",
+    "description": "Pair color with an icon and a clear message. Static notices do not need live-region announcements.",
+    "category": "Application",
+    "href": "./components.html#notices"
+  },
+  {
+    "title": "Richer native inputs",
+    "description": "Use visible labels and native input types. Date/time and file controls retain the browser\u2019s own picker.",
+    "category": "Application",
+    "href": "./components.html#forms"
+  },
+  {
+    "title": "Form validation",
+    "description": "Submit an incomplete form to see linked errors. Errors clear as you correct the fields.",
+    "category": "Application",
+    "href": "./components.html#validation"
+  },
+  {
+    "title": "Action menus",
+    "description": "Enter, Space, or Down opens the menu. Use Up/Down, Home/End, and typing to move; Escape returns focus.",
+    "category": "Application",
+    "href": "./components.html#menus"
+  },
+  {
+    "title": "Popovers",
+    "description": "Use a nonmodal popover for supplementary content or a short group of controls. Outside click and Escape dismiss it.",
+    "category": "Application",
+    "href": "./components.html#popovers"
+  },
+  {
+    "title": "Tooltips",
+    "description": "Use for supplementary descriptions, never essential instructions or interactive content. Hover, focus, or tap reveals the tip.",
+    "category": "Application",
+    "href": "./components.html#tooltips"
+  },
+  {
+    "title": "Detail drawers",
+    "description": "A drawer uses the same native modal dialog and opener behavior as our dialog component.",
+    "category": "Application",
+    "href": "./components.html#drawers"
+  },
+  {
+    "title": "Toast notifications",
+    "description": "Announce a completed action without interrupting the workflow. Every toast has a dismiss button.",
+    "category": "Application",
+    "href": "./components.html#notifications"
+  },
+  {
+    "title": "Searchable, sortable tables",
+    "description": "Filter, sort, select rows, and move between pages. Selection is preserved when a row is filtered out.",
+    "category": "Application",
+    "href": "./components.html#tables"
+  },
+  {
+    "title": "Application layout",
+    "description": "A responsive header, navigation sidebar, and main area. The sidebar is always available without JavaScript.",
+    "category": "Application",
+    "href": "./components.html#layout"
+  },
+  {
+    "title": "Searchable selection",
+    "description": "Single selection and multiple values, enhanced from native selects. Use arrows and Enter to choose; Escape closes the list.",
+    "category": "Workflow",
+    "href": "./patterns.html#combobox"
+  },
+  {
+    "title": "Loading, empty, error, and retry",
+    "description": "A region has one state at a time. This preview uses a short simulated delay; Retry returns to the loaded state.",
+    "category": "Workflow",
+    "href": "./patterns.html#states"
+  },
+  {
+    "title": "Multi-step forms",
+    "description": "Validate each step, preserve values when going back, and review before submitting. Without enhancement, all sections remain visible.",
+    "category": "Workflow",
+    "href": "./patterns.html#wizard"
+  },
+  {
+    "title": "File selection and upload states",
+    "description": "Choose or drop files, remove them, and try success and retry states. The upload preview is simulated: no files leave your browser.",
+    "category": "Workflow",
+    "href": "./patterns.html#files"
+  },
+  {
+    "title": "Avatars, account menus, and grouped navigation",
+    "description": "Name avatars for assistive technology. Initials remain visible when an image cannot load. Groups and navigation use ordinary HTML.",
+    "category": "Workflow",
+    "href": "./patterns.html#people"
+  },
+  {
+    "title": "More useful tables",
+    "description": "Choose visible columns and expand a row. Expanded details stay with their project when sorted, filtered, or paginated.",
+    "category": "Workflow",
+    "href": "./patterns.html#advanced-table"
+  },
+  {
+    "title": "Simple, accessible charts",
+    "description": "SVG charts scale with the page. Each chart has a title, a description, visible values, and an equivalent data table. These are illustrative values.",
+    "category": "Workflow",
+    "href": "./patterns.html#charts"
+  },
+  {
+    "title": "Guided project creation",
+    "description": "Comboboxes, team selection, files, validation, and a review step.",
+    "category": "Examples",
+    "href": "./examples/create.html"
+  },
+  {
+    "title": "Settings workspace",
+    "description": "Save local preferences with native form controls.",
+    "category": "Examples",
+    "href": "./examples/settings.html"
+  },
+  {
+    "title": "Project list",
+    "description": "Search, sort, filter, select, expand rows, and choose columns.",
+    "category": "Examples",
+    "href": "./examples/projects.html"
+  },
+  {
+    "title": "Dashboard",
+    "description": "Metrics and upcoming work derived from local projects.",
+    "category": "Examples",
+    "href": "./examples/dashboard.html"
+  },
+  {
+    "title": "Website template",
+    "description": "Hero, features, pricing, testimonial, FAQ, and footer patterns.",
+    "category": "Examples",
+    "href": "./examples/website.html"
+  }
+]

@@ -8,7 +8,7 @@ The theme adapts QuantumBlack’s mist and slate palettes, monochrome actions, a
 
 ## Start using it
 
-Copy `css/timvw.css`, plus `css/components.css` for the extended components and `icons.svg` for icons. For interactive components, copy `js/timvw.js`, `js/controls.js`, `js/overlays.js`, and `js/table.js` together, keeping their relative paths. Keep [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and the referenced upstream license with redistributed copies. Start from [starter.html](starter.html) or use this markup:
+Copy `css/timvw.css`, plus `css/components.css` for the extended components and `icons.svg` for icons. For interactive components, copy `js/timvw.js`, `js/controls.js`, `js/overlays.js`, `js/table.js`, `js/select.js`, `js/files.js`, and `js/workflow.js` together, keeping their relative paths. Keep [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and the referenced upstream license with redistributed copies. Start from [starter.html](starter.html) or use this markup:
 
 ```html
 <link rel="stylesheet" href="./css/timvw.css">
@@ -44,6 +44,7 @@ The header's version switcher links to the latest demo and frozen releases:
 | Demo | Contents |
 | --- | --- |
 | [Latest](https://timvw.github.io/timvw-design-system/) | The current demo, updated from `main` |
+| [v0.5.0](https://timvw.github.io/timvw-design-system/v0.5.0/) | Guided forms, searchable documentation, file states, chart and website patterns |
 | [v0.4.0](https://timvw.github.io/timvw-design-system/v0.4.0/) | Application components and complete settings, projects, and dashboard examples |
 | [v0.3.0](https://timvw.github.io/timvw-design-system/v0.3.0/) | QuantumBlack palette, version navigation, and theme icons |
 | [v0.2.0](https://timvw.github.io/timvw-design-system/v0.2.0/) | QuantumBlack palette components |
@@ -54,6 +55,8 @@ Each release folder contains its own component CSS, JavaScript, examples, and li
 Maintainers can create future snapshots with the optional Python standard-library utility documented in [CONTRIBUTING.md](CONTRIBUTING.md). It is not needed to use or serve the design system.
 
 ## Components
+
+Start with the [searchable component explorer](explore.html), including an icon browser and theme-token reference. [Workflow components](patterns.html) add searchable selects/multi-selects, skeletons and recovery states, multi-step forms, file selection/upload states, avatars, grouped navigation, column visibility, expandable table rows, and SVG charts. Try the [guided project creation](examples/create.html) and [website template](examples/website.html).
 
 [Extended component reference](components.html) provides copyable examples for icons, button sizes and loading states, switches, segmented controls, theme pickers, breadcrumbs, pagination, empty states, warning/info feedback, richer inputs, validation, menus, popovers, tooltips, drawers, notifications, interactive tables, and responsive application layouts. See [COMPONENTS.md](COMPONENTS.md) for their markup contracts, APIs, and keyboard behavior.
 
@@ -116,7 +119,7 @@ The foundation includes visible focus, reduced-motion and forced-color accommoda
 
 Target browsers must support CSS cascade layers, custom properties, OKLCH colors, ES modules, and native `dialog.showModal()`. Extended components also use CSS `:has()` and the native Popover API. There are no polyfills. Accordions, form controls, and all tab content remain available without JavaScript; dialog triggers stay hidden. The showcase's copy button requires the Clipboard API and a secure context (HTTPS or localhost); source can always be selected manually.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for a manual review checklist and the browser-native regression page in [tests/index.html](tests/index.html).
+See [QUALITY.md](QUALITY.md) for automated coverage, visual baselines, and pending manual audits, and [CONTRIBUTING.md](CONTRIBUTING.md) for a manual review checklist and the browser-native regression page in [tests/index.html](tests/index.html).
 
 ## License and inspiration
 

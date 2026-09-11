@@ -18,7 +18,8 @@ export function initTables(root) {
     const empty = container.querySelector('[data-tvw-empty]');
     const pageSize = Math.max(1, parseInt(container.dataset.pageSize, 10) || 10);
     const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
-    let rows = [...body.rows], page = 1, sortColumn = -1, direction = 1, visible = [];
+    const dataRows = () => [...body.rows].filter(row => !row.hasAttribute('data-tvw-detail-row'));
+    let rows = dataRows(), page = 1, sortColumn = -1, direction = 1, visible = [];
     const selected = () => rows.filter(row => row.querySelector('[data-tvw-row-select]')?.checked);
 
     function selection() {
@@ -86,11 +87,40 @@ export function initTables(root) {
           chips.append(chip);
         });
       }
+      // Expanded detail rows travel with their parent through sorting, filtering and paging.
+      rows.forEach(row => {
+        const toggle = row.querySelector('[data-tvw-expand]');
+        if (toggle) toggle.disabled = false;
+        const detail = toggle && document.getElementById(toggle.getAttribute('aria-controls'));
+        if (detail && body.contains(detail) && detail.hasAttribute('data-tvw-detail-row')) {
+          row.after(detail); detail.hidden = row.hidden || toggle.getAttribute('aria-expanded') !== 'true';
+          detail.cells[0].colSpan = [...table.tHead.rows[0].cells].filter(cell => !cell.hidden).length;
+        }
+      });
+      applyColumns();
       selection();
       container.dispatchEvent(new CustomEvent('tvw:tablechange', { bubbles: true, detail: { total: rows.length, filtered: filtered.length, page, pages } }));
     }
 
-    search?.addEventListener('input', () => { page = 1; render(); });
+    const columnControls = [...container.querySelectorAll('[data-tvw-column]')];
+    function applyColumns() {
+      columnControls.forEach(control => {
+        const index = Number(control.dataset.tvwColumn);
+        if (!Number.isInteger(index) || index < 1) return;
+        [table.tHead?.rows[0], ...rows].filter(Boolean).forEach(row => { if (row.cells[index]) row.cells[index].hidden = !control.checked; });
+      });
+      body.querySelectorAll('[data-tvw-detail-row]').forEach(row => {
+        row.cells[0].colSpan = [...table.tHead.rows[0].cells].filter(cell => !cell.hidden).length;
+      });
+    }
+    columnControls.forEach(control => control.addEventListener('change', applyColumns));
+    container.querySelectorAll('[data-tvw-column-controls]').forEach(control => { control.hidden = false; });
+    body.addEventListener('click', event => {
+      const toggle = event.target.closest('[data-tvw-expand]');
+      if (!toggle || !body.contains(toggle)) return;
+      toggle.setAttribute('aria-expanded', String(toggle.getAttribute('aria-expanded') !== 'true')); render();
+    });
+    search?.addEventListener('input' , () => { page = 1; render(); });
     filters.forEach(filter => filter.addEventListener('change', () => { page = 1; render(); }));
     table.querySelectorAll('[data-tvw-sort]').forEach(button => {
       button.disabled = false;
@@ -113,7 +143,7 @@ export function initTables(root) {
     }));
     container.querySelectorAll('[data-tvw-table-controls]').forEach(control => { control.hidden = false; });
     controllers.set(container, {
-      refresh() { rows = [...body.rows]; render(); },
+      refresh() { rows = dataRows(); render(); },
       getSelected: () => selected().map(row => row.querySelector('[data-tvw-row-select]').value),
       clearSelection() { rows.forEach(row => { const box = row.querySelector('[data-tvw-row-select]'); if (box) box.checked = false; }); selection(); },
     });

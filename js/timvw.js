@@ -1,10 +1,16 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { initControls } from './controls.js';
-import { initOverlays } from './overlays.js';
-import { initTables } from './table.js';
-export { setTheme, getTheme, setBusy } from './controls.js';
-export { notify } from './overlays.js';
-export { getTable } from './table.js';
+import { initSelects } from './select.js?v=0.5.0';
+import { initWorkflows, initAvatars } from './workflow.js?v=0.5.0';
+import { initFiles } from './files.js?v=0.5.0';
+export { getCombobox } from './select.js?v=0.5.0';
+export { getWizard, setRegionState } from './workflow.js?v=0.5.0';
+export { getFilePicker } from './files.js?v=0.5.0';
+import { initControls } from './controls.js?v=0.5.0';
+import { initOverlays } from './overlays.js?v=0.5.0';
+import { initTables } from './table.js?v=0.5.0';
+export { setTheme, getTheme, setBusy } from './controls.js?v=0.5.0';
+export { notify } from './overlays.js?v=0.5.0';
+export { getTable } from './table.js?v=0.5.0';
 const initializedTabs = new WeakSet();
 const initializedTriggers = new WeakSet();
 const initializedDialogs = new WeakSet();
@@ -12,6 +18,10 @@ const openers = new WeakMap();
 
 /** Enhance tabs and dialog triggers within a Document or Element. Safe to call again. */
 export function init(root = document) {
+  initSelects(root);
+  initFiles(root);
+  initWorkflows(root);
+  initAvatars(root);
   initControls(root);
   initOverlays(root);
   initTables(root);

@@ -1,0 +1,49 @@
+name: Design system checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      update_snapshots:
+        description: Generate visual baselines for review (download and commit the artifact)
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Static integrity and release tests
+        run: |
+          python3 scripts/check-site.py
+          python3 -m unittest discover -s scripts -p 'test_*.py'
+      - name: Install isolated browser test tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/tvw-checks" --no-save @playwright/test@1.57.0
+          node "$RUNNER_TEMP/tvw-checks/node_modules/@playwright/test/cli.js" install --with-deps chromium firefox webkit
+      - name: Browser workflows and visual regressions
+        env:
+          VISUAL_TESTS: 'true'
+          UPDATE_SNAPSHOTS: ${{ inputs.update_snapshots || 'false' }}
+        run: |
+          export NODE_PATH="$RUNNER_TEMP/tvw-checks/node_modules"
+          if [ "$UPDATE_SNAPSHOTS" = "true" ] || [ ! -d tests/snapshots ]; then
+            node "$RUNNER_TEMP/tvw-checks/node_modules/@playwright/test/cli.js" test --config tests/browser.config.cjs --update-snapshots
+          else
+            node "$RUNNER_TEMP/tvw-checks/node_modules/@playwright/test/cli.js" test --config tests/browser.config.cjs
+          fi
+      - name: Upload reports and visual baselines
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: design-system-checks
+          path: |
+            test-results/
+            tests/snapshots/
+          retention-days: 14

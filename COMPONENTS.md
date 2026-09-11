@@ -161,3 +161,55 @@ Pagination/filtering are enhancements over existing HTML rows. Without JavaScrip
 The examples use localStorage for optional persistence and report storage failures. They do not authenticate, contact a server, upload files, or schedule notifications. They are working examples to adapt, not a backend.
 
 Run [tests/index.html](tests/index.html) on a static server for browser-native regression checks. Test your completed application with keyboard, touch, zoom, both themes, forced colors, and target screen readers. Automated behavior and contrast checks are not an accessibility certification.
+
+## Workflow components (v0.5.0)
+
+Use [patterns.html](patterns.html) for working HTML and JavaScript examples, or [explore.html](explore.html) to search the catalogue, icons, and tokens. The library now also imports `js/select.js`, `js/files.js`, and `js/workflow.js`; keep all seven library modules together. `js/patterns.js`, `js/explore.js`, `js/docs.js`, and `js/demo-versions.js` are documentation scripts, not application dependencies.
+
+### Searchable selection
+
+Wrap a labeled native `select` in `[data-tvw-combobox]`. The select needs a unique ID, meaningful option values, and a visible label. Add `multiple` for chips and multiple selection; add `required` when selection is mandatory. The single-select empty option should use `value=""`. Optional `data-placeholder` on the wrapper changes the search hint.
+
+`init()` creates a labeled editable combobox and listbox while keeping the original select as the submitted form control. Arrow keys move through available options, Enter selects, Escape dismisses, and Tab leaves the field. Typing filters options; disabled options are excluded. Multiple selection adds one value at a time and provides named removal buttons. Normal text editing keys keep their browser behavior. Required selection is validated through the generated visible input. Reset restores the original selection. Without enhancement, the native select remains available.
+
+`getCombobox(wrapper).getValues()` returns selected nonempty values. After programmatically changing selection, options, or disabled state, call `getCombobox(wrapper).refresh()`. Native `change` events also synchronize the display. Forms submit the original select name, including repeated values for multiple selection. Readonly controls, grouped option headings, remote queries, arbitrary free-text values, and virtualized lists are outside this release’s contract. Keep required/multiple configuration stable after initialization.
+
+### Multi-step forms
+
+Use `form[data-tvw-wizard]` containing sections with `data-tvw-step="Step title"`, an `ol[data-tvw-step-list]`, and a `[data-tvw-step-error]` region with `role="alert"`. Provide type-button controls `[data-tvw-previous]` and `[data-tvw-next]`, plus a submit button `[data-tvw-finish]`. Group demo-only actions inside an initially hidden `[data-tvw-wizard-controls]` container. Keep all step sections visible in source HTML.
+
+Initialization shows one step and adds a current-step indicator. Continue checks native constraints before moving on. Back retains values. Enter before the final step advances instead of submitting. The final submission validates all steps and reveals the first invalid one. Focus moves to the step heading or invalid field. Hidden steps remain enabled so their values are retained in `FormData`.
+
+The form emits `tvw:stepchange` with `{ index, total, formData }` for review rendering and `tvw:complete` with `{ formData }` before final submission. Cancel `tvw:complete` to handle the data locally; otherwise normal submission proceeds. `getWizard(form)` exposes `goTo(index)` and `getStep()`; forward movement validates preceding steps. Native form reset returns to the first step. Use this enhancer instead of `data-tvw-validate` on the same form. Application code supplies persistence, server errors, and any cross-field rules.
+
+### Files
+
+A `[data-tvw-files]` wrapper contains a labeled native file input, `[data-tvw-file-list]`, and a `[data-tvw-file-status]` live status. Optional `data-max-bytes` limits each file; `data-max-files` limits the selection. The native `accept` attribute defines accepted extensions or MIME types. Enhanced selection supports adding files, dropping files, duplicate suppression, and removing files; removals update the native `FileList` used by `FormData`. A native picker remains available for keyboard and touch use. Filename/type checks are client-side convenience; an upload service must validate received files independently.
+
+`getFilePicker(wrapper)` returns `getFiles()`, `clear()`, and `upload(adapter)`. The adapter is an async `(file, reportProgress) => { ... }` function provided by the application. Report a number from 0 to 100 and reject on failure. The component displays per-file progress, success, or failure, restores its controls after completion, and returns `{ completed, failed }`. Retry skips already completed files. Removal and adding files are disabled while uploading. Reset clears selection; it does not abort a network request already started by your adapter. `tvw:fileschange` provides `{ files }` when selection changes.
+
+The showcase adapter uses timers to simulate success/failure and sends no requests. The project-creation example saves attachment names, sizes, and types only; it does not retain file contents. No upload service is bundled.
+
+### Loading and recovery
+
+Use `.tvw-skeleton`, optional `--heading` or `--block`, for decorative loading placeholders. Put skeletons in an `aria-hidden="true"` container and provide a separate status message. Reduced-motion mode stops the animation.
+
+`setRegionState(region, 'ready' | 'loading' | 'empty' | 'error', message?)` switches among descendants with matching `data-tvw-state` values. Include each state you intend to use. It updates `aria-busy`, writes to `[data-tvw-region-status]`, and moves focus to the region if an action would otherwise become hidden. Put a meaningful accessible name on the region. The application loads data and binds Retry; the component does not fetch or automatically retry requests.
+
+### Avatars and grouped navigation
+
+`.tvw-avatar` and `--lg` support initials or an overlaid image. Give the wrapper `role="img"` and a person’s name through `aria-label`, and use empty `alt` on a decorative child image. Include initials under the image for its failure state; `init()` hides failed images. `.tvw-avatar-group` composes overlapping avatars. Use the existing menu component for account actions.
+
+`details.tvw-nav-group` with a meaningful `summary` and a labeled `.tvw-nav` provides expandable sidebar sections with native keyboard behavior. It remains functional without JavaScript. This is grouped navigation, not a tree widget or application menubar.
+
+### Table extensions
+
+Optional checkboxes `[data-tvw-column="N"]` show/hide the header and cells at zero-based index N. Column zero is always retained; omit controls for any other essential columns. Put controls inside an initially hidden `[data-tvw-column-controls]` wrapper. Hiding a sorted column does not clear its sort order.
+
+A row’s `[data-tvw-expand]` button uses `aria-expanded` and `aria-controls` pointing to a sibling `tr[data-tvw-detail-row]`. Keep the detail row hidden initially. Detail rows are excluded from result counts and sorting and move with their parent through filtering, sorting, and paging. Their cell span follows column visibility. Keep one detail cell per detail row and unique control IDs. Expanded contents may contain ordinary HTML; use a dialog drawer for modal editing.
+
+### Charts and website patterns
+
+The bar and line examples use ordinary SVG with a title, description, explicit values, and an equivalent HTML table. `.tvw-chart` supplies responsive sizing; `.chart-bar`, `.chart-line`, `.chart-point`, and `.chart-grid` use theme tokens and forced-color rules. No charting runtime or data-processing package is required. Applications calculate coordinates and keep the SVG and table values synchronized. Charts with multiple series need distinguishable shapes/labels in addition to color.
+
+[Website template](examples/website.html) includes hero, feature cards, an illustrative brand strip and testimonial, pricing cards, FAQ, and footer. Its composition styles live in `examples/website.css`. Prices, organizations, and the customer story are fictional examples; links open local demos. The design system does not implement billing, subscriptions, or authentication.

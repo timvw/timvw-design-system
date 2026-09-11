@@ -1,5 +1,5 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { init, notify, setBusy } from './timvw.js?v=0.4.0';
+import { init, notify, setBusy } from './timvw.js?v=0.5.0';
 
 init();
 

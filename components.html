@@ -7,11 +7,11 @@
   <meta name="color-scheme" content="light dark">
   <title>Application components · timvw</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./css/timvw.css?v=0.4.0">
-  <link rel="stylesheet" href="./css/components.css?v=0.4.0">
+  <link rel="stylesheet" href="./css/timvw.css?v=0.5.0">
+  <link rel="stylesheet" href="./css/components.css?v=0.5.0">
   <link rel="stylesheet" href="./docs.css">
   <link rel="stylesheet" href="./demo-controls.css">
-  <script type="module" src="./js/docs.js?v=0.4.0"></script>
+  <script type="module" src="./js/docs.js?v=0.5.0"></script>
   <script type="module" src="./js/demo-versions.js"></script>
 </head>
 <body class="tvw">
@@ -19,7 +19,8 @@
 <header class="docs-header">
   <a class="docs-brand" href="./"><span class="docs-mark" aria-hidden="true">tw</span><span><strong>timvw</strong><small>Design system</small></span></a>
   <div class="docs-controls">
-    <details class="docs-version" data-version-picker data-demo-version="latest"><summary aria-label="Demo version: Latest · v0.4.0">Latest · v0.4.0</summary><nav aria-label="Demo versions"><a href="./" aria-current="page"><strong>Latest</strong><small>Current development</small></a><a href="./v0.4.0/"><strong>v0.4.0</strong><small>Application components &amp; complete examples</small></a><a href="./v0.3.0/"><strong>v0.3.0</strong><small>Versioned demos &amp; theme icons</small></a><a href="./v0.2.0/"><strong>v0.2.0</strong><small>QuantumBlack palette</small></a><a href="./v0.1.0/"><strong>v0.1.0</strong><small>Original blue palette</small></a></nav></details>
+    <a class="tvw-button tvw-button--quiet" href="./explore.html"><svg class="tvw-icon" aria-hidden="true"><use href="./icons.svg#search"></use></svg> Search</a>
+    <details class="docs-version" data-version-picker data-demo-version="latest"><summary aria-label="Demo version: Latest · v0.5.0">Latest · v0.5.0</summary><nav aria-label="Demo versions"><a href="./" aria-current="page"><strong>Latest</strong><small>Current development</small></a><a href="./v0.5.0/"><strong>v0.5.0</strong><small>Guided forms, component explorer &amp; website patterns</small></a><a href="./v0.4.0/"><strong>v0.4.0</strong><small>Application components &amp; complete examples</small></a><a href="./v0.3.0/"><strong>v0.3.0</strong><small>Versioned demos &amp; theme icons</small></a><a href="./v0.2.0/"><strong>v0.2.0</strong><small>QuantumBlack palette</small></a><a href="./v0.1.0/"><strong>v0.1.0</strong><small>Original blue palette</small></a></nav></details>
     <div class="tvw-theme-picker" data-tvw-theme-picker role="group" aria-label="Color theme" hidden>
       <button class="tvw-button tvw-button--icon" type="button" data-theme="light" title="Light" aria-label="Light theme" aria-pressed="false">
         <svg class="tvw-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
@@ -34,7 +35,7 @@
     <a class="tvw-button tvw-button--secondary" href="https://github.com/timvw/timvw-design-system" aria-label="GitHub repository"><svg class="tvw-icon" aria-hidden="true"><use href="./icons.svg?v=github#github"></use></svg> GitHub</a>
   </div>
 </header>
-<div class="docs-shell"><aside class="docs-sidebar"><div><p class="docs-label">Application components</p><nav aria-label="Components"><a href="#icons">Icons & button variants</a><a href="#switches">Switches</a><a href="#segmented">Segmented choices</a><a href="#theme">Theme picker</a><a href="#navigation">Breadcrumbs & pagination</a><a href="#empty">Empty states</a><a href="#notices">Warning & information</a><a href="#forms">Richer native inputs</a><a href="#validation">Form validation</a><a href="#menus">Action menus</a><a href="#popovers">Popovers</a><a href="#tooltips">Tooltips</a><a href="#drawers">Detail drawers</a><a href="#notifications">Toast notifications</a><a href="#tables">Searchable, sortable tables</a><a href="#layout">Application layout</a></nav><hr><a href="./">← Foundation components</a></div></aside><main class="docs-main" id="main" tabindex="-1"><div class="docs-intro"><p class="docs-kicker">timvw / v0.4.0</p><h1>Ready for your application.</h1><p class="docs-lead">Copy the markup. Keep native browser behavior. Add the modules for interaction.</p><p>Load <a href="./css/timvw.css">timvw.css</a> and <a href="./css/components.css">components.css</a>, copy the <a href="./js/timvw.js">JavaScript modules</a> and <a href="./icons.svg">icon sprite</a>, then call <code>init()</code>. <a href="./COMPONENTS.md">Read the API and accessibility guide.</a></p></div><section class="docs-section" id="icons"><h2>Icons & button variants</h2><p class="tvw-muted">Copy icons.svg and reference a symbol with SVG use. Icon-only actions need an accessible name.</p><div class="docs-demo"><div class="tvw-cluster">
+<div class="docs-shell"><aside class="docs-sidebar"><div><p class="docs-label">Application components</p><nav aria-label="Components"><a href="#icons">Icons & button variants</a><a href="#switches">Switches</a><a href="#segmented">Segmented choices</a><a href="#theme">Theme picker</a><a href="#navigation">Breadcrumbs & pagination</a><a href="#empty">Empty states</a><a href="#notices">Warning & information</a><a href="#forms">Richer native inputs</a><a href="#validation">Form validation</a><a href="#menus">Action menus</a><a href="#popovers">Popovers</a><a href="#tooltips">Tooltips</a><a href="#drawers">Detail drawers</a><a href="#notifications">Toast notifications</a><a href="#tables">Searchable, sortable tables</a><a href="#layout">Application layout</a></nav><hr><a href="./">← Foundation components</a></div></aside><main class="docs-main" id="main" tabindex="-1"><div class="docs-intro"><p class="docs-kicker">timvw / v0.5.0</p><h1>Ready for your application.</h1><p class="docs-lead">Copy the markup. Keep native browser behavior. Add the modules for interaction.</p><p>Load <a href="./css/timvw.css">timvw.css</a> and <a href="./css/components.css">components.css</a>, copy the <a href="./js/timvw.js">JavaScript modules</a> and <a href="./icons.svg">icon sprite</a>, then call <code>init()</code>. <a href="./COMPONENTS.md">Read the API and accessibility guide.</a></p></div><section class="docs-section" id="icons"><h2>Icons & button variants</h2><p class="tvw-muted">Copy icons.svg and reference a symbol with SVG use. Icon-only actions need an accessible name.</p><div class="docs-demo"><div class="tvw-cluster">
   <button class="tvw-button tvw-button--sm" type="button">Small</button>
   <button class="tvw-button" type="button">Default</button>
   <button class="tvw-button tvw-button--lg" type="button">Large</button>
