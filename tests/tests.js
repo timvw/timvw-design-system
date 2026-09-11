@@ -1,13 +1,12 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
 import { init } from '../js/timvw.js';
-import { runExtendedChecks } from './extended.js';
+import { runExtendedChecks, waitFor } from './extended.js';
 import { runWorkflowChecks } from './workflows.js';
 
 const fixtures = document.getElementById('fixtures');
 const summary = document.getElementById('summary');
 const results = document.getElementById('results');
 const run = document.getElementById('run');
-const frame = () => new Promise((resolve) => requestAnimationFrame(resolve));
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 
 function tabs(prefix) {
@@ -109,7 +108,7 @@ run.addEventListener('click', async () => {
     assert(dialog.open && dialog.matches(':modal'), 'Dialog did not open modally');
     assert(dialog.contains(document.activeElement), 'Focus did not enter dialog');
     dialog.querySelector('button').click();
-    await frame(); await frame();
+    await waitFor(() => !dialog.open && document.activeElement === opener, 'Focus did not return');
     assert(!dialog.open && document.activeElement === opener, 'Focus did not return');
   });
   await runExtendedChecks(check, fixtures);

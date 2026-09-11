@@ -13,6 +13,9 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble@sha256:3bed4b1a12f2338642f3d8cba28e291deef3c66bd4a964bbeb3e57bbff511dbd
+      options: --ipc=host
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -26,7 +29,6 @@ jobs:
       - name: Install isolated browser test tools
         run: |
           npm install --prefix "$RUNNER_TEMP/tvw-checks" --no-save @playwright/test@1.57.0
-          node "$RUNNER_TEMP/tvw-checks/node_modules/@playwright/test/cli.js" install --with-deps chromium firefox webkit
       - name: Browser workflows and visual regressions
         env:
           VISUAL_TESTS: 'true'
