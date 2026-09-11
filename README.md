@@ -4,6 +4,8 @@ An original design system for timvw projects, written in plain HTML, CSS, and Ja
 
 The theme combines ink and blue, system fonts, semantic color tokens, light and dark palettes, and native browser controls.
 
+[Explore the live component showcase](https://timvw.github.io/timvw-design-system/).
+
 ## Start using it
 
 Copy `css/timvw.css` and, if you need tabs or dialogs, `js/timvw.js` into your project. Keep [LICENSE](LICENSE) with redistributed copies. Start from [starter.html](starter.html) or use this markup:
@@ -31,6 +33,10 @@ python3 -m http.server 8080
 Open `http://localhost:8080` for the component showcase. HTML and CSS also work from disk; browsers restrict JavaScript module loading on `file://` URLs. Python is just an optional local server, not a project dependency.
 
 The showcase provides live examples and copyable source. `docs.css` and `js/docs.js` belong only to the showcase; consumers don't need them.
+
+## Demo hosting
+
+The showcase is published on [GitHub Pages](https://timvw.github.io/timvw-design-system/) from the root of the `main` branch. Pushing changes to `main` automatically updates the demo. `.nojekyll` keeps the files served as plain static assets; no project build command or dependencies are needed.
 
 ## Components
 
