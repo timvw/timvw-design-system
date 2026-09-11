@@ -3,22 +3,41 @@ import { init } from './timvw.js';
 
 init();
 
-const theme = document.getElementById('theme');
+const theme = document.querySelector('[data-theme-picker]');
+const themeButtons = [...theme.querySelectorAll('[data-theme]')];
 const preference = window.matchMedia('(prefers-color-scheme: dark)');
 let savedTheme;
 try { savedTheme = localStorage.getItem('tvw-theme'); } catch { /* Storage is optional. */ }
-theme.value = ['light', 'dark'].includes(savedTheme) ? savedTheme : 'system';
+let selectedTheme = ['light', 'dark'].includes(savedTheme) ? savedTheme : 'system';
 function applyTheme() {
-  document.documentElement.dataset.tvwTheme = theme.value === 'system'
-    ? (preference.matches ? 'dark' : 'light') : theme.value;
+  document.documentElement.dataset.tvwTheme = selectedTheme === 'system'
+    ? (preference.matches ? 'dark' : 'light') : selectedTheme;
+  themeButtons.forEach((button) => {
+    button.setAttribute('aria-pressed', String(button.dataset.theme === selectedTheme));
+  });
 }
 applyTheme();
-theme.closest('label').hidden = false;
-theme.addEventListener('change', () => {
-  applyTheme();
-  try { localStorage.setItem('tvw-theme', theme.value); } catch { /* Storage is optional. */ }
+theme.hidden = false;
+themeButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    selectedTheme = button.dataset.theme;
+    applyTheme();
+    try { localStorage.setItem('tvw-theme', selectedTheme); } catch { /* Storage is optional. */ }
+  });
 });
 preference.addEventListener('change', applyTheme);
+
+const versions = document.querySelector('[data-version-picker]');
+document.addEventListener('click', (event) => {
+  if (versions && !versions.contains(event.target)) versions.open = false;
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && versions?.open) {
+    const focusInside = versions.contains(document.activeElement);
+    versions.open = false;
+    if (focusInside) versions.querySelector('summary').focus();
+  }
+});
 
 document.querySelectorAll('[data-copy]').forEach((button) => {
   if (!navigator.clipboard?.writeText) return;

@@ -9,18 +9,36 @@
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./css/timvw.css">
   <link rel="stylesheet" href="./docs.css">
-  <script type="module" src="./js/docs.js"></script>
+  <link rel="stylesheet" href="./demo-controls.css">
+  <script type="module" src="./js/docs.js?v=0.3.0"></script>
 </head>
 <body class="tvw">
 <a class="tvw-skip" href="#main">Skip to content</a>
 <header class="docs-header">
   <a class="docs-brand" href="./"><span class="docs-mark" aria-hidden="true">tw</span><span><strong>timvw</strong><small>Design system</small></span></a>
-  <div class="tvw-cluster"><label class="docs-theme" hidden>Theme <select class="tvw-input" id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label><a href="https://github.com/timvw/timvw-design-system">GitHub ↗</a></div>
+  <div class="docs-controls">
+    <details class="docs-version" data-version-picker><summary aria-label="Demo version: Latest · v0.3.0">Latest · v0.3.0</summary><nav aria-label="Demo versions"><a href="./" aria-current="page"><strong>Latest · v0.3.0</strong><small>Current development</small></a><a href="./v0.3.0/"><strong>v0.3.0</strong><small>Versioned demos &amp; theme icons</small></a><a href="./v0.2.0/"><strong>v0.2.0</strong><small>QuantumBlack palette</small></a><a href="./v0.1.0/"><strong>v0.1.0</strong><small>Original blue palette</small></a></nav></details>
+    <div class="docs-theme-picker" data-theme-picker role="group" aria-label="Color theme" hidden>
+      <button class="docs-theme-button" type="button" data-theme="light" aria-label="Light theme" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+        <span class="docs-theme-tip" aria-hidden="true">Light</span>
+      </button>
+      <button class="docs-theme-button" type="button" data-theme="dark" aria-label="Dark theme" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13A8.6 8.6 0 0 1 11 3.5a8.6 8.6 0 1 0 9.5 9.5Z"/></svg>
+        <span class="docs-theme-tip" aria-hidden="true">Dark</span>
+      </button>
+      <button class="docs-theme-button" type="button" data-theme="system" aria-label="Use system theme" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 17v4m-4 0h8"/></svg>
+        <span class="docs-theme-tip" aria-hidden="true">System</span>
+      </button>
+    </div>
+    <a href="https://github.com/timvw/timvw-design-system">GitHub ↗</a>
+  </div>
 </header>
 <div class="docs-shell">
   <aside class="docs-sidebar"><div><p class="docs-label">Foundation</p><nav aria-label="Foundations"><a href="#get-started">Get started</a><a href="#tokens">Design tokens</a><a href="#typography">Typography</a></nav><p class="docs-label">Components</p><nav aria-label="Components"><a href="#buttons">Buttons</a><a href="#forms">Form controls</a><a href="#choices">Checkboxes & radios</a><a href="#cards">Cards</a><a href="#feedback">Badges & notices</a><a href="#tables">Tables</a><a href="#navigation">Navigation</a><a href="#accordions">Accordions</a><a href="#tabs">Tabs</a><a href="#dialogs">Dialogs</a><a href="#progress">Progress</a></nav><p class="docs-label">Guidelines</p><nav aria-label="Guidelines"><a href="#accessibility">Accessibility</a></nav></div></aside>
   <main class="docs-main" id="main" tabindex="-1">
-    <div class="docs-intro"><p class="docs-kicker">timvw / v0.2.0</p><h1>Built on the browser.</h1><p class="docs-lead">A small design system for the things you build. Semantic HTML, a considered theme, and just enough JavaScript.</p><div class="tvw-cluster"><a class="tvw-button" href="#buttons">Browse components</a><a class="tvw-button tvw-button--secondary" href="./starter.html">Open starter →</a></div></div>
+    <div class="docs-intro"><p class="docs-kicker">timvw / v0.3.0</p><h1>Built on the browser.</h1><p class="docs-lead">A small design system for the things you build. Semantic HTML, a considered theme, and just enough JavaScript.</p><div class="tvw-cluster"><a class="tvw-button" href="#buttons">Browse components</a><a class="tvw-button tvw-button--secondary" href="./starter.html">Open starter →</a></div></div>
     <section class="docs-section" id="get-started"><div class="docs-heading"><h2>Get started</h2><span>01 / Foundation</span></div><p>Copy <a href="./css/timvw.css"><code>css/timvw.css</code></a> into your project and add <code>class="tvw"</code> to the body. For tabs and dialogs, also copy <a href="./js/timvw.js"><code>js/timvw.js</code></a> and call <code>init()</code>.</p><p class="tvw-muted">No package install or build step. Serve your files over HTTP to use JavaScript modules; the HTML and CSS also work directly from disk.</p><details class="docs-code"><summary>View source</summary><pre><code id="code-starter">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;

@@ -32,11 +32,24 @@ python3 -m http.server 8080
 
 Open `http://localhost:8080` for the component showcase. HTML and CSS also work from disk; browsers restrict JavaScript module loading on `file://` URLs. Python is just an optional local server, not a project dependency.
 
-The showcase provides live examples and copyable source. `docs.css` and `js/docs.js` belong only to the showcase; consumers don't need them.
+The showcase provides live examples and copyable source. `docs.css`, `demo-controls.css`, and `js/docs.js` belong only to the showcase; consumers don't need them. The sun, moon, and computer buttons select light, dark, or system appearance. Your choice is remembered across demo versions; system mode follows OS changes.
 
 ## Demo hosting
 
 The showcase is published on [GitHub Pages](https://timvw.github.io/timvw-design-system/) from the root of the `main` branch. Pushing changes to `main` automatically updates the demo. `.nojekyll` keeps the files served as plain static assets; no project build command or dependencies are needed.
+
+The header's version switcher links to the latest demo and frozen releases:
+
+| Demo | Contents |
+| --- | --- |
+| [Latest](https://timvw.github.io/timvw-design-system/) | The current demo, updated from `main` |
+| [v0.3.0](https://timvw.github.io/timvw-design-system/v0.3.0/) | QuantumBlack palette, version navigation, and theme icons |
+| [v0.2.0](https://timvw.github.io/timvw-design-system/v0.2.0/) | QuantumBlack palette components |
+| [v0.1.0](https://timvw.github.io/timvw-design-system/v0.1.0/) | Original blue palette components |
+
+Each release folder contains its own component CSS, JavaScript, examples, and licenses. The archived demos received version navigation and theme icons when first archived; their component files match the recorded source revision. Everything in a release folder is frozen after publication. `release.json` records the source commit and SHA-256 checksums. Archived version menus show the versions known when they were created and always link back to Latest.
+
+Maintainers can create future snapshots with the optional Python standard-library utility documented in [CONTRIBUTING.md](CONTRIBUTING.md). It is not needed to use or serve the design system.
 
 ## Components
 
