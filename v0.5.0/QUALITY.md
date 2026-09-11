@@ -17,7 +17,7 @@ Browser tooling is installed in a temporary CI directory. It is not shipped with
 
 ## Visual baselines
 
-Baselines use Ubuntu 24.04, Playwright 1.57.0, Chromium, a fixed locale/timezone, and reduced motion. Screenshots compare against committed images in `tests/snapshots/`; the tolerance allows minor rendering differences, not arbitrary layout changes. Failed comparisons produce expected/actual/difference images and traces in the workflow artifact.
+Baselines use the official `mcr.microsoft.com/playwright:v1.57.0-noble` Linux container, Chromium, a fixed locale/timezone, and reduced motion. Screenshots compare against committed images in `tests/snapshots/`; the tolerance allows minor rendering differences, not arbitrary layout changes. Failed comparisons produce expected/actual/difference images and traces in the workflow artifact.
 
 To propose intentional visual changes, dispatch **Design system checks** with `update_snapshots` enabled. Download the artifact, inspect the new screenshots, then commit the reviewed images. Updating baselines does not happen automatically in the repository. The first run bootstraps images for review when no baseline directory exists.
 

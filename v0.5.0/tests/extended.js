@@ -1,7 +1,15 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
 import { init, setTheme, getTheme, setBusy, getTable, notify } from '../js/timvw.js';
 const assert = (value, message) => { if (!value) throw new Error(message); };
-const settle = () => new Promise(resolve => setTimeout(resolve, 40));
+// Browser close/toggle events and animation frames use different task queues.
+// Wait for the observable result instead of assuming they finish within 40 ms.
+export async function waitFor(predicate, message) {
+  const deadline = performance.now() + 2000;
+  while (!predicate()) {
+    assert(performance.now() < deadline, message);
+    await new Promise(resolve => setTimeout(resolve, 16));
+  }
+}
 
 export async function runExtendedChecks(check, fixtures) {
   await check('Busy buttons restore original content, listeners, and disabled state', () => {
@@ -55,7 +63,7 @@ export async function runExtendedChecks(check, fixtures) {
   await check('Menus move focus, skip disabled items, and close with Escape', async () => {
     const holder = document.createElement('div'); holder.innerHTML = '<button popovertarget="ext-menu">Actions</button><div id="ext-menu" class="tvw-menu" popover data-tvw-menu role="menu"><button role="menuitem">First</button><button role="menuitem" disabled>Disabled</button><button role="menuitem">Last</button></div>';
     fixtures.append(holder); init(holder); const trigger = holder.firstElementChild, menu = holder.lastElementChild;
-    trigger.click(); await settle(); assert(document.activeElement.textContent === 'First', 'First item not focused');
+    trigger.click(); await waitFor(() => document.activeElement === menu.firstElementChild, 'First item not focused');
     menu.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
     assert(document.activeElement.textContent === 'Last', 'Disabled item not skipped');
     menu.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
@@ -66,21 +74,23 @@ export async function runExtendedChecks(check, fixtures) {
     holder.innerHTML = '<button popovertarget="ext-dialog-menu">Actions</button><div id="ext-dialog-menu" class="tvw-menu" popover data-tvw-menu role="menu"><button role="menuitem" data-tvw-open="ext-menu-dialog">Edit</button></div><dialog id="ext-menu-dialog" aria-label="Edit"><form method="dialog"><button>Close</button></form></dialog>';
     fixtures.append(holder); init(holder);
     const trigger = holder.firstElementChild, dialog = holder.querySelector('dialog');
-    trigger.click(); await settle(); holder.querySelector('[role="menuitem"]').click(); await settle();
+    trigger.click(); await waitFor(() => document.activeElement === holder.querySelector('[role="menuitem"]'), 'Menu did not receive focus');
+    holder.querySelector('[role="menuitem"]').click();
     assert(dialog.open && dialog.contains(document.activeElement), 'Dialog did not receive focus');
-    dialog.querySelector('button').click(); await settle();
+    dialog.querySelector('button').click(); await waitFor(() => document.activeElement === trigger, 'Focus did not return to visible trigger');
     assert(document.activeElement === trigger, 'Focus did not return to visible trigger');
   });
   await check('Tooltips appear on focus and dismiss with Escape', async () => {
     const holder = document.createElement('div'); holder.innerHTML = '<span data-tvw-tooltip><button aria-describedby="ext-tip">Information</button><span class="tvw-tooltip" id="ext-tip" role="tooltip" popover="manual">More information</span></span>';
-    fixtures.append(holder); init(holder); holder.querySelector('button').focus(); await settle();
+    fixtures.append(holder); init(holder); holder.querySelector('button').focus();
     assert(holder.querySelector('[role="tooltip"]').matches(':popover-open'), 'Tooltip not shown');
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     assert(!holder.querySelector('[role="tooltip"]').matches(':popover-open'), 'Tooltip not dismissed');
   });
   await check('Notification messages are treated as text and can be dismissed', async () => {
-    const dismiss = notify('<b>Plain text</b>'); await settle();
+    const dismiss = notify('<b>Plain text</b>');
     const toast = [...document.querySelectorAll('.tvw-toast')].at(-1);
+    await waitFor(() => toast.querySelector('[role="status"]').textContent !== '', 'Notification text was not populated');
     assert(toast.querySelector('[role="status"]').textContent === '<b>Plain text</b>' && !toast.querySelector('b'), 'Message interpreted as HTML');
     dismiss(); assert(!toast.isConnected, 'Notification did not dismiss');
   });
