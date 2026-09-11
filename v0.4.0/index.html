@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The timvw design system. Original components, light and dark themes, and copyable examples in plain HTML, CSS, and JavaScript.">
+  <meta name="color-scheme" content="light dark">
+  <title>timvw v0.4.0 · Design system</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/timvw.css?v=0.4.0">
+  <link rel="stylesheet" href="./css/components.css?v=0.4.0">
+  <link rel="stylesheet" href="./docs.css">
+  <link rel="stylesheet" href="./demo-controls.css">
+  <script type="module" src="./js/docs.js?v=0.4.0"></script>
+</head>
+<body class="tvw">
+<a class="tvw-skip" href="#main">Skip to content</a>
+<header class="docs-header">
+  <a class="docs-brand" href="./"><span class="docs-mark" aria-hidden="true">tw</span><span><strong>timvw</strong><small>Design system</small></span></a>
+  <div class="docs-controls">
+    <details class="docs-version" data-version-picker><summary aria-label="Demo version: v0.4.0">v0.4.0</summary><nav aria-label="Demo versions"><a href="../"><strong>Latest · v0.4.0</strong><small>Current development</small></a><a href="../v0.4.0/" aria-current="page"><strong>v0.4.0</strong><small>Application components &amp; complete examples</small></a><a href="../v0.3.0/"><strong>v0.3.0</strong><small>Versioned demos &amp; theme icons</small></a><a href="../v0.2.0/"><strong>v0.2.0</strong><small>QuantumBlack palette</small></a><a href="../v0.1.0/"><strong>v0.1.0</strong><small>Original blue palette</small></a></nav></details>
+    <div class="tvw-theme-picker" data-tvw-theme-picker role="group" aria-label="Color theme" hidden>
+      <button class="tvw-button tvw-button--icon" type="button" data-theme="light" title="Light" aria-label="Light theme" aria-pressed="false">
+        <svg class="tvw-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+      </button>
+      <button class="tvw-button tvw-button--icon" type="button" data-theme="dark" title="Dark" aria-label="Dark theme" aria-pressed="false">
+        <svg class="tvw-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13A8.6 8.6 0 0 1 11 3.5a8.6 8.6 0 1 0 9.5 9.5Z"/></svg>
+      </button>
+      <button class="tvw-button tvw-button--icon" type="button" data-theme="system" title="System" aria-label="Use system theme" aria-pressed="false">
+        <svg class="tvw-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 17v4m-4 0h8"/></svg>
+      </button>
+    </div>
+    <a href="https://github.com/timvw/timvw-design-system">GitHub ↗</a>
+  </div>
+</header>
+<aside class="docs-archive" aria-label="Archived demo"><p>Frozen demo · v0.4.0. <a href="../">View the latest version →</a></p></aside>
+<div class="docs-shell">
+  <aside class="docs-sidebar"><div><p class="docs-label">Foundation</p><nav aria-label="Foundations"><a href="#get-started">Get started</a><a href="#tokens">Design tokens</a><a href="#typography">Typography</a></nav><p class="docs-label">Explore</p><nav aria-label="Extended library"><a href="./components.html">Application components</a><a href="./examples/settings.html">Settings example</a><a href="./examples/projects.html">Project list example</a><a href="./examples/dashboard.html">Dashboard example</a></nav><p class="docs-label">Components</p><nav aria-label="Components"><a href="#buttons">Buttons</a><a href="#forms">Form controls</a><a href="#choices">Checkboxes & radios</a><a href="#cards">Cards</a><a href="#feedback">Badges & notices</a><a href="#tables">Tables</a><a href="#navigation">Navigation</a><a href="#accordions">Accordions</a><a href="#tabs">Tabs</a><a href="#dialogs">Dialogs</a><a href="#progress">Progress</a></nav><p class="docs-label">Guidelines</p><nav aria-label="Guidelines"><a href="#accessibility">Accessibility</a></nav></div></aside>
+  <main class="docs-main" id="main" tabindex="-1">
+    <div class="docs-intro"><p class="docs-kicker">timvw / v0.4.0</p><h1>Built on the browser.</h1><p class="docs-lead">Components and complete application examples in semantic HTML, plain CSS, and small JavaScript modules.</p><div class="tvw-cluster"><a class="tvw-button" href="./components.html">Explore application components</a><a class="tvw-button tvw-button--secondary" href="./starter.html">Open starter →</a></div></div>
+    <section class="docs-section" id="get-started"><div class="docs-heading"><h2>Get started</h2><span>01 / Foundation</span></div><p>Copy <a href="./css/timvw.css"><code>css/timvw.css</code></a> into your project and add <code>class="tvw"</code> to the body. For tabs and dialogs, also copy <a href="./js/timvw.js"><code>js/timvw.js</code></a> and call <code>init()</code>.</p><p class="tvw-muted">No package install or build step. Serve your files over HTTP to use JavaScript modules; the HTML and CSS also work directly from disk.</p><details class="docs-code"><summary>View source</summary><pre><code id="code-starter">&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;My project · timvw&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;./css/timvw.css&quot;&gt;
+&lt;/head&gt;
+&lt;body class=&quot;tvw&quot;&gt;
+  &lt;main class=&quot;tvw-card&quot;&gt;
+    &lt;h1&gt;Hello, timvw.&lt;/h1&gt;
+    &lt;p&gt;Your next project starts with HTML.&lt;/p&gt;
+    &lt;button class=&quot;tvw-button&quot; type=&quot;button&quot;&gt;A native button&lt;/button&gt;
+  &lt;/main&gt;
+  &lt;script type=&quot;module&quot;&gt;
+    import { init } from &#x27;./js/timvw.js&#x27;;
+    init();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-starter" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+    <section class="docs-section" id="tokens"><div class="docs-heading"><h2>Design tokens</h2><span>02 / Foundation</span></div><p class="tvw-muted">Mist whites, slate darks, and selective cyan highlights. Colors adapted from the QuantumBlack Design System, mapped to the timvw components.</p><div class="docs-swatches"><div class="docs-swatch"><div class="docs-swatch-color" style="background:var(--tvw-highlight)"></div><span>Cyan highlight<br><code>--tvw-highlight</code></span></div><div class="docs-swatch"><div class="docs-swatch-color" style="background:var(--tvw-link)"></div><span>Link<br><code>--tvw-link</code></span></div><div class="docs-swatch"><div class="docs-swatch-color" style="background:var(--tvw-accent)"></div><span>Action<br><code>--tvw-accent</code></span></div><div class="docs-swatch"><div class="docs-swatch-color" style="background:var(--tvw-text)"></div><span>Text<br><code>--tvw-text</code></span></div><div class="docs-swatch"><div class="docs-swatch-color" style="background:var(--tvw-surface)"></div><span>Surface<br><code>--tvw-surface</code></span></div><div class="docs-swatch"><div class="docs-swatch-color" style="background:var(--tvw-bg)"></div><span>Canvas<br><code>--tvw-bg</code></span></div><div class="docs-swatch"><div class="docs-swatch-color" style="background:var(--tvw-muted)"></div><span>Secondary text<br><code>--tvw-muted</code></span></div><div class="docs-swatch"><div class="docs-swatch-color" style="background:var(--tvw-border)"></div><span>Divider<br><code>--tvw-border</code></span></div><div class="docs-swatch"><div class="docs-swatch-color" style="background:var(--tvw-success)"></div><span>Success<br><code>--tvw-success</code></span></div><div class="docs-swatch"><div class="docs-swatch-color" style="background:var(--tvw-danger)"></div><span>Error<br><code>--tvw-danger</code></span></div></div><h3 class="docs-subheading">Spacing</h3><div class="docs-space-scale"><div><i style="width:var(--tvw-space-1)"></i><span>1 · 4px</span></div><div><i style="width:var(--tvw-space-2)"></i><span>2 · 8px</span></div><div><i style="width:var(--tvw-space-3)"></i><span>3 · 12px</span></div><div><i style="width:var(--tvw-space-4)"></i><span>4 · 16px</span></div><div><i style="width:var(--tvw-space-6)"></i><span>6 · 24px</span></div><div><i style="width:var(--tvw-space-8)"></i><span>8 · 32px</span></div><div><i style="width:var(--tvw-space-12)"></i><span>12 · 48px</span></div></div><details class="docs-code"><summary>View source</summary><pre><code id="code-theme">/* Load your overrides after timvw.css. */
+:root {
+  --tvw-radius: .25rem;
+  --tvw-space-4: 1rem;
+}
+/* Set data-tvw-theme=&quot;dark&quot; on &lt;html&gt; to use the dark palette.
+   Omit it, or use &quot;light&quot;, for the light palette. */</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-theme" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+    <section class="docs-section" id="typography"><div class="docs-heading"><h2>Typography</h2><span>03 / Foundation</span></div><p class="tvw-muted">System fonts, a comfortable reading rhythm, and monospace for code. No font downloads.</p><div class="docs-demo"><p class="docs-type-display">Clear by default.</p><h3>Give each thought some room.</h3><p>Body text is 1rem with a 1.6 line height. Headings scale with the viewport while respecting the reader’s font settings.</p><code>font-family: var(--tvw-mono);</code></div></section>
+    <section class="docs-section" id="buttons" aria-labelledby="heading-buttons">
+<div class="docs-heading"><h2 id="heading-buttons">Buttons</h2><span>HTML + CSS</span></div>
+<p class="tvw-muted">Use buttons for actions and links for navigation. Keep one primary action per group.</p><div class="docs-demo"><div class="tvw-cluster">
+  <button class="tvw-button" type="button">Primary</button>
+  <button class="tvw-button tvw-button--secondary" type="button">Secondary</button>
+  <button class="tvw-button tvw-button--quiet" type="button">Quiet</button>
+  <button class="tvw-button" type="button" disabled>Unavailable</button>
+  <a class="tvw-button tvw-button--secondary" href="#get-started">Get started →</a>
+</div></div><details class="docs-code"><summary>View source</summary><pre><code id="code-buttons">&lt;div class=&quot;tvw-cluster&quot;&gt;
+  &lt;button class=&quot;tvw-button&quot; type=&quot;button&quot;&gt;Primary&lt;/button&gt;
+  &lt;button class=&quot;tvw-button tvw-button--secondary&quot; type=&quot;button&quot;&gt;Secondary&lt;/button&gt;
+  &lt;button class=&quot;tvw-button tvw-button--quiet&quot; type=&quot;button&quot;&gt;Quiet&lt;/button&gt;
+  &lt;button class=&quot;tvw-button&quot; type=&quot;button&quot; disabled&gt;Unavailable&lt;/button&gt;
+  &lt;a class=&quot;tvw-button tvw-button--secondary&quot; href=&quot;#get-started&quot;&gt;Get started →&lt;/a&gt;
+&lt;/div&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-buttons" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+<section class="docs-section" id="forms" aria-labelledby="heading-forms">
+<div class="docs-heading"><h2 id="heading-forms">Form controls</h2><span>HTML + CSS</span></div>
+<p class="tvw-muted">Keep labels visible. Connect help and error text with aria-describedby; use native validation where possible.</p><div class="docs-demo"><div class="tvw-stack">
+  <div class="tvw-field">
+    <label for="project">Project name</label>
+    <input class="tvw-input" id="project" name="project" placeholder="My next project" aria-describedby="project-help">
+    <span class="tvw-help" id="project-help">A short, descriptive name.</span>
+  </div>
+  <div class="tvw-field">
+    <label for="visibility">Visibility</label>
+    <select class="tvw-input" id="visibility" name="visibility">
+      <option>Private</option><option>Public</option>
+    </select>
+  </div>
+  <div class="tvw-field">
+    <label for="email">Email address</label>
+    <input class="tvw-input" id="email" type="email" value="hello@" aria-invalid="true" aria-describedby="email-error">
+    <span class="tvw-error" id="email-error">Enter a complete email address, such as hello@example.com.</span>
+  </div>
+  <div class="tvw-field">
+    <label for="reference">Reference (unavailable)</label>
+    <input class="tvw-input" id="reference" value="Assigned after creation" disabled>
+  </div>
+  <div class="tvw-field">
+    <label for="notes">Notes</label>
+    <textarea class="tvw-input" id="notes" rows="3" placeholder="What should we know?"></textarea>
+  </div>
+</div></div><details class="docs-code"><summary>View source</summary><pre><code id="code-forms">&lt;div class=&quot;tvw-stack&quot;&gt;
+  &lt;div class=&quot;tvw-field&quot;&gt;
+    &lt;label for=&quot;project&quot;&gt;Project name&lt;/label&gt;
+    &lt;input class=&quot;tvw-input&quot; id=&quot;project&quot; name=&quot;project&quot; placeholder=&quot;My next project&quot; aria-describedby=&quot;project-help&quot;&gt;
+    &lt;span class=&quot;tvw-help&quot; id=&quot;project-help&quot;&gt;A short, descriptive name.&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;tvw-field&quot;&gt;
+    &lt;label for=&quot;visibility&quot;&gt;Visibility&lt;/label&gt;
+    &lt;select class=&quot;tvw-input&quot; id=&quot;visibility&quot; name=&quot;visibility&quot;&gt;
+      &lt;option&gt;Private&lt;/option&gt;&lt;option&gt;Public&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;tvw-field&quot;&gt;
+    &lt;label for=&quot;email&quot;&gt;Email address&lt;/label&gt;
+    &lt;input class=&quot;tvw-input&quot; id=&quot;email&quot; type=&quot;email&quot; value=&quot;hello@&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;email-error&quot;&gt;
+    &lt;span class=&quot;tvw-error&quot; id=&quot;email-error&quot;&gt;Enter a complete email address, such as hello@example.com.&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;tvw-field&quot;&gt;
+    &lt;label for=&quot;reference&quot;&gt;Reference (unavailable)&lt;/label&gt;
+    &lt;input class=&quot;tvw-input&quot; id=&quot;reference&quot; value=&quot;Assigned after creation&quot; disabled&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;tvw-field&quot;&gt;
+    &lt;label for=&quot;notes&quot;&gt;Notes&lt;/label&gt;
+    &lt;textarea class=&quot;tvw-input&quot; id=&quot;notes&quot; rows=&quot;3&quot; placeholder=&quot;What should we know?&quot;&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-forms" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+<section class="docs-section" id="choices" aria-labelledby="heading-choices">
+<div class="docs-heading"><h2 id="heading-choices">Checkboxes & radios</h2><span>HTML + CSS</span></div>
+<p class="tvw-muted">Use checkboxes for independent choices and radios for one choice from a named group.</p><div class="docs-demo"><div class="tvw-stack">
+  <fieldset class="tvw-fieldset">
+    <legend>Include in export</legend>
+    <label class="tvw-choice"><input type="checkbox" name="export" value="source" checked> Source files</label>
+    <label class="tvw-choice"><input type="checkbox" name="export" value="docs"> Documentation</label>
+  </fieldset>
+  <fieldset class="tvw-fieldset">
+    <legend>Release channel</legend>
+    <label class="tvw-choice"><input type="radio" name="channel" value="stable" checked> Stable</label>
+    <label class="tvw-choice"><input type="radio" name="channel" value="preview"> Preview</label>
+  </fieldset>
+</div></div><details class="docs-code"><summary>View source</summary><pre><code id="code-choices">&lt;div class=&quot;tvw-stack&quot;&gt;
+  &lt;fieldset class=&quot;tvw-fieldset&quot;&gt;
+    &lt;legend&gt;Include in export&lt;/legend&gt;
+    &lt;label class=&quot;tvw-choice&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;export&quot; value=&quot;source&quot; checked&gt; Source files&lt;/label&gt;
+    &lt;label class=&quot;tvw-choice&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;export&quot; value=&quot;docs&quot;&gt; Documentation&lt;/label&gt;
+  &lt;/fieldset&gt;
+  &lt;fieldset class=&quot;tvw-fieldset&quot;&gt;
+    &lt;legend&gt;Release channel&lt;/legend&gt;
+    &lt;label class=&quot;tvw-choice&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;channel&quot; value=&quot;stable&quot; checked&gt; Stable&lt;/label&gt;
+    &lt;label class=&quot;tvw-choice&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;channel&quot; value=&quot;preview&quot;&gt; Preview&lt;/label&gt;
+  &lt;/fieldset&gt;
+&lt;/div&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-choices" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+<section class="docs-section" id="cards" aria-labelledby="heading-cards">
+<div class="docs-heading"><h2 id="heading-cards">Cards</h2><span>HTML + CSS</span></div>
+<p class="tvw-muted">Group related content. Give each card a descriptive heading and a specific link when needed.</p><div class="docs-demo"><article class="tvw-card">
+  <span class="tvw-badge">Foundation</span>
+  <h3>Make it your own</h3>
+  <p>Start with the timvw theme and adjust the CSS variables to suit your project.</p>
+  <a href="#tokens">Explore the tokens →</a>
+</article></div><details class="docs-code"><summary>View source</summary><pre><code id="code-cards">&lt;article class=&quot;tvw-card&quot;&gt;
+  &lt;span class=&quot;tvw-badge&quot;&gt;Foundation&lt;/span&gt;
+  &lt;h3&gt;Make it your own&lt;/h3&gt;
+  &lt;p&gt;Start with the timvw theme and adjust the CSS variables to suit your project.&lt;/p&gt;
+  &lt;a href=&quot;#tokens&quot;&gt;Explore the tokens →&lt;/a&gt;
+&lt;/article&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-cards" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+<section class="docs-section" id="feedback" aria-labelledby="heading-feedback">
+<div class="docs-heading"><h2 id="heading-feedback">Badges & notices</h2><span>HTML + CSS</span></div>
+<p class="tvw-muted">Pair color with clear text. Add role="status" to dynamically updated feedback, or role="alert" for urgent errors.</p><div class="docs-demo"><div class="tvw-stack">
+  <div class="tvw-cluster">
+    <span class="tvw-badge">Draft</span>
+    <span class="tvw-badge tvw-badge--success">Published</span>
+    <span class="tvw-badge tvw-badge--danger">Needs attention</span>
+  </div>
+  <div class="tvw-notice"><p><strong>Preview release.</strong> Review the components in your own layouts before adopting them.</p></div>
+  <div class="tvw-notice tvw-notice--success"><p><strong>Changes saved.</strong> Your preferences are up to date.</p></div>
+  <div class="tvw-notice tvw-notice--danger"><p><strong>Upload failed.</strong> Check your connection and try again.</p></div>
+</div></div><details class="docs-code"><summary>View source</summary><pre><code id="code-feedback">&lt;div class=&quot;tvw-stack&quot;&gt;
+  &lt;div class=&quot;tvw-cluster&quot;&gt;
+    &lt;span class=&quot;tvw-badge&quot;&gt;Draft&lt;/span&gt;
+    &lt;span class=&quot;tvw-badge tvw-badge--success&quot;&gt;Published&lt;/span&gt;
+    &lt;span class=&quot;tvw-badge tvw-badge--danger&quot;&gt;Needs attention&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;tvw-notice&quot;&gt;&lt;p&gt;&lt;strong&gt;Preview release.&lt;/strong&gt; Review the components in your own layouts before adopting them.&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;tvw-notice tvw-notice--success&quot;&gt;&lt;p&gt;&lt;strong&gt;Changes saved.&lt;/strong&gt; Your preferences are up to date.&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;tvw-notice tvw-notice--danger&quot;&gt;&lt;p&gt;&lt;strong&gt;Upload failed.&lt;/strong&gt; Check your connection and try again.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-feedback" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+<section class="docs-section" id="tables" aria-labelledby="heading-tables">
+<div class="docs-heading"><h2 id="heading-tables">Tables</h2><span>HTML + CSS</span></div>
+<p class="tvw-muted">Use a caption and scoped headers. The surrounding region can scroll on narrow screens.</p><div class="docs-demo"><div class="tvw-table-wrap" role="region" aria-label="Component implementation" tabindex="0">
+  <table class="tvw-table">
+    <caption>Choose the smallest building block</caption>
+    <thead><tr><th scope="col">Component</th><th scope="col">HTML element</th><th scope="col">JavaScript</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Button</th><td><code>button</code></td><td>None for styling</td></tr>
+      <tr><th scope="row">Accordion</th><td><code>details</code></td><td>None</td></tr>
+      <tr><th scope="row">Dialog</th><td><code>dialog</code></td><td>Open & focus return</td></tr>
+      <tr><th scope="row">Tabs</th><td><code>button</code> + sections</td><td>Selection & keyboard</td></tr>
+    </tbody>
+  </table>
+</div></div><details class="docs-code"><summary>View source</summary><pre><code id="code-tables">&lt;div class=&quot;tvw-table-wrap&quot; role=&quot;region&quot; aria-label=&quot;Component implementation&quot; tabindex=&quot;0&quot;&gt;
+  &lt;table class=&quot;tvw-table&quot;&gt;
+    &lt;caption&gt;Choose the smallest building block&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Component&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;HTML element&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;JavaScript&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Button&lt;/th&gt;&lt;td&gt;&lt;code&gt;button&lt;/code&gt;&lt;/td&gt;&lt;td&gt;None for styling&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Accordion&lt;/th&gt;&lt;td&gt;&lt;code&gt;details&lt;/code&gt;&lt;/td&gt;&lt;td&gt;None&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Dialog&lt;/th&gt;&lt;td&gt;&lt;code&gt;dialog&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Open &amp; focus return&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Tabs&lt;/th&gt;&lt;td&gt;&lt;code&gt;button&lt;/code&gt; + sections&lt;/td&gt;&lt;td&gt;Selection &amp; keyboard&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-tables" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+<section class="docs-section" id="navigation" aria-labelledby="heading-navigation">
+<div class="docs-heading"><h2 id="heading-navigation">Navigation</h2><span>HTML + CSS</span></div>
+<p class="tvw-muted">Use a labeled navigation landmark. On separate pages, mark the current page with aria-current="page".</p><div class="docs-demo"><nav class="tvw-nav" aria-label="Example navigation">
+  <a href="#get-started">Get started</a>
+  <a href="#tokens">Tokens</a>
+  <a href="#accessibility">Accessibility</a>
+</nav></div><details class="docs-code"><summary>View source</summary><pre><code id="code-navigation">&lt;nav class=&quot;tvw-nav&quot; aria-label=&quot;Example navigation&quot;&gt;
+  &lt;a href=&quot;#get-started&quot;&gt;Get started&lt;/a&gt;
+  &lt;a href=&quot;#tokens&quot;&gt;Tokens&lt;/a&gt;
+  &lt;a href=&quot;#accessibility&quot;&gt;Accessibility&lt;/a&gt;
+&lt;/nav&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-navigation" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+<section class="docs-section" id="accordions" aria-labelledby="heading-accordions">
+<div class="docs-heading"><h2 id="heading-accordions">Accordions</h2><span>HTML + CSS</span></div>
+<p class="tvw-muted">Native details and summary work with keyboard, touch, and JavaScript disabled.</p><div class="docs-demo"><div class="tvw-stack">
+  <details class="tvw-accordion" open>
+    <summary>Do I need a build step?</summary>
+    <div><p>No. Copy the stylesheet, add semantic HTML, and load the optional JavaScript module for tabs and dialogs.</p></div>
+  </details>
+  <details class="tvw-accordion">
+    <summary>Can I change the theme?</summary>
+    <div><p>Yes. Override the <code>--tvw-*</code> custom properties in your own stylesheet.</p></div>
+  </details>
+</div></div><details class="docs-code"><summary>View source</summary><pre><code id="code-accordions">&lt;div class=&quot;tvw-stack&quot;&gt;
+  &lt;details class=&quot;tvw-accordion&quot; open&gt;
+    &lt;summary&gt;Do I need a build step?&lt;/summary&gt;
+    &lt;div&gt;&lt;p&gt;No. Copy the stylesheet, add semantic HTML, and load the optional JavaScript module for tabs and dialogs.&lt;/p&gt;&lt;/div&gt;
+  &lt;/details&gt;
+  &lt;details class=&quot;tvw-accordion&quot;&gt;
+    &lt;summary&gt;Can I change the theme?&lt;/summary&gt;
+    &lt;div&gt;&lt;p&gt;Yes. Override the &lt;code&gt;--tvw-*&lt;/code&gt; custom properties in your own stylesheet.&lt;/p&gt;&lt;/div&gt;
+  &lt;/details&gt;
+&lt;/div&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-accordions" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+<section class="docs-section" id="tabs" aria-labelledby="heading-tabs">
+<div class="docs-heading"><h2 id="heading-tabs">Tabs</h2><span>HTML + CSS + JS</span></div>
+<p class="tvw-muted">Arrow keys change tabs; Home and End jump to the first and last. Without JavaScript, all sections stay readable.</p><div class="docs-demo"><div class="tvw-tabs" data-tvw-tabs>
+  <div data-tvw-tablist aria-label="Component details" hidden>
+    <button type="button" id="tab-overview" aria-controls="panel-overview">Overview</button>
+    <button type="button" id="tab-usage" aria-controls="panel-usage">Usage</button>
+    <button type="button" id="tab-keyboard" aria-controls="panel-keyboard">Keyboard</button>
+  </div>
+  <section id="panel-overview"><h3>Overview</h3><p>Related content, one section at a time. The selected tab and its panel are linked for assistive technology.</p></section>
+  <section id="panel-usage"><h3>Usage</h3><p>Give every button and panel a unique ID, then call <code>init()</code> after the markup is available.</p></section>
+  <section id="panel-keyboard"><h3>Keyboard</h3><p>Use Left and Right, Home, or End to select a tab. Tab moves into the selected panel.</p></section>
+</div></div><details class="docs-code"><summary>View source</summary><pre><code id="code-tabs">&lt;div class=&quot;tvw-tabs&quot; data-tvw-tabs&gt;
+  &lt;div data-tvw-tablist aria-label=&quot;Component details&quot; hidden&gt;
+    &lt;button type=&quot;button&quot; id=&quot;tab-overview&quot; aria-controls=&quot;panel-overview&quot;&gt;Overview&lt;/button&gt;
+    &lt;button type=&quot;button&quot; id=&quot;tab-usage&quot; aria-controls=&quot;panel-usage&quot;&gt;Usage&lt;/button&gt;
+    &lt;button type=&quot;button&quot; id=&quot;tab-keyboard&quot; aria-controls=&quot;panel-keyboard&quot;&gt;Keyboard&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;section id=&quot;panel-overview&quot;&gt;&lt;h3&gt;Overview&lt;/h3&gt;&lt;p&gt;Related content, one section at a time. The selected tab and its panel are linked for assistive technology.&lt;/p&gt;&lt;/section&gt;
+  &lt;section id=&quot;panel-usage&quot;&gt;&lt;h3&gt;Usage&lt;/h3&gt;&lt;p&gt;Give every button and panel a unique ID, then call &lt;code&gt;init()&lt;/code&gt; after the markup is available.&lt;/p&gt;&lt;/section&gt;
+  &lt;section id=&quot;panel-keyboard&quot;&gt;&lt;h3&gt;Keyboard&lt;/h3&gt;&lt;p&gt;Use Left and Right, Home, or End to select a tab. Tab moves into the selected panel.&lt;/p&gt;&lt;/section&gt;
+&lt;/div&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-tabs" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+<section class="docs-section" id="dialogs" aria-labelledby="heading-dialogs">
+<div class="docs-heading"><h2 id="heading-dialogs">Dialogs</h2><span>HTML + CSS + JS</span></div>
+<p class="tvw-muted">The native modal contains keyboard focus and closes with Escape. Focus returns to the button that opened it.</p><div class="docs-demo"><button class="tvw-button" type="button" data-tvw-open="example-dialog" hidden>Open dialog</button>
+<dialog class="tvw-dialog" id="example-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+  <h2 id="dialog-title">A little room to focus</h2>
+  <p id="dialog-description">Use a dialog for a short task that needs attention before returning to the page.</p>
+  <form method="dialog">
+    <button class="tvw-button" autofocus>Close dialog</button>
+  </form>
+</dialog></div><details class="docs-code"><summary>View source</summary><pre><code id="code-dialogs">&lt;button class=&quot;tvw-button&quot; type=&quot;button&quot; data-tvw-open=&quot;example-dialog&quot; hidden&gt;Open dialog&lt;/button&gt;
+&lt;dialog class=&quot;tvw-dialog&quot; id=&quot;example-dialog&quot; aria-labelledby=&quot;dialog-title&quot; aria-describedby=&quot;dialog-description&quot;&gt;
+  &lt;h2 id=&quot;dialog-title&quot;&gt;A little room to focus&lt;/h2&gt;
+  &lt;p id=&quot;dialog-description&quot;&gt;Use a dialog for a short task that needs attention before returning to the page.&lt;/p&gt;
+  &lt;form method=&quot;dialog&quot;&gt;
+    &lt;button class=&quot;tvw-button&quot; autofocus&gt;Close dialog&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/dialog&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-dialogs" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+<section class="docs-section" id="progress" aria-labelledby="heading-progress">
+<div class="docs-heading"><h2 id="heading-progress">Progress</h2><span>HTML + CSS</span></div>
+<p class="tvw-muted">Provide an accessible label and a visible value. Omit value for indeterminate progress.</p><div class="docs-demo"><div class="tvw-stack">
+  <label for="upload-progress">Example upload · 65%</label>
+  <progress class="tvw-progress" id="upload-progress" value="65" max="100">65%</progress>
+</div></div><details class="docs-code"><summary>View source</summary><pre><code id="code-progress">&lt;div class=&quot;tvw-stack&quot;&gt;
+  &lt;label for=&quot;upload-progress&quot;&gt;Example upload · 65%&lt;/label&gt;
+  &lt;progress class=&quot;tvw-progress&quot; id=&quot;upload-progress&quot; value=&quot;65&quot; max=&quot;100&quot;&gt;65%&lt;/progress&gt;
+&lt;/div&gt;</code></pre><div class="tvw-cluster"><button type="button" class="tvw-button tvw-button--secondary" data-copy="code-progress" hidden>Copy source</button><span role="status" class="tvw-help"></span></div></details></section>
+    <section class="docs-section" id="accessibility"><h2>Accessibility is part of the markup.</h2><p>The components provide visible focus styles, native controls, and keyboard behavior for tabs and dialogs. Your content and integration still need testing.</p><ul><li>Use a logical heading order and visible, descriptive labels.</li><li>Keep errors understandable without relying on color.</li><li>Test every interaction with only a keyboard and with your target screen readers.</li><li>Check your custom colors, zoomed layouts, and narrow screens.</li><li>Keep essential content available when JavaScript cannot load.</li></ul><p class="tvw-muted">This is an initial release, not an accessibility certification. See <a href="./CONTRIBUTING.md">the contribution guide</a> for the review checklist.</p></section>
+    <footer class="docs-footer"><p>Made by <a href="https://github.com/timvw">timvw</a> · Vanilla components · Apache-2.0</p><a href="./LICENSE">License</a><a href="./THIRD_PARTY_NOTICES.md">Palette attribution</a><a href="https://github.com/timvw/timvw-design-system">Source & issues ↗</a></footer>
+  </main>
+</div>
+</body>
+</html>
