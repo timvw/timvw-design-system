@@ -42,3 +42,6 @@
 .docs-swatch code { font-size: .75rem; overflow-wrap: anywhere; }
 .docs-demo > :last-child { margin-bottom: 0; }
 .docs-demo .tvw-card h3 { margin-top: 1rem; }
+/* Standalone reference pages use generous separation between recipes. */
+.docs-main.tvw-container > section { margin-block: 3rem; }
+.docs-main.tvw-container > nav, .docs-main.tvw-container > footer { margin-block: 2rem; }

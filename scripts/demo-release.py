@@ -23,6 +23,32 @@ PUBLIC_FILES = (
     'js/select.js', 'js/files.js', 'js/workflow.js', 'js/patterns.js', 'js/explore.js',
     'examples/create.html', 'examples/create.js', 'examples/website.html', 'examples/website.css',
     'tests/workflows.js',
+    'guide.html', 'playground.html', 'component-guides.json', 'MODULES.md', 'MIGRATING.md', 'CHANGELOG.md',
+    'js/forms.js', 'js/locale.js', 'js/interactions.js', 'js/tabs.js', 'js/dialogs.js', 'js/templates.js', 'js/playground.js',
+    'examples/workflows.html', 'examples/workflows.js', 'examples/localized.html', 'examples/localized.js',
+    'examples/templates.html', 'examples/templates.js', 'examples/article.html', 'examples/article.css',
+    'css/foundation.css',
+    'css/parts/accordion.css',
+    'css/parts/buttons.css',
+    'css/parts/cards.css',
+    'css/parts/charts.css',
+    'css/parts/chips.css',
+    'css/parts/commands.css',
+    'css/parts/details.css',
+    'css/parts/dialogs.css',
+    'css/parts/feedback.css',
+    'css/parts/files.css',
+    'css/parts/forms.css',
+    'css/parts/layout.css',
+    'css/parts/navigation.css',
+    'css/parts/overlays.css',
+    'css/parts/people.css',
+    'css/parts/select.css',
+    'css/parts/tables.css',
+    'css/parts/tabs.css',
+    'css/parts/theme.css',
+    'css/parts/workflows.css',
+    'downloads/timvw-0.6.0.zip',
 )
 REQUIRED = {'index.html', 'docs.css', 'css/timvw.css', 'js/timvw.js', 'LICENSE'}
 
@@ -105,7 +131,7 @@ def main():
             if not manifest_path.is_file(): continue
             manifest = json.loads(manifest_path.read_text())
             changes = {}
-            for name in ('index.html', 'components.html', 'patterns.html', 'explore.html'):
+            for name in ('index.html', 'components.html', 'patterns.html', 'explore.html', 'guide.html', 'playground.html'):
                 target = folder / name
                 if not target.exists(): continue
                 source = target.read_text()
@@ -125,7 +151,7 @@ def main():
     if args.latest:
         if args.version or args.ref:
             parser.error('--latest cannot be combined with --version or --ref')
-        for name in ('index.html', 'components.html', 'patterns.html', 'explore.html'):
+        for name in ('index.html', 'components.html', 'patterns.html', 'explore.html', 'guide.html', 'playground.html'):
             target = ROOT / name
             if target.exists(): target.write_text(page(target.read_text(), catalog))
         print('Updated latest demo headers.')
@@ -156,7 +182,7 @@ def main():
             original_hashes[name] = hashlib.sha256(data).hexdigest()
         # Component assets live inside the archive; release navigation uses the shared site catalog.
         (stage / 'index.html').write_text(page((stage / 'index.html').read_text(), catalog, args.version))
-        for name in ('components.html', 'patterns.html', 'explore.html'):
+        for name in ('components.html', 'patterns.html', 'explore.html', 'guide.html', 'playground.html'):
             if (stage / name).exists():
                 (stage / name).write_text(page((stage / name).read_text(), catalog, args.version))
         for name in ('demo-controls.css', 'js/docs.js'):

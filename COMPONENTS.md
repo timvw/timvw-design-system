@@ -4,7 +4,7 @@ The component source is ordinary HTML, CSS, and JavaScript. There is no framewor
 
 ## Files and initialization
 
-Copy `css/timvw.css` and `css/components.css`, the **whole `js/` directory**, and `icons.svg` into your project. The small modules imported by `js/timvw.js` must remain beside it. `js/docs.js` and `js/demo-versions.js` are showcase-only and can be omitted. Keep the license and attribution files described in README.md.
+Copy `css/timvw.css` and `css/components.css`, the **whole `js/` directory**, and `icons.svg` into your project. For selective loading and native HTML templates, see [MODULES.md](MODULES.md). The small modules imported by `js/timvw.js` must remain beside it. `js/docs.js` and `js/demo-versions.js` are showcase-only and can be omitted. Keep the license and attribution files described in README.md.
 
 ```html
 <link rel="stylesheet" href="./css/timvw.css">
@@ -113,7 +113,7 @@ To enhance validation, add `data-tvw-validate` to a form and include a summary:
   tabindex="-1" role="region" aria-label="Form errors" hidden></div>
 ```
 
-The enhancer uses native constraint validation (`required`, input types, `min`, `max`, `pattern`, etc.). Invalid submission focuses a summary of links and connects inline error text with `aria-describedby`. Correcting a field updates its error; reset clears generated feedback. Existing help-text references are retained. Use unique input IDs and visible labels. It does not implement server validation, cross-field rules, or asynchronous validation for you.
+The enhancer uses native constraint validation (`required`, input types, `min`, `max`, `pattern`, etc.). Invalid submission focuses a summary of links and connects inline error text with `aria-describedby`. Correcting a field updates its error; reset clears generated feedback. Existing help-text references are retained. Use unique input IDs and visible labels. Use getForm(form).configure({validate}) for asynchronous and cross-field checks, and setErrors() to display server errors; the consuming application supplies the validation rules and service. See the v0.6.0 API notes below.
 
 On valid submission, the form dispatches `tvw:valid-submit`, with `detail.formData`. Cancel that event to take over the submission:
 
@@ -164,7 +164,7 @@ Run [tests/index.html](tests/index.html) on a static server for browser-native r
 
 ## Workflow components (v0.5.0)
 
-Use [patterns.html](patterns.html) for working HTML and JavaScript examples, or [explore.html](explore.html) to search the catalogue, icons, and tokens. The library now also imports `js/select.js`, `js/files.js`, and `js/workflow.js`; keep all seven library modules together. `js/patterns.js`, `js/explore.js`, `js/docs.js`, and `js/demo-versions.js` are documentation scripts, not application dependencies.
+Use [patterns.html](patterns.html) for working HTML and JavaScript examples, or [explore.html](explore.html) to search the catalogue, icons, and tokens. The library now also imports `js/select.js`, `js/files.js`, and `js/workflow.js`; keep the runtime module directory together, or use the selective imports in MODULES.md. `js/patterns.js`, `js/explore.js`, `js/docs.js`, and `js/demo-versions.js` are documentation scripts, not application dependencies.
 
 ### Searchable selection
 
@@ -172,7 +172,7 @@ Wrap a labeled native `select` in `[data-tvw-combobox]`. The select needs a uniq
 
 `init()` creates a labeled editable combobox and listbox while keeping the original select as the submitted form control. Arrow keys move through available options, Enter selects, Escape dismisses, and Tab leaves the field. Typing filters options; disabled options are excluded. Multiple selection adds one value at a time and provides named removal buttons. Normal text editing keys keep their browser behavior. Required selection is validated through the generated visible input. Reset restores the original selection. Without enhancement, the native select remains available.
 
-`getCombobox(wrapper).getValues()` returns selected nonempty values. After programmatically changing selection, options, or disabled state, call `getCombobox(wrapper).refresh()`. Native `change` events also synchronize the display. Forms submit the original select name, including repeated values for multiple selection. Readonly controls, grouped option headings, remote queries, arbitrary free-text values, and virtualized lists are outside this release’s contract. Keep required/multiple configuration stable after initialization.
+`getCombobox(wrapper).getValues()` returns selected nonempty values. After programmatically changing selection, options, or disabled state, call `getCombobox(wrapper).refresh()`. Native `change` events also synchronize the display. Forms submit the original select name, including repeated values for multiple selection. Optgroups and asynchronous queries are supported; readonly controls, arbitrary free-text values and virtualized lists remain outside the component contract. Keep required/multiple configuration stable after initialization.
 
 ### Multi-step forms
 
@@ -180,13 +180,13 @@ Use `form[data-tvw-wizard]` containing sections with `data-tvw-step="Step title"
 
 Initialization shows one step and adds a current-step indicator. Continue checks native constraints before moving on. Back retains values. Enter before the final step advances instead of submitting. The final submission validates all steps and reveals the first invalid one. Focus moves to the step heading or invalid field. Hidden steps remain enabled so their values are retained in `FormData`.
 
-The form emits `tvw:stepchange` with `{ index, total, formData }` for review rendering and `tvw:complete` with `{ formData }` before final submission. Cancel `tvw:complete` to handle the data locally; otherwise normal submission proceeds. `getWizard(form)` exposes `goTo(index)` and `getStep()`; forward movement validates preceding steps. Native form reset returns to the first step. Use this enhancer instead of `data-tvw-validate` on the same form. Application code supplies persistence, server errors, and any cross-field rules.
+The form emits `tvw:stepchange` with `{ index, total, formData }` for review rendering and `tvw:complete` with `{ formData }` before final submission. Cancel `tvw:complete` to handle the data locally; otherwise normal submission proceeds. `getWizard(form)` exposes `goTo(index)` and `getStep()`; forward movement validates preceding steps. Native form reset returns to the first step. Use this enhancer instead of `data-tvw-validate` on the same form. Application code supplies persistence and final business validation. The separate form enhancer provides asynchronous/server validation; do not put both enhancers on the same form.
 
 ### Files
 
 A `[data-tvw-files]` wrapper contains a labeled native file input, `[data-tvw-file-list]`, and a `[data-tvw-file-status]` live status. Optional `data-max-bytes` limits each file; `data-max-files` limits the selection. The native `accept` attribute defines accepted extensions or MIME types. Enhanced selection supports adding files, dropping files, duplicate suppression, and removing files; removals update the native `FileList` used by `FormData`. A native picker remains available for keyboard and touch use. Filename/type checks are client-side convenience; an upload service must validate received files independently.
 
-`getFilePicker(wrapper)` returns `getFiles()`, `clear()`, and `upload(adapter)`. The adapter is an async `(file, reportProgress) => { ... }` function provided by the application. Report a number from 0 to 100 and reject on failure. The component displays per-file progress, success, or failure, restores its controls after completion, and returns `{ completed, failed }`. Retry skips already completed files. Removal and adding files are disabled while uploading. Reset clears selection; it does not abort a network request already started by your adapter. `tvw:fileschange` provides `{ files }` when selection changes.
+`getFilePicker(wrapper)` returns `getFiles()`, `clear()`, and `upload(adapter)`. The adapter is an async `(file, reportProgress) => { ... }` function provided by the application. Report a number from 0 to 100 and reject on failure. The component displays per-file progress, success, or failure, restores its controls after completion, and returns `{ completed, failed, cancelled }`. Retry skips already completed files. Removal and adding files are disabled while uploading. Reset clears selection and aborts the adapter signal. Adapters must cooperate with cancellation; see MIGRATING.md. `tvw:fileschange` provides `{ files }` when selection changes.
 
 The showcase adapter uses timers to simulate success/failure and sends no requests. The project-creation example saves attachment names, sizes, and types only; it does not retain file contents. No upload service is bundled.
 
@@ -213,3 +213,18 @@ A row’s `[data-tvw-expand]` button uses `aria-expanded` and `aria-controls` po
 The bar and line examples use ordinary SVG with a title, description, explicit values, and an equivalent HTML table. `.tvw-chart` supplies responsive sizing; `.chart-bar`, `.chart-line`, `.chart-point`, and `.chart-grid` use theme tokens and forced-color rules. No charting runtime or data-processing package is required. Applications calculate coordinates and keep the SVG and table values synchronized. Charts with multiple series need distinguishable shapes/labels in addition to color.
 
 [Website template](examples/website.html) includes hero, feature cards, an illustrative brand strip and testimonial, pricing cards, FAQ, and footer. Its composition styles live in `examples/website.css`. Prices, organizations, and the customer story are fictional examples; links open local demos. The design system does not implement billing, subscriptions, or authentication.
+
+## Connected workflows and reuse (v0.6.0)
+
+See [the component guide](guide.html) for variants, states and keyboard recipes, [MODULES.md](MODULES.md) for selective imports and native template instantiation, and [MIGRATING.md](MIGRATING.md) for the full contracts and limitations.
+
+- `getForm(form).configure({ validate: async (formData, {signal}) => ({fieldName: 'Error'}) })` enables asynchronous/cross-field validation. Return `{}` for success. Input changes invalidate pending results. `setErrors(errors, {focus:true})` maps server errors by field name/ID; `_form` displays a general error. `validate()` returns a Promise<boolean>.
+- `watchChanges(form)` returns `isDirty()`, `refresh()`, `markSaved()` and `destroy()`. It tracks form values without storing them. Call refresh after programmatic edits.
+- `getCombobox(wrapper).configure({loadOptions: async (query, {signal}) => [{value, label, group, disabled}], debounce:200, minimumLength:0})` enables async option lists; stale responses are ignored.
+- `getFilePicker(wrapper).upload(adapter)` passes `(file, reportProgress, {signal})`. `cancel()` aborts the signal; retry skips completed files.
+- `getEditor(wrapper).configure({save: async value => { ... }})` attaches persistence to an inline editor. A rejection retains and focuses the draft. Successful commits emit `tvw:edited` with `{value}`. Supply a form, `data-tvw-edit-input`, `data-tvw-value`, `data-tvw-edit`, `data-tvw-edit-cancel` and a `data-tvw-edit-status` live region.
+- `getCommands(dialog).open()` opens a native command dialog. Mark the search field, result links/buttons and status with `data-tvw-command-search`, `data-tvw-command` and `data-tvw-command-status`; result controls live in list items. An opener uses `data-tvw-command-open="dialog-id"`. Ctrl/⌘ K opens the palette unless another modal is active.
+- `setLocale(locale, {messages, direction})`, `addMessages(locale, messages)`, `translate(key, values, element)`, `formatNumber(value, options, element)` and `formatDate(value, options, element)` provide locale configuration. Configure before initialization; page copy is application-owned.
+- Table date inputs use `data-tvw-filter="due"`, `data-filter-mode="min|max"` and unique names against row `data-due="YYYY-MM-DD"` values. `data-tvw-url="projects"` opts into URL filter persistence.
+
+Working examples: [connected workflows](examples/workflows.html), [localized workspace](examples/localized.html?lang=nl), [minimal native templates](examples/templates.html), [playground](playground.html), and [article/documentation layout](examples/article.html).

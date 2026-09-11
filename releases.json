@@ -1,6 +1,10 @@
 {
-  "latest": "0.5.0",
+  "latest": "0.6.0",
   "versions": [
+    {
+      "version": "0.6.0",
+      "description": "Modular imports, native templates & connected workflows"
+    },
     {
       "version": "0.5.0",
       "description": "Guided forms, component explorer & website patterns"

@@ -11,6 +11,8 @@ GitHub Actions runs the following on pushes and pull requests:
 - 28 browser-native component checks in Chromium, Firefox, and WebKit.
 - Complete project creation, review, local persistence, expandable rows, column visibility, simulated upload failures/retries, documentation search, and archive-navigation workflows.
 - Narrow-screen overflow and no-JavaScript fallback checks.
+- Asynchronous validation and stale results, editing recovery, cancelled uploads, grouped remote options, URL filters, Dutch formatting, command navigation, safe template cloning and selective network imports.
+- Automated axe-core 4.10.3 checks against WCAG A/AA rules on 15 current pages in both themes, plus error, grouped-option and open modal states. This covers rendered states exercised by the tests; it does not establish complete conformance.
 - Chromium screenshot comparisons in both themes, including desktop and mobile compositions.
 
 Browser tooling is installed in a temporary CI directory. It is not shipped with the site and is not needed to copy or use components. The site still has no runtime dependencies or build step.
@@ -26,7 +28,7 @@ To propose intentional visual changes, dispatch **Design system checks** with `u
 | Area | Current evidence | Remaining work |
 | --- | --- | --- |
 | Keyboard | Automated control and workflow coverage across three engines | Review keyboard use in each consuming application |
-| Light/dark and narrow layouts | Browser checks and reviewed screenshots | Recheck customized palettes and application content |
+| Light/dark, narrow layouts and RTL | Browser checks, 200% text scaling and reviewed screenshots | Recheck customized palettes and application content |
 | Reduced motion | CSS accommodation and deterministic visual checks | Review any animation added by a consumer |
 | Forced colors | Component CSS accommodations | Manual Windows high-contrast review pending |
 | Screen readers | Semantic markup and accessible-name relationships | VoiceOver/Safari and NVDA/Firefox manual sessions pending |
@@ -36,9 +38,9 @@ Screen-reader results must record the operating system, browser, reader version,
 
 ## Component scope
 
-- Comboboxes use local native-select options. Large remote datasets and grouped option headings are not supported.
-- File validation checks client metadata. Actual upload, server validation, cancellation, and authorization belong to the consuming application.
-- Wizards apply native constraints and emit submission events. Server and cross-field validation belong to the application.
+- Comboboxes use local native-select options. Optgroups and asynchronous adapters are supported; virtualized large datasets are not.
+- File validation checks client metadata. Actual upload, server validation and authorization belong to the consuming application. Cancellation signals must be respected by its upload adapter.
+- Wizards apply native constraints and emit submission events. The separate form enhancer supports asynchronous/cross-field rules and server errors supplied by the consuming application.
 - Tables work with modest HTML datasets; they are not spreadsheet grids or virtualized remote tables.
 - Chart examples pair SVG with equivalent data tables; consumers must preserve that relationship when changing data.
 

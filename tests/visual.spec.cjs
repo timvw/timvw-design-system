@@ -1,11 +1,11 @@
 const { test, expect } = require(process.env.PLAYWRIGHT_TEST_MODULE || '@playwright/test');
 // Baselines are generated and compared on Ubuntu 24.04 with Playwright 1.57.0.
 for (const theme of ['light', 'dark']) {
-  for (const [name, path, width] of [['home', '/', 1280], ['patterns', '/patterns.html', 1280], ['explorer', '/explore.html', 375], ['website', '/examples/website.html', 1280], ['website-mobile', '/examples/website.html', 375]]) {
+  for (const [name, path, width] of [['home', '/', 1280], ['patterns', '/patterns.html', 1280], ['explorer', '/explore.html', 375], ['website', '/examples/website.html', 1280], ['website-mobile', '/examples/website.html', 375], ['guide', '/guide.html', 1280], ['playground', '/playground.html', 1280], ['connected', '/examples/workflows.html', 1280], ['article-mobile', '/examples/article.html', 375], ['templates', '/examples/templates.html', 1280], ['localized', '/examples/localized.html?lang=nl', 1280]]) {
     test(`${name} ${theme}`, async ({ page, browserName }) => {
       test.skip(browserName !== 'chromium' || process.env.VISUAL_TESTS !== 'true', 'Visual baselines use pinned Chromium on Linux.');
       await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' }); await page.setViewportSize({ width, height: 900 });
-      await page.goto(path); await page.waitForLoadState('networkidle');
+      await page.goto(path); await page.waitForLoadState('networkidle'); await page.locator('html').evaluate((node, value) => node.dataset.tvwTheme = value, theme);
       await expect(page).toHaveScreenshot(`${name}-${theme}.png`, { fullPage: name === 'website-mobile' });
     });
   }

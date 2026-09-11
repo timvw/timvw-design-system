@@ -54,3 +54,12 @@ To publish a new version:
 5. Verify the new snapshot and its local links, then commit the new release folder and push both commits together. GitHub Pages publishes the latest demo and all archives.
 
 The helper uses only Python's standard library and Git. It is an optional release-maintenance utility; no tooling or build step is required by the published HTML, CSS, or JavaScript. All demos use the shared `js/demo-versions.js` to read the root `releases.json` with cache revalidation. New releases become available in archived menus without rebuilding their components. Static archived Latest links must not embed a version number. Verify the picker with a simulated future catalog and a failed request; both must retain the correct Latest destination. The shared navigation module must remain independent of any versioned component API.
+
+## Maintaining v0.6.0
+
+- Edit the canonical CSS, then run `python3 scripts/build-css.py`; `--check` verifies generated selective styles.
+- Update the catalogue and component-guide JSON with their static HTML pages; run `python3 scripts/build-docs.py` to synchronize the generated sections.
+- Update CHANGELOG.md and MIGRATING.md when a public contract changes.
+- Run `python3 scripts/package-release.py` after runtime/documentation changes. `--check` verifies the downloadable payload. The bundle is deterministic and contains no browser tooling.
+- Automated accessibility uses isolated `axe-core@4.10.3`. Set `AXE_TESTS=true` and optionally `AXE_CORE_PATH` to its `axe.min.js`; otherwise the runner resolves the installed package.
+- Manual screen-reader/Windows/touch checks need the actual corresponding environment. Record evidence in QUALITY.md instead of inferring a pass from axe or browser emulation.

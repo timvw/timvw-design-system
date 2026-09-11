@@ -2,7 +2,7 @@
 const { defineConfig } = require(process.env.PLAYWRIGHT_TEST_MODULE || '@playwright/test');
 module.exports = defineConfig({
   testDir: __dirname,
-  testMatch: ['browser.spec.cjs', 'visual.spec.cjs'],
+  testMatch: ['browser.spec.cjs', 'next.spec.cjs', 'bundle.spec.cjs', 'accessibility.spec.cjs', 'visual.spec.cjs'],
   timeout: 30000,
   expect: { timeout: 5000, toHaveScreenshot: { animations: 'disabled', maxDiffPixelRatio: 0.002 } },
   workers: 2,

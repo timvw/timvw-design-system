@@ -1,3 +1,4 @@
+import { translate as t } from './locale.js?v=0.6.0';
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
 const enhanced = new WeakSet();
 const tooltips = new Set();
@@ -56,7 +57,7 @@ function initTooltip(wrapper) {
   });
 }
 
-export function initOverlays(root) {
+export function initOverlays(root = document) {
   if (!escapeListening) {
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape') tooltips.forEach(dismiss => dismiss());
@@ -130,7 +131,7 @@ export function notify(message, { tone = 'info', duration = 0 } = {}) {
   let region = document.querySelector('[data-tvw-notifications]');
   if (!region) {
     region = document.createElement('section'); region.className = 'tvw-toast-region';
-    region.dataset.tvwNotifications = ''; region.setAttribute('aria-label', 'Notifications');
+    region.dataset.tvwNotifications = ''; region.setAttribute('aria-label', t('notifications'));
     document.body.append(region);
   }
   const toast = document.createElement('div');
@@ -138,7 +139,7 @@ export function notify(message, { tone = 'info', duration = 0 } = {}) {
   const content = document.createElement('p'); content.setAttribute('role', 'status');
   const dismissButton = document.createElement('button');
   dismissButton.type = 'button'; dismissButton.className = 'tvw-button tvw-button--quiet tvw-button--icon';
-  dismissButton.textContent = '×'; dismissButton.setAttribute('aria-label', 'Dismiss notification');
+  dismissButton.textContent = '×'; dismissButton.setAttribute('aria-label', t('dismissNotification'));
   toast.append(content, dismissButton); region.append(toast);
   requestAnimationFrame(() => { content.textContent = String(message); });
   const opener = document.activeElement;

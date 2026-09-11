@@ -1,5 +1,5 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { init, notify, setTheme, setBusy, getTable } from '../js/timvw.js?v=0.5.0';
+import { init, notify, setTheme, setBusy, getTable } from '../js/timvw.js?v=0.6.0';
 import { sampleProjects, readProjects, storeProjects } from './data.js';
 
 const currency = new Intl.NumberFormat('en', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
@@ -68,7 +68,7 @@ function drawRows() {
   const template = document.getElementById('project-row');
   projects.forEach((project, index) => {
     const row = template.content.firstElementChild.cloneNode(true);
-    row.dataset.status = project.status;
+    row.dataset.status = project.status; row.dataset.due = project.due;
     row.dataset.search = `${project.name} ${project.owner}`;
     const checkbox = row.querySelector('[data-tvw-row-select]');
     checkbox.value = project.id; checkbox.setAttribute('aria-label', `Select ${project.name}`);

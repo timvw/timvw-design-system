@@ -1,7 +1,8 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
+import { translate as t } from './locale.js?v=0.6.0';
 const controllers = new WeakMap();
 export const getWizard = form => controllers.get(form);
-export function initWorkflows(root) {
+export function initWorkflows(root = document) {
   root.querySelectorAll('form[data-tvw-wizard]').forEach(form => {
     if (controllers.has(form)) return;
     const steps = [...form.querySelectorAll('[data-tvw-step]')];
@@ -38,7 +39,7 @@ export function initWorkflows(root) {
       if (!invalid.length) return true;
       if (index !== current) show(index, false);
       const first = invalid[0];
-      error.textContent = `${first.labels?.[0]?.textContent.trim() || first.name || 'Field'}: ${first.validationMessage}`;
+      error.textContent = `${first.labels?.[0]?.textContent.trim() || first.name || t('field', {}, form)}: ${first.validationMessage}`;
       error.hidden = false; first.focus(); first.reportValidity(); return false;
     }
     function goTo(index) {
@@ -79,12 +80,12 @@ export function setRegionState(region, state, message) {
   region.setAttribute('aria-busy', String(state === 'loading'));
   region.dataset.state = state;
   const status = region.querySelector('[data-tvw-region-status]');
-  if (status) status.textContent = message || { ready: 'Content loaded.', loading: 'Loading…', empty: 'No content available.', error: 'Content could not be loaded.' }[state];
+  if (status) status.textContent = message || t(state, {}, region);
   if (movingFocus) { region.tabIndex = -1; region.focus(); }
 }
 
 const avatars = new WeakSet();
-export function initAvatars(root) {
+export function initAvatars(root = document) {
   root.querySelectorAll('.tvw-avatar img').forEach(img => {
     if (avatars.has(img)) return;
     avatars.add(img);

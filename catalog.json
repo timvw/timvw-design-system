@@ -1,7 +1,7 @@
 [
   {
     "title": "Get started",
-    "description": "Copy css/timvw.css into your project and add class=\"tvw\" to the body. For interactive components, copy js/timvw.js, js/controls.js, js/overlays.js, and js/table.js together, then call init(). See the component guide for optional styles and icons.",
+    "description": "Use the full CSS/JavaScript entry points, or load foundation.css with selected CSS parts and import individual initializers. See the component guide for complete recipes and native HTML templates.",
     "category": "Foundation",
     "href": "./index.html#get-started"
   },
@@ -256,5 +256,41 @@
     "description": "Hero, features, pricing, testimonial, FAQ, and footer patterns.",
     "category": "Examples",
     "href": "./examples/website.html"
+  },
+  {
+    "title": "Component guide",
+    "description": "Variants, states, keyboard behavior, import recipes and copyable HTML.",
+    "category": "Foundation",
+    "href": "./guide.html"
+  },
+  {
+    "title": "Selective imports & native templates",
+    "description": "Load only the CSS and JavaScript needed for a reusable native dialog.",
+    "category": "Foundation",
+    "href": "./examples/templates.html"
+  },
+  {
+    "title": "Component playground",
+    "description": "Change a button, input, notice or card and copy its HTML.",
+    "category": "Foundation",
+    "href": "./playground.html"
+  },
+  {
+    "title": "Connected workflows",
+    "description": "Asynchronous validation, inline editing, remote options and cancellation.",
+    "category": "Workflow",
+    "href": "./examples/workflows.html"
+  },
+  {
+    "title": "Dutch workspace",
+    "description": "Translated component messages, page content, numbers and dates.",
+    "category": "Examples",
+    "href": "./examples/localized.html?lang=nl"
+  },
+  {
+    "title": "Article & documentation layout",
+    "description": "Readable article, in-page contents, related navigation and a resource footer.",
+    "category": "Examples",
+    "href": "./examples/article.html"
   }
 ]

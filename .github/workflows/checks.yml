@@ -24,14 +24,18 @@ jobs:
           node-version: '22'
       - name: Static integrity and release tests
         run: |
+          python3 scripts/build-css.py --check
+          python3 scripts/build-docs.py --check
+          python3 scripts/package-release.py --check
           python3 scripts/check-site.py
           python3 -m unittest discover -s scripts -p 'test_*.py'
       - name: Install isolated browser test tools
         run: |
-          npm install --prefix "$RUNNER_TEMP/tvw-checks" --no-save @playwright/test@1.57.0
+          npm install --prefix "$RUNNER_TEMP/tvw-checks" --no-save @playwright/test@1.57.0 axe-core@4.10.3
       - name: Browser workflows and visual regressions
         env:
           VISUAL_TESTS: 'true'
+          AXE_TESTS: 'true'
           UPDATE_SNAPSHOTS: ${{ inputs.update_snapshots || 'false' }}
         run: |
           # Actions mounts a home directory owned by pwuser into this root container.

@@ -1,8 +1,9 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
+import { translate as t, getLocale } from './locale.js?v=0.6.0';
 const controllers = new WeakMap();
 export function getTable(container) { return controllers.get(container); }
 
-export function initTables(root) {
+export function initTables(root = document) {
   root.querySelectorAll('[data-tvw-table]').forEach(container => {
     if (controllers.has(container)) return;
     const table = container.querySelector('table');
@@ -17,14 +18,30 @@ export function initTables(root) {
     const selectAll = container.querySelector('[data-tvw-select-all]');
     const empty = container.querySelector('[data-tvw-empty]');
     const pageSize = Math.max(1, parseInt(container.dataset.pageSize, 10) || 10);
-    const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+    const collator = new Intl.Collator(getLocale(container), { numeric: true, sensitivity: 'base' });
     const dataRows = () => [...body.rows].filter(row => !row.hasAttribute('data-tvw-detail-row'));
     let rows = dataRows(), page = 1, sortColumn = -1, direction = 1, visible = [];
     const selected = () => rows.filter(row => row.querySelector('[data-tvw-row-select]')?.checked);
 
+    const urlFields = [search, ...filters].filter(Boolean);
+    const prefix = container.dataset.tvwUrl;
+    const parameter = field => `${prefix}.${field.name || (field === search ? 'q' : field.dataset.tvwFilter)}`;
+    function readURL() {
+      if (!prefix) return;
+      const params = new URLSearchParams(location.search);
+      urlFields.forEach(field => { field.value = params.get(parameter(field)) || ''; }); page = 1;
+    }
+    function writeURL() {
+      if (!prefix) return;
+      const url = new URL(location.href);
+      urlFields.forEach(field => { if (field.value) url.searchParams.set(parameter(field), field.value); else url.searchParams.delete(parameter(field)); });
+      if (url.href !== location.href) history.replaceState(history.state, '', url);
+    }
+    readURL();
+    if (prefix) addEventListener('popstate', () => { if (container.isConnected) { readURL(); render(); } });
     function selection() {
       const checked = selected();
-      if (selectedCount) selectedCount.textContent = `${checked.length} selected`;
+      if (selectedCount) selectedCount.textContent = t('selectedCount', { count: checked.length }, container);
       const boxes = visible.map(row => row.querySelector('[data-tvw-row-select]')).filter(box => box && !box.disabled);
       if (selectAll) {
         selectAll.disabled = !boxes.length;
@@ -37,7 +54,14 @@ export function initTables(root) {
     function render() {
       const query = (search?.value || '').trim().toLocaleLowerCase();
       const filtered = rows.filter(row => (!query || (row.dataset.search || row.textContent).toLocaleLowerCase().includes(query))
-        && filters.every(filter => !filter.value || row.dataset[filter.dataset.tvwFilter] === filter.value));
+        && filters.every(filter => {
+          if (!filter.value) return true;
+          const value = row.dataset[filter.dataset.tvwFilter];
+          if (value == null || value === '') return false;
+          if (filter.dataset.filterMode === 'min') return value >= filter.value;
+          if (filter.dataset.filterMode === 'max') return value <= filter.value;
+          return value === filter.value;
+        }));
       if (sortColumn >= 0) {
         const type = table.tHead.rows[0].cells[sortColumn].querySelector('[data-tvw-sort]').dataset.tvwSort;
         filtered.sort((a, b) => {
@@ -55,8 +79,8 @@ export function initTables(root) {
       body.append(...filtered, ...rows.filter(row => !filtered.includes(row)));
       if (empty) empty.hidden = filtered.length > 0;
       if (count) count.textContent = filtered.length
-        ? `${pagination ? (page - 1) * pageSize + 1 : 1}–${pagination ? Math.min(page * pageSize, filtered.length) : filtered.length} of ${filtered.length} results`
-        : 'No results';
+        ? t('results', { start: pagination ? (page - 1) * pageSize + 1 : 1, end: pagination ? Math.min(page * pageSize, filtered.length) : filtered.length, count: filtered.length }, container)
+        : t('noResults', {}, container);
       if (pagination) {
         const restoreFocus = pagination.contains(document.activeElement);
         pagination.replaceChildren(); pagination.hidden = pages <= 1;
@@ -65,14 +89,14 @@ export function initTables(root) {
           button.className = 'tvw-button tvw-button--secondary tvw-button--sm';
           button.textContent = label; button.disabled = disabled;
           if (current) button.setAttribute('aria-current', 'page');
-          if (/^\d+$/.test(label)) button.setAttribute('aria-label', `Page ${label}`);
+          if (/^\d+$/.test(label)) button.setAttribute('aria-label', t('page', { page: label }, container));
           button.addEventListener('click', () => { page = target; render(); });
           pagination.append(button);
         };
-        add('Previous', page - 1, page === 1);
+        add(t('previous', {}, container), page - 1, page === 1);
         const start = Math.max(1, Math.min(page - 2, pages - 4));
         for (let i = start; i <= Math.min(pages, start + 4); i++) add(String(i), i, false, i === page);
-        add('Next', page + 1, page === pages);
+        add(t('next', {}, container), page + 1, page === pages);
         if (restoreFocus) pagination.querySelector('[aria-current]')?.focus();
       }
       if (chips) {
@@ -80,9 +104,9 @@ export function initTables(root) {
         const active = [search, ...filters].filter(input => input?.value);
         active.forEach(input => {
           const chip = document.createElement('button'); chip.type = 'button'; chip.className = 'tvw-chip';
-          const label = input.labels?.[0]?.textContent.trim() || 'Search';
+          const label = input.labels?.[0]?.textContent.trim() || t('search', {}, container);
           const value = input.tagName === 'SELECT' ? input.selectedOptions[0].textContent : input.value;
-          chip.textContent = `${label}: ${value} ×`; chip.setAttribute('aria-label', `Clear ${label}: ${value}`);
+          chip.textContent = `${label}: ${value} ×`; chip.setAttribute('aria-label', t('clear', { name: label, value }, container));
           chip.addEventListener('click', () => { input.value = ''; input.focus(); page = 1; render(); });
           chips.append(chip);
         });
@@ -99,6 +123,7 @@ export function initTables(root) {
       });
       applyColumns();
       selection();
+      writeURL();
       container.dispatchEvent(new CustomEvent('tvw:tablechange', { bubbles: true, detail: { total: rows.length, filtered: filtered.length, page, pages } }));
     }
 
