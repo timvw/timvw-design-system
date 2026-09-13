@@ -1,6 +1,6 @@
 const { test, expect } = require(process.env.PLAYWRIGHT_TEST_MODULE || '@playwright/test');
 test.skip(({ browserName }) => browserName !== 'chromium' || process.env.AXE_TESTS !== 'true', 'Automated accessibility audit runs in Chromium when AXE_TESTS=true.');
-const paths = ['/', '/components.html', '/patterns.html', '/explore.html', '/guide.html', '/playground.html', '/examples/create.html', '/examples/projects.html', '/examples/settings.html', '/examples/dashboard.html', '/examples/website.html', '/examples/workflows.html', '/examples/localized.html?lang=nl', '/examples/templates.html', '/examples/article.html'];
+const paths = ['/', '/components.html', '/patterns.html', '/explore.html', '/guide.html', '/playground.html', '/examples/create.html', '/examples/projects.html', '/examples/settings.html', '/examples/dashboard.html', '/examples/website.html', '/examples/workflows.html', '/examples/localized.html?lang=nl', '/examples/templates.html', '/examples/article.html', '/examples/custom-elements.html'];
 for (const theme of ['light', 'dark']) for (const path of paths) {
   test(`automated accessibility ${theme} ${path}`, async ({ page }) => {
     await page.addInitScript(value => localStorage.setItem('tvw-theme', value), theme);

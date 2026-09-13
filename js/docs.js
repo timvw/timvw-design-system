@@ -1,10 +1,10 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { init, notify, setBusy } from './timvw.js?v=0.6.0';
+import { init, notify, setBusy } from './timvw.js?v=0.7.0';
 
 const palette = document.createElement('dialog');
 palette.className = 'tvw-dialog'; palette.id = 'site-commands'; palette.dataset.tvwCommands = ''; palette.setAttribute('aria-labelledby', 'site-commands-title');
 palette.innerHTML = '<h2 id="site-commands-title">Go to…</h2><label for="site-command-search">Find a page</label><input class="tvw-input" id="site-command-search" data-tvw-command-search type="search" autocomplete="off"><p class="tvw-help" data-tvw-command-status role="status"></p><ul class="tvw-command-list"></ul><form method="dialog"><button class="tvw-button tvw-button--secondary">Close</button></form>';
-for (const [name, path] of [['Foundations', 'index.html'], ['Components', 'components.html'], ['Workflows', 'patterns.html'], ['Component guide', 'guide.html'], ['Playground', 'playground.html'], ['Search, icons and tokens', 'explore.html'], ['Connected workflows', 'examples/workflows.html'], ['Article example', 'examples/article.html']]) {
+for (const [name, path] of [['Foundations', 'index.html'], ['Components', 'components.html'], ['Workflows', 'patterns.html'], ['Component guide', 'guide.html'], ['Playground', 'playground.html'], ['Search, icons and tokens', 'explore.html'], ['Connected workflows', 'examples/workflows.html'], ['Article example', 'examples/article.html'], ['Reusable HTML tags', 'examples/custom-elements.html']]) {
   const item = document.createElement('li'), link = document.createElement('a'); link.textContent = name; link.dataset.tvwCommand = ''; link.href = new URL('../' + path, import.meta.url); item.append(link); palette.querySelector('ul').append(item);
 }
 if (document.querySelector('.docs-controls')) {

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.0
+
+- Add `registerTemplate`: register native HTML templates as reusable custom tags, with isolated IDs, safe reactive text attributes, automatic initialization and connection cleanup.
+- Add a live custom-tag demo for independent project dialogs and cards, including dynamic insertion, attribute updates and retained input state.
+- Fix forced-color rendering: off/disabled switch thumbs remain visible, the pressed theme button retains its selected border, and the current pagination button has an outline.
+- Apply the fixes to full and selective CSS without breaking existing markup or JavaScript APIs.
+- Add full/selective forced-color regressions, native modal accessibility/focus checks, grouped option semantics and touch-event workflows.
+- Publish a reproducible accessibility review with screen-reader, Windows contrast-theme and physical-device cases. The maintainer has parked those manual sessions; automated results are not presented as manual passes.
+
 ## 0.6.0
 
 - Add optional modular CSS families and direct JavaScript entry points for dialogs and tabs. Keep the full entry points compatible.

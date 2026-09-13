@@ -12,8 +12,10 @@ GitHub Actions runs the following on pushes and pull requests:
 - Complete project creation, review, local persistence, expandable rows, column visibility, simulated upload failures/retries, documentation search, and archive-navigation workflows.
 - Narrow-screen overflow and no-JavaScript fallback checks.
 - Asynchronous validation and stale results, editing recovery, cancelled uploads, grouped remote options, URL filters, Dutch formatting, command navigation, safe template cloning and selective network imports.
-- Automated axe-core 4.10.3 checks against WCAG A/AA rules on 15 current pages in both themes, plus error, grouped-option and open modal states. This covers rendered states exercised by the tests; it does not establish complete conformance.
+- Automated axe-core 4.10.3 checks against WCAG A/AA rules on 16 current pages in both themes, plus error, grouped-option and open modal states. This covers rendered states exercised by the tests; it does not establish complete conformance.
 - Chromium screenshot comparisons in both themes, including desktop and mobile compositions.
+- Reusable custom tags: existing and inserted instances, isolated IDs and form values, reactive text, native registry validation and connection cleanup.
+- Forced-color state regressions with full/selective CSS, native modal accessibility semantics, and touch-event workflows. These are browser emulation checks, not physical-device or screen-reader sessions.
 
 Browser tooling is installed in a temporary CI directory. It is not shipped with the site and is not needed to copy or use components. The site still has no runtime dependencies or build step.
 
@@ -30,11 +32,13 @@ To propose intentional visual changes, dispatch **Design system checks** with `u
 | Keyboard | Automated control and workflow coverage across three engines | Review keyboard use in each consuming application |
 | Light/dark, narrow layouts and RTL | Browser checks, 200% text scaling and reviewed screenshots | Recheck customized palettes and application content |
 | Reduced motion | CSS accommodation and deterministic visual checks | Review any animation added by a consumer |
-| Forced colors | Component CSS accommodations | Manual Windows high-contrast review pending |
-| Screen readers | Semantic markup and accessible-name relationships | VoiceOver/Safari and NVDA/Firefox manual sessions pending |
-| Touch | Native inputs and pointer controls; responsive layouts | Real-device touch testing pending |
+| Forced colors | Reviewed Chromium emulation samples and regression checks for switches, theme selection and pagination | Manual Windows light/dark contrast-theme review parked: no Windows environment connected |
+| Screen readers | Semantic markup, accessible-name relationships and modal/option browser semantics | VoiceOver/Safari parked by unavailable native desktop control; NVDA/Firefox parked by missing Windows environment |
+| Touch | Synthetic touch activation and viewport-change checks | Real-device touch, screen-reader gestures and onscreen keyboard checks parked: no physical device connected |
 
 Screen-reader results must record the operating system, browser, reader version, tested task, and observed result. Do not mark a component verified based solely on an automated check. The current release has no completed manual screen-reader audit.
+
+The [2026-09-13 review and test plan](ACCESSIBILITY_REVIEW.md) records the findings, environment blockers and individual cases needed to finish these checks. These manual checks were deferred by the maintainer on 2026-09-13. No parked manual row has been marked passed.
 
 ## Component scope
 

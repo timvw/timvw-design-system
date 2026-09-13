@@ -62,4 +62,4 @@ The helper uses only Python's standard library and Git. It is an optional releas
 - Update CHANGELOG.md and MIGRATING.md when a public contract changes.
 - Run `python3 scripts/package-release.py` after runtime/documentation changes. `--check` verifies the downloadable payload. The bundle is deterministic and contains no browser tooling.
 - Automated accessibility uses isolated `axe-core@4.10.3`. Set `AXE_TESTS=true` and optionally `AXE_CORE_PATH` to its `axe.min.js`; otherwise the runner resolves the installed package.
-- Manual screen-reader/Windows/touch checks need the actual corresponding environment. Record evidence in QUALITY.md instead of inferring a pass from axe or browser emulation.
+- Manual screen-reader/Windows/touch checks need the actual corresponding environment. Follow [ACCESSIBILITY_REVIEW.md](ACCESSIBILITY_REVIEW.md), record observed results there and update QUALITY.md; do not infer a pass from axe or browser emulation.

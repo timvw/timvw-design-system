@@ -89,10 +89,6 @@
   @media (prefers-reduced-motion: reduce) {
     .tvw *, .tvw *::before, .tvw *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
   }
-  @media (forced-colors: active) {
-    .tvw-button, .tvw-badge { border: 1px solid ButtonText; }
-    .tvw-tabs [role="tab"][aria-selected="true"] { border-bottom-color: Highlight; }
-  }
 }
 @layer timvw.components {
 .tvw-stack { grid-template-columns: minmax(0, 1fr); }

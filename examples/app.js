@@ -1,5 +1,5 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { init, notify, setTheme, setBusy, getTable } from '../js/timvw.js?v=0.6.0';
+import { init, notify, setTheme, setBusy, getTable } from '../js/timvw.js?v=0.7.0';
 import { sampleProjects, readProjects, storeProjects } from './data.js';
 
 const currency = new Intl.NumberFormat('en', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });

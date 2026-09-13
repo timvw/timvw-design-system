@@ -34,6 +34,7 @@ Load `css/foundation.css` first. It supplies the tokens, base typography, focus/
 | Inline editing | forms, buttons | interactions.js: `initInteractions`, `getEditor` |
 | Command palette | commands, dialogs, forms, buttons | interactions.js: `initInteractions`, `getCommands` |
 | Native templates | Parts used by their contents | templates.js: `instantiateTemplate` |
+| Reusable HTML tags | Parts used by their template | templates.js: `registerTemplate` |
 
 `dialogs.js`, `tabs.js` and `templates.js` have no dependencies. The other direct component modules import only `locale.js`. Keep it beside them; relative module paths include a release query suffix. You may copy the whole `js/` directory: copying a file does not cause a browser to load it. Demo scripts (`docs.js`, `demo-versions.js`, `patterns.js`, `explore.js`, `playground.js`) are not required by consuming applications.
 
@@ -68,6 +69,88 @@ Use `<template id="project-dialog">` as a document-local registry. Template cont
 The helper remaps IDs, label/form/list references, ARIA ID references, dialog/popover targets and local fragment links. `data-tvw-text="name"` slots receive `String(values.name)` through `textContent`; HTML in a value is not parsed. Unmatched references remain unchanged so a template may refer to a shared external description.
 
 Template markup must be trusted. The helper is not an HTML sanitizer. It does not rewrite CSS selectors or scripts, bind arbitrary attributes, or instantiate nested template contents; avoid styles/scripts inside a reusable fragment. Event listeners must be added after cloning. If instances share a parent form, choose field names intentionally: ID remapping does not rename submitted fields.
+
+## Reusable HTML tags
+
+`registerTemplate(name, template, { setup })` turns a trusted `<template>` into an
+autonomous native custom element. After registration, both existing and newly
+inserted tags enhance automatically. No extra `init(document)` call is needed.
+
+```html
+<template id="project-template">
+  <button type="button" class="tvw-button" data-tvw-open="details"
+    data-tvw-text="action" hidden>Open project</button>
+  <dialog id="details" class="tvw-dialog" aria-labelledby="heading">
+    <h2 id="heading" data-tvw-text="heading">Project details</h2>
+    <form method="dialog"><button class="tvw-button" autofocus>Close</button></form>
+  </dialog>
+</template>
+
+<project-dialog heading="Atlas" action="Open Atlas"></project-dialog>
+<project-dialog heading="Beacon" action="Open Beacon"></project-dialog>
+
+<script type="module">
+  import { registerTemplate } from './js/templates.js';
+  import { initDialogs } from './js/dialogs.js';
+  registerTemplate('project-dialog', document.getElementById('project-template'), {
+    setup: initDialogs
+  });
+</script>
+```
+
+Load foundation plus button/dialog CSS for this example. The [working tag demo](examples/custom-elements.html)
+also registers a card, changes attributes and inserts/removes instances. It uses
+only direct module imports. The wrapper is ordinary light DOM: global CSS, native
+form fields and the real `<dialog>` continue to work. Set the host's layout with
+your CSS or a utility class if needed; there is no automatic CSS encapsulation.
+
+- A name needs a hyphen, for example `project-dialog`. The native registry rejects
+  invalid or already registered names; choose an application prefix to avoid
+  collisions. Register once, or guard registration with `customElements.get(name)`.
+  The returned value is the registered element constructor.
+- Each `data-tvw-text="heading"` binding observes the corresponding `heading`
+  attribute. Use lowercase attribute names and text-only binding elements.
+  Values are text, never parsed HTML. Removing an attribute restores that binding's
+  original text. Undeclared attributes keep their ordinary HTML behavior.
+- `element.setAttribute('heading', 'Updated')` changes the existing text nodes.
+  It preserves input values, dialog state, focus and remapped IDs. A definition is
+  copied at registration; later edits to the source template do not alter it.
+- Authored host children are preserved before the generated content. This helper
+  does not project `<slot>` content, clone host children, bind HTML expressions or
+  provide arbitrary property/attribute forwarding. Put trusted rich markup in the
+  template or use ordinary DOM APIs in `setup`.
+- All IDs and supported references in the template are remapped per instance,
+  exactly as with `instantiateTemplate`. Submitted form field names remain yours
+  to choose. The host itself is not a form-associated replacement for native inputs.
+
+`setup(element, { signal, getId })` runs after the content is inserted and on later
+reconnections. It may return a synchronous cleanup function. On disconnection,
+the signal is aborted and cleanup runs in a microtask. Use the signal for listeners
+on `window`/`document` and abortable work. An immediate move within the same document
+retains the connection and input state. For native dialogs, close them before moving
+their host; a removal cleanup should also close any open dialog before reconnection.
+
+```js
+registerTemplate('project-dialog', template, {
+  setup(element, { signal, getId }) {
+    initDialogs(element);
+    const dialog = document.getElementById(getId('details'));
+    window.addEventListener('project:updated', refresh, { signal });
+    return () => { if (dialog.open) dialog.close(); };
+  }
+});
+```
+
+Import dependencies before registration; `setup` must not return a Promise.
+The helper does not add a general destroy API to enhanced components. Use their
+controller APIs and cleanup contracts for pending work. Moving instances between
+documents/iframes is outside this helper's supported lifecycle.
+
+JavaScript must load for registration and template instantiation. Use ordinary
+authored HTML for essential no-JavaScript content. A module script runs after
+parsing, so the definition and host children are available before upgrade.
+This uses the platform's [custom element lifecycle](https://html.spec.whatwg.org/multipage/custom-elements.html),
+with no framework, transpiler, polyfill or consumer build step.
 
 ## Initialization and lifetime
 

@@ -1,5 +1,5 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { init, setRegionState, getFilePicker, setBusy, notify } from './timvw.js?v=0.6.0';
+import { init, setRegionState, getFilePicker, setBusy, notify } from './timvw.js?v=0.7.0';
 const region = document.getElementById('region-preview');
 let timer;
 function load() { clearTimeout(timer); setRegionState(region, 'loading'); timer = setTimeout(() => setRegionState(region, 'ready'), 900); }

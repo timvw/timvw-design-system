@@ -42,8 +42,11 @@ textarea.tvw-input { resize: vertical; min-height: 7rem; }
 .tvw-input[type="file"] { max-width: 100%; }
 .tvw-input::file-selector-button { font: inherit; padding: .375rem .625rem; margin-inline-end: .75rem; background: var(--tvw-subtle); color: var(--tvw-text); border: 1px solid var(--tvw-control-border); border-radius: .25rem; cursor: pointer; }
 @media (forced-colors: active) {
+.tvw-switch-track::before { border: 1px solid CanvasText; }
 .tvw-switch input:checked + .tvw-switch-track { background: Highlight; }
-.tvw-switch input:checked + .tvw-switch-track::before { background: HighlightText; }
+.tvw-switch input:checked + .tvw-switch-track::before { background: HighlightText; border-color: HighlightText; }
+.tvw-switch:has(input:disabled) { opacity: 1; color: GrayText; }
+.tvw-switch input:disabled + .tvw-switch-track, .tvw-switch input:disabled + .tvw-switch-track::before { border-color: GrayText; }
 .tvw-segmented label:has(:checked) { border: 2px solid Highlight; }
 }
 }

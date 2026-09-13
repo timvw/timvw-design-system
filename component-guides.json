@@ -218,5 +218,15 @@
     "css": "theme, buttons",
     "javascript": "controls.js: initControls, setTheme",
     "example": "<div class=\"tvw-theme-picker\" data-tvw-theme-picker role=\"group\" aria-label=\"Color theme\" hidden><button type=\"button\" data-theme=\"light\">Light</button><button type=\"button\" data-theme=\"dark\">Dark</button><button type=\"button\" data-theme=\"system\">System</button></div>"
+  },
+  {
+    "id": "custom-tags",
+    "title": "Reusable HTML tags",
+    "variants": "Register any trusted native template as your own custom element; light DOM uses the existing CSS.",
+    "states": "Already in HTML, inserted later, attribute update, disconnected and reconnected.",
+    "guidance": "Use a hyphenated tag name. data-tvw-text keys bind attributes as text. Register once with registerTemplate; use setup for component initialization and connection cleanup.",
+    "css": "Parts used by the template",
+    "javascript": "templates.js: registerTemplate",
+    "example": "<template id=\"message-template\"><section class=\"tvw-card\"><h3 data-tvw-text=\"heading\">Message</h3><p data-tvw-text=\"message\">No message yet.</p></section></template>\n<message-card heading=\"Ready\" message=\"Your workspace is available.\"></message-card>\n<script type=\"module\">\n  import { registerTemplate } from \"./js/templates.js\";\n  registerTemplate(\"message-card\", document.getElementById(\"message-template\"));\n</script>"
   }
 ]

@@ -1,4 +1,12 @@
-# Upgrading to v0.6.0
+# Upgrading
+
+## v0.6.0 → v0.7.0
+
+Existing markup and JavaScript APIs remain supported. `registerTemplate` is an optional new export from `templates.js` and the full entry point; see [reusable HTML tags](MODULES.md#reusable-html-tags) for registration and lifecycle details. No global registration happens automatically when importing the library.
+
+Replace both full stylesheets, or update `foundation.css` and the CSS parts you use together. Forced-color button/badge/tab rules now live with their components, so do not mix old and new generated files. See [ACCESSIBILITY_REVIEW.md](ACCESSIBILITY_REVIEW.md) for the audit scope and parked manual checks.
+
+## Upgrading to v0.6.0
 
 ## Existing v0.5.0 applications
 

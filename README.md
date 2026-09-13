@@ -8,7 +8,7 @@ The theme adapts QuantumBlack’s mist and slate palettes, monochrome actions, a
 
 ## Start using it
 
-[Download v0.6.0](https://timvw.github.io/timvw-design-system/downloads/timvw-0.6.0.zip) · [Component guide](https://timvw.github.io/timvw-design-system/guide.html) · [Selective imports and native templates](MODULES.md) · [Upgrade guide](MIGRATING.md)
+[Download v0.7.0](https://timvw.github.io/timvw-design-system/downloads/timvw-0.7.0.zip) · [Component guide](https://timvw.github.io/timvw-design-system/guide.html) · [Selective imports and native templates](MODULES.md) · [Reusable HTML tags](https://timvw.github.io/timvw-design-system/examples/custom-elements.html) · [Upgrade guide](MIGRATING.md)
 
 
 Copy `css/timvw.css`, plus `css/components.css` for the extended components and `icons.svg` for icons. For interactive components, copy `js/timvw.js`, `js/controls.js`, `js/overlays.js`, `js/table.js`, `js/select.js`, `js/files.js`, and `js/workflow.js` together, keeping their relative paths. Keep [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and the referenced upstream license with redistributed copies. Start from [starter.html](starter.html) or use this markup:
@@ -47,6 +47,7 @@ The header's version switcher links to the latest demo and frozen releases:
 | Demo | Contents |
 | --- | --- |
 | [Latest](https://timvw.github.io/timvw-design-system/) | The current demo, updated from `main` |
+| [v0.7.0](https://timvw.github.io/timvw-design-system/v0.7.0/) | Reusable HTML tags, template registration and forced-color fixes |
 | [v0.6.0](https://timvw.github.io/timvw-design-system/v0.6.0/) | Modular imports, native templates, localization and connected workflows |
 | [v0.5.0](https://timvw.github.io/timvw-design-system/v0.5.0/) | Guided forms, searchable documentation, file states, chart and website patterns |
 | [v0.4.0](https://timvw.github.io/timvw-design-system/v0.4.0/) | Application components and complete settings, projects, and dashboard examples |

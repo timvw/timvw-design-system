@@ -227,4 +227,8 @@ See [the component guide](guide.html) for variants, states and keyboard recipes,
 - `setLocale(locale, {messages, direction})`, `addMessages(locale, messages)`, `translate(key, values, element)`, `formatNumber(value, options, element)` and `formatDate(value, options, element)` provide locale configuration. Configure before initialization; page copy is application-owned.
 - Table date inputs use `data-tvw-filter="due"`, `data-filter-mode="min|max"` and unique names against row `data-due="YYYY-MM-DD"` values. `data-tvw-url="projects"` opts into URL filter persistence.
 
-Working examples: [connected workflows](examples/workflows.html), [localized workspace](examples/localized.html?lang=nl), [minimal native templates](examples/templates.html), [playground](playground.html), and [article/documentation layout](examples/article.html).
+Working examples: [connected workflows](examples/workflows.html), [localized workspace](examples/localized.html?lang=nl), [minimal native templates](examples/templates.html), [reusable HTML tags](examples/custom-elements.html), [playground](playground.html), and [article/documentation layout](examples/article.html).
+
+## Reusable HTML tags
+
+`registerTemplate(name, template, {setup})` registers an autonomous custom element backed by a trusted native template. Declared `data-tvw-text` bindings observe matching attributes as text. Existing and future instances initialize automatically; values and IDs survive text updates. The optional setup callback receives `{signal, getId}` and can return connection cleanup. See [MODULES.md](MODULES.md#reusable-html-tags) for complete markup, selective imports, defaults and lifecycle constraints.

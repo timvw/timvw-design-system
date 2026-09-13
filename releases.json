@@ -1,6 +1,10 @@
 {
-  "latest": "0.6.0",
+  "latest": "0.7.0",
   "versions": [
+    {
+      "version": "0.7.0",
+      "description": "Reusable HTML tags & native template registration"
+    },
     {
       "version": "0.6.0",
       "description": "Modular imports, native templates & connected workflows"

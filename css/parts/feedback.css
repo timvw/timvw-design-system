@@ -9,6 +9,9 @@
 .tvw-notice--success { border-inline-start-color: var(--tvw-success); }
 .tvw-notice--danger { border-inline-start-color: var(--tvw-danger); }
 .tvw-progress { width: 100%; height: .75rem; accent-color: var(--tvw-accent); }
+@media (forced-colors: active) {
+.tvw-badge { border-color: CanvasText; }
+}
 }
 @layer timvw.components {
 .tvw-empty { display: grid; justify-items: center; gap: .75rem; text-align: center; padding: 3rem 1.5rem; border: 1px dashed var(--tvw-control-border); border-radius: var(--tvw-radius); }

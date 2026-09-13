@@ -1,5 +1,5 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { translate as t, getLocale } from './locale.js?v=0.6.0';
+import { translate as t, getLocale } from './locale.js?v=0.7.0';
 const controllers = new WeakMap();
 export function getTable(container) { return controllers.get(container); }
 

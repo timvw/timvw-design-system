@@ -5,4 +5,7 @@
 .tvw-tabs [role="tab"] { min-height: 2.75rem; padding: .625rem 1rem; background: transparent; color: var(--tvw-muted); border: 0; border-bottom: 3px solid transparent; white-space: nowrap; }
 .tvw-tabs [role="tab"][aria-selected="true"] { border-bottom-color: var(--tvw-accent); color: var(--tvw-text); font-weight: 650; }
 .tvw-tabs [role="tablist"][aria-orientation="vertical"] { flex-direction: column; }
+@media (forced-colors: active) {
+.tvw-tabs [role="tab"][aria-selected="true"] { border-bottom-color: Highlight; }
+}
 }

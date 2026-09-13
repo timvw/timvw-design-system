@@ -94,10 +94,14 @@
     .tvw-app[data-tvw-enhanced] [data-tvw-nav-toggle] { display: inline-flex; }
   }
   @media (forced-colors: active) {
+    .tvw-switch-track::before { border: 1px solid CanvasText; }
     .tvw-switch input:checked + .tvw-switch-track { background: Highlight; }
-    .tvw-switch input:checked + .tvw-switch-track::before { background: HighlightText; }
+    .tvw-switch input:checked + .tvw-switch-track::before { background: HighlightText; border-color: HighlightText; }
+    .tvw-switch:has(input:disabled) { opacity: 1; color: GrayText; }
+    .tvw-switch input:disabled + .tvw-switch-track, .tvw-switch input:disabled + .tvw-switch-track::before { border-color: GrayText; }
     .tvw-segmented label:has(:checked) { border: 2px solid Highlight; }
     .tvw-theme-picker [aria-pressed="true"] { border: 2px solid Highlight; }
+    .tvw-pagination [aria-current="page"] { outline: 2px solid Highlight; outline-offset: -3px; }
   }
 }
 

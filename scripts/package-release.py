@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 import zipfile
 ROOT = Path(__file__).resolve().parent.parent
 version = json.loads((ROOT/'releases.json').read_text())['latest']
-files = ['starter.html', 'icons.svg', 'favicon.svg', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'MODULES.md', 'COMPONENTS.md', 'MIGRATING.md', 'CHANGELOG.md']
+files = ['starter.html', 'icons.svg', 'favicon.svg', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'MODULES.md', 'COMPONENTS.md', 'MIGRATING.md', 'CHANGELOG.md', 'ACCESSIBILITY_REVIEW.md', 'CONTRIBUTING.md', 'QUALITY.md']
 files += [str(p.relative_to(ROOT)) for p in sorted((ROOT/'css').rglob('*.css'))]
 files += [f'js/{name}.js' for name in ['timvw','controls','overlays','table','select','workflow','files','forms','locale','interactions','tabs','dialogs','templates']]
 files += [str(p.relative_to(ROOT)) for p in sorted((ROOT/'third-party').glob('*.txt'))]

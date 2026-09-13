@@ -48,7 +48,8 @@ PUBLIC_FILES = (
     'css/parts/tabs.css',
     'css/parts/theme.css',
     'css/parts/workflows.css',
-    'downloads/timvw-0.6.0.zip',
+    'downloads/timvw-0.7.0.zip', 'ACCESSIBILITY_REVIEW.md',
+    'examples/custom-elements.html', 'examples/custom-elements.js',
 )
 REQUIRED = {'index.html', 'docs.css', 'css/timvw.css', 'js/timvw.js', 'LICENSE'}
 

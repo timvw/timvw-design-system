@@ -1,5 +1,5 @@
-import { initDialogs } from '../js/dialogs.js?v=0.6.0';
-import { instantiateTemplate } from '../js/templates.js?v=0.6.0';
+import { initDialogs } from '../js/dialogs.js?v=0.7.0';
+import { instantiateTemplate } from '../js/templates.js?v=0.7.0';
 const template = document.getElementById('dialog-template'), container = document.getElementById('instances');
 let count = 0;
 function add() {

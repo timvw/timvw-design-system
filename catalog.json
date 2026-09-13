@@ -292,5 +292,11 @@
     "description": "Readable article, in-page contents, related navigation and a resource footer.",
     "category": "Examples",
     "href": "./examples/article.html"
+  },
+  {
+    "title": "Reusable HTML tags",
+    "description": "Register a native template once, then use custom tags with reactive text attributes and isolated IDs.",
+    "category": "Foundation",
+    "href": "./examples/custom-elements.html"
   }
 ]
