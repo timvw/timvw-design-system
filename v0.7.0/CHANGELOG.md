@@ -4,6 +4,7 @@
 
 - Add `registerTemplate`: register native HTML templates as reusable custom tags, with isolated IDs, safe reactive text attributes, automatic initialization and connection cleanup.
 - Add a live custom-tag demo for independent project dialogs and cards, including dynamic insertion, attribute updates and retained input state.
+- Keep combobox input focus while selecting an option through touch-generated mouse events.
 - Fix forced-color rendering: off/disabled switch thumbs remain visible, the pressed theme button retains its selected border, and the current pagination button has an outline.
 - Apply the fixes to full and selective CSS without breaking existing markup or JavaScript APIs.
 - Add full/selective forced-color regressions, native modal accessibility/focus checks, grouped option semantics and touch-event workflows.
