@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reusable dialog templates · timvw</title><link rel="icon" href="../favicon.svg"><link rel="stylesheet" href="../css/foundation.css?v=0.7.0"><link rel="stylesheet" href="../css/parts/buttons.css?v=0.7.0"><link rel="stylesheet" href="../css/parts/dialogs.css?v=0.7.0"><style>main{max-width:52rem;margin:auto;padding:2rem}#instances{margin-block:2rem}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><script type="module" src="./templates.js?v=0.7.0"></script></head><body class="tvw"><a class="tvw-skip" href="#main">Skip to content</a><main id="main" tabindex="-1"><p><a href="../">timvw / design system</a></p><h1>One template. Many dialogs.</h1><p>This page loads foundation, button and dialog CSS, plus only the dialog and template JavaScript modules. Each instance gets unique IDs and its own focus return.</p><button id="add-template" type="button" class="tvw-button" hidden>Add another dialog</button><div id="instances" class="tvw-stack"></div><noscript><p>JavaScript is needed to instantiate this template. Native dialogs can also be authored directly in the page.</p></noscript><h2>Define once in HTML</h2><pre><code>&lt;template id="dialog-template"&gt;
+  &lt;button type="button" data-tvw-open="dialog" hidden&gt;Open&lt;/button&gt;
+  &lt;dialog id="dialog" aria-labelledby="title"&gt;
+    &lt;h2 id="title" data-tvw-text="title"&gt;Details&lt;/h2&gt;
+    &lt;form method="dialog"&gt;&lt;button&gt;Close&lt;/button&gt;&lt;/form&gt;
+  &lt;/dialog&gt;
+&lt;/template&gt;</code></pre><h2>Instantiate only what you need</h2><pre><code>import { initDialogs } from '../js/dialogs.js';
+import { instantiateTemplate } from '../js/templates.js';
+const instance = instantiateTemplate(template, {
+  values: { title: 'Project details' }
+});
+container.append(instance.fragment);
+initDialogs(container);</code></pre><p>Templates hold trusted markup. Values are inserted as text. Event listeners are attached after cloning. No custom element registration or framework is required.</p><p><a href="../guide.html#imports">Import recipes</a> · <a href="../playground.html">Playground</a></p></main><template id="dialog-template"><section><button type="button" class="tvw-button tvw-button--secondary" data-tvw-open="dialog" data-tvw-text="button" hidden>Open details</button><dialog id="dialog" class="tvw-dialog" aria-labelledby="title" aria-describedby="description"><h2 id="title" data-tvw-text="title">Project details</h2><p id="description" data-tvw-text="description">A reusable dialog.</p><form method="dialog"><button class="tvw-button" value="close" autofocus>Close</button></form></dialog></section></template></body></html>
