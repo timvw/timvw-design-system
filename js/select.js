@@ -69,6 +69,9 @@ export function initSelects(root = document) {
         const item = document.createElement('div'); item.id = `${uid}-option-${i}`;
         item.setAttribute('role', 'option'); item.setAttribute('aria-selected', 'false'); item.textContent = option.text;
         item.addEventListener('pointerdown', event => event.preventDefault());
+        // Preserve input focus through compatibility mouse events after a tap.
+        // WebKit can otherwise blur/hide the list before the option's click.
+        item.addEventListener('mousedown', event => event.preventDefault());
         item.addEventListener('click', () => choose(option));
         const groupName = option.parentElement.tagName === 'OPTGROUP' ? option.parentElement.label : '';
         if (groupName) {
