@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One import. Your HTML. · timvw</title>
+  <link rel="icon" href="../favicon.svg">
+  <script type="module" src="../components/dialog.js?v=0.8.0"></script>
+  <script type="module" src="../components/card.js?v=0.8.0"></script>
+  <script type="module" src="./packaged-components.js?v=0.8.0"></script>
+  <style>
+    /* Page layout only. The components need no stylesheet links or init call. */
+    :root { color-scheme: light dark; }
+    :root[data-tvw-theme="light"] { color-scheme: light; }
+    :root[data-tvw-theme="dark"] { color-scheme: dark; }
+    body { margin: 0; background: light-dark(#fafafa, #1c1d24); color: light-dark(#24242c, #ededee); font: 1rem/1.6 system-ui, sans-serif; }
+    main { max-width: 64rem; margin: auto; padding: clamp(1rem, 4vw, 2.5rem); }
+    h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); line-height: 1.05; letter-spacing: -.045em; margin-block: 1rem; }
+    h2 { line-height: 1.2; letter-spacing: -.025em; }
+    a { color: light-dark(#0369a1, #38bdf8); text-underline-offset: .2em; }
+    section { margin-block: 2rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1rem; }
+    .themes { display: flex; gap: .5rem; }
+    .themes button { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; background: transparent; color: inherit; border: 1px solid currentColor; border-radius: .5rem; cursor: pointer; }
+    .themes button[aria-pressed="true"] { background: light-dark(#24242c,#fff); color: light-dark(#fff,#24242c); }
+    svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 1.7; }
+    :focus-visible { outline: 3px solid light-dark(#0369a1,#38bdf8); outline-offset: 4px; }
+    form { display: grid; gap: .75rem; }
+    input, form button { box-sizing: border-box; font: inherit; min-height: 2.75rem; padding: .6rem .75rem; border: 1px solid light-dark(#73737a,#a1a1aa); border-radius: .5rem; }
+    input { width: 100%; }
+    form button { justify-self: start; cursor: pointer; }
+    pre { padding: 1.25rem; border: 1px solid light-dark(#d3d3d6,#494951); border-radius: .5rem; white-space: pre-wrap; overflow-wrap: anywhere; font-size: .875rem; }
+    .eyebrow { font-size: .875rem; letter-spacing: .08em; text-transform: uppercase; }
+    .result { min-height: 1.6em; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><a href="../">timvw / design system</a></p>
+    <div class="themes" role="group" aria-label="Color theme">
+      <button type="button" data-theme="light" aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4.2 4.2l2.1 2.1m11.4 11.4 2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></button>
+      <button type="button" data-theme="dark" aria-label="Dark theme" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.4A8.5 8.5 0 0 1 8.6 4a8.5 8.5 0 1 0 11.4 11.4Z"/></svg></button>
+      <button type="button" data-theme="system" aria-label="System theme" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="13" rx="2"/><path d="M12 16v5m-5 0h10"/></svg></button>
+    </div>
+    <p class="eyebrow">Native Web Components</p>
+    <h1>One import.<br>Your HTML.</h1>
+    <p>Write the tag. Add a heading, content and actions. Each import brings its own template, styles and behavior; native slots keep your HTML and its state intact.</p>
+    <noscript><p>Interactive custom elements require JavaScript. <a href="../guide.html">Ordinary HTML recipes</a> are also available.</p></noscript>
+    <section aria-labelledby="examples-title">
+      <h2 id="examples-title">Two projects. Independent content.</h2>
+      <div class="grid">
+        <tvw-card>
+          <h3 slot="heading">Atlas workspace</h3>
+          <p>A dialog with your own heading and a real form. Try changing the note, then close and reopen it.</p>
+          <tvw-dialog slot="actions" id="atlas" open-label="Open Atlas">
+            <h2 slot="heading">Edit <em>Atlas</em></h2>
+            <p>Your content stays in the page DOM. The browser displays it through a slot.</p>
+            <form method="dialog">
+              <label for="atlas-note">Project note</label>
+              <input id="atlas-note" name="note" required autocomplete="off" placeholder="Add a note" autofocus>
+              <button value="saved">Save note</button>
+            </form>
+            <button slot="actions" type="button" data-tvw-close value="cancelled">Cancel</button>
+          </tvw-dialog>
+        </tvw-card>
+        <tvw-card>
+          <h3 slot="heading">Beacon workspace</h3>
+          <p>The same tag, different contents. A custom trigger and footer use ordinary buttons.</p>
+          <tvw-dialog slot="actions" id="beacon" close-label="Done">
+            <button slot="trigger" type="button" aria-haspopup="dialog">View Beacon</button>
+            <h2 slot="heading">Beacon details</h2>
+            <p>A separate instance, with its own modal and focus return.</p>
+            <ul><li>Shared color tokens</li><li>Encapsulated component styles</li><li>Native keyboard behavior</li></ul>
+          </tvw-dialog>
+        </tvw-card>
+      </div>
+      <p class="result" role="status" id="dialog-result"></p>
+    </section>
+    <section aria-labelledby="recipe-title">
+      <h2 id="recipe-title">This is the complete setup.</h2>
+      <pre><code>&lt;script type="module" src="./components/dialog.js"&gt;&lt;/script&gt;
+
+&lt;tvw-dialog open-label="Open project"&gt;
+  &lt;h2 slot="heading"&gt;Project Atlas&lt;/h2&gt;
+  &lt;p&gt;Your project details.&lt;/p&gt;
+&lt;/tvw-dialog&gt;</code></pre>
+      <p>The tag registers automatically. More instances reuse the same modules and styles. For a card, import <code>components/card.js</code> and use <code>&lt;tvw-card&gt;</code>.</p>
+      <p><a href="../WEB_COMPONENTS.md">Slots, forms, theming and your own component modules</a> · <a href="./custom-elements.html">Light DOM templates</a> · <a href="https://github.com/timvw/timvw-design-system">GitHub ↗</a></p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,6 +1,14 @@
 # Loading only what you use
 
-The library has two supported entry styles. Both run directly in current browsers without a build step.
+The library has three supported entry styles. All run directly in current browsers without a build step.
+
+## One import for packaged tags
+
+Import `components/dialog.js` for `<tvw-dialog>` or `components/card.js` for
+`<tvw-card>`. Each entry supplies HTML, scoped CSS, behavior and automatic
+registration. Both support native slots, with no separate stylesheet or `init()`.
+See [Web Components](WEB_COMPONENTS.md) and the [working demo](examples/packaged-components.html).
+These entries are opt-in and are not imported by `js/timvw.js`.
 
 ## Full entry points
 

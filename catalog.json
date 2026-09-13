@@ -298,5 +298,11 @@
     "description": "Register a native template once, then use custom tags with reactive text attributes and isolated IDs.",
     "category": "Foundation",
     "href": "./examples/custom-elements.html"
+  },
+  {
+    "title": "One-import Web Components",
+    "category": "Foundation",
+    "description": "Packaged dialog and card tags with native slots, included styles and automatic registration.",
+    "href": "./examples/packaged-components.html"
   }
 ]

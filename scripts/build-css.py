@@ -2,6 +2,7 @@
 """Generate optional CSS families from the canonical, directly usable stylesheets."""
 from pathlib import Path
 import re
+import json
 import sys
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -64,5 +65,19 @@ for name, content in outputs.items():
     if '--check' in sys.argv:
         if not path.exists() or path.read_text() != text: failed.append(str(path.relative_to(ROOT)))
     else: path.parent.mkdir(parents=True, exist_ok=True); path.write_text(text)
+# Shadow components reuse canonical tokens without setting global CSS variables.
+token_layer = next(body for heading, body in rules((ROOT/'css/timvw.css').read_text()) if heading == '@layer timvw.tokens')
+palettes = {heading: dict(re.findall(r'(--tvw-[\w-]+)\s*:\s*([^;]+);', body)) for heading, body in rules(token_layer)}
+light, dark = palettes[':root'], palettes[':root[data-tvw-theme="dark"]']
+values = []
+for key, value in light.items():
+    fallback = f'light-dark({value}, {dark[key]})' if key in dark and key != '--tvw-shadow' else value
+    if key == '--tvw-shadow': fallback = '0 16px 48px light-dark(oklch(20.64% 0.0205 271.56 / .12), rgb(0 0 0 / .3))'
+    values.append(f'  {key.replace("--tvw-", "--_tvw-")}: var({key}, {fallback});')
+shadow = '/* Generated from css/timvw.css by scripts/build-css.py. SPDX-License-Identifier: Apache-2.0.\n * QuantumBlack-derived tokens; see THIRD_PARTY_NOTICES.md. */\nexport default ' + json.dumps('.frame {\n' + '\n'.join(values) + '\n}\n') + ';\n'
+path = ROOT/'components/tokens.js'
+if '--check' in sys.argv:
+    if not path.exists() or path.read_text() != shadow: failed.append(str(path.relative_to(ROOT)))
+else: path.parent.mkdir(parents=True, exist_ok=True); path.write_text(shadow)
 if failed: sys.exit('Outdated modular CSS: '+', '.join(failed))
 print(f'{len(outputs)} modular stylesheets '+('verified.' if '--check' in sys.argv else 'generated.'))

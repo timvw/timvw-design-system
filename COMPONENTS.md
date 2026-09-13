@@ -232,3 +232,11 @@ Working examples: [connected workflows](examples/workflows.html), [localized wor
 ## Reusable HTML tags
 
 `registerTemplate(name, template, {setup})` registers an autonomous custom element backed by a trusted native template. Declared `data-tvw-text` bindings observe matching attributes as text. Existing and future instances initialize automatically; values and IDs survive text updates. The optional setup callback receives `{signal, getId}` and can return connection cleanup. See [MODULES.md](MODULES.md#reusable-html-tags) for complete markup, selective imports, defaults and lifecycle constraints.
+
+## Packaged Web Components
+
+`components/dialog.js` and `components/card.js` register `<tvw-dialog>` and
+`<tvw-card>` with their HTML, CSS and behavior in one import. Native slots keep
+authored content and state intact. See [WEB_COMPONENTS.md](WEB_COMPONENTS.md) for
+slots, attributes, modal methods/events, forms, theming and custom module recipes.
+Try the [standalone example](examples/packaged-components.html).

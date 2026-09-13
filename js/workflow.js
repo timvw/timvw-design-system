@@ -1,5 +1,5 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { translate as t } from './locale.js?v=0.7.0';
+import { translate as t } from './locale.js?v=0.8.0';
 const controllers = new WeakMap();
 export const getWizard = form => controllers.get(form);
 export function initWorkflows(root = document) {

@@ -1,5 +1,5 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { translate as t } from './locale.js?v=0.7.0';
+import { translate as t } from './locale.js?v=0.8.0';
 const editors = new WeakMap(), commands = new WeakMap();
 export const getEditor = element => editors.get(element);
 export const getCommands = element => commands.get(element);

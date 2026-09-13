@@ -17,3 +17,20 @@ test('downloaded runtime bundle works independently of the repository modules', 
   await page.getByRole('button',{name:'Open dialog'}).click();await expect(page.getByRole('dialog',{name:'Bundled dialog'})).toBeVisible();await page.keyboard.press('Escape');
   await expect(page.getByRole('button',{name:'Open dialog'})).toBeFocused();expect(errors).toEqual([]);
 });
+
+test('packaged tags load from the extracted ZIP with no repository CSS or modules', async ({ page }) => {
+  const base = `/test-results/bundle-${test.info().project.name}/timvw-${latest}/`;
+  const requested = [], errors = [];
+  page.on('request', r => { if (/\.(css|js)$/.test(new URL(r.url()).pathname)) requested.push(new URL(r.url()).pathname); });
+  page.on('pageerror', e => errors.push(e.message));
+  page.on('response', r => { if (r.status() >= 400) errors.push(r.url()); });
+  await page.route(`**${base}isolated.html`, route => route.fulfill({ contentType: 'text/html', body: `<!doctype html><html lang="en"><title>Bundled tags</title><script type="module" src="./components/dialog.js"></script><script type="module" src="./components/card.js"></script><tvw-card><h2 slot="heading">Bundled card</h2><tvw-dialog slot="actions" open-label="Open bundled"><h2 slot="heading">Bundled modal</h2><p>Independent of the repository.</p></tvw-dialog></tvw-card></html>` }));
+  await page.goto(`${base}isolated.html`);
+  await expect(page.getByRole('heading', { name: 'Bundled card' })).toBeVisible();
+  await page.getByRole('button', { name: 'Open bundled' }).click();
+  await expect(page.getByRole('dialog', { name: 'Bundled modal' })).toBeVisible();
+  expect(await page.getByRole('dialog').evaluate(el => getComputedStyle(el).borderRadius)).toBe('8px');
+  await page.keyboard.press('Escape'); await expect(page.getByRole('button', { name: 'Open bundled' })).toBeFocused();
+  expect(requested.sort()).toEqual(['dialog','card','shared','tokens'].map(name => `${base}components/${name}.js`).sort());
+  expect(errors).toEqual([]);
+});

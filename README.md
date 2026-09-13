@@ -8,10 +8,25 @@ The theme adapts QuantumBlack’s mist and slate palettes, monochrome actions, a
 
 ## Start using it
 
-[Download v0.7.0](https://timvw.github.io/timvw-design-system/downloads/timvw-0.7.0.zip) · [Component guide](https://timvw.github.io/timvw-design-system/guide.html) · [Selective imports and native templates](MODULES.md) · [Reusable HTML tags](https://timvw.github.io/timvw-design-system/examples/custom-elements.html) · [Upgrade guide](MIGRATING.md)
+[Download v0.8.0](https://timvw.github.io/timvw-design-system/downloads/timvw-0.8.0.zip) · [Component guide](https://timvw.github.io/timvw-design-system/guide.html) · [Selective imports and native templates](MODULES.md) · [Reusable HTML tags](https://timvw.github.io/timvw-design-system/examples/custom-elements.html) · [Upgrade guide](MIGRATING.md)
 
 
-Copy `css/timvw.css`, plus `css/components.css` for the extended components and `icons.svg` for icons. For interactive components, copy `js/timvw.js`, `js/controls.js`, `js/overlays.js`, `js/table.js`, `js/select.js`, `js/files.js`, and `js/workflow.js` together, keeping their relative paths. Keep [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and the referenced upstream license with redistributed copies. Start from [starter.html](starter.html) or use this markup:
+For packaged tags, import once and write ordinary HTML:
+
+```html
+<script type="module" src="./components/dialog.js"></script>
+<tvw-dialog open-label="Open project">
+  <h2 slot="heading">Project Atlas</h2>
+  <p>Your project details.</p>
+</tvw-dialog>
+```
+
+The import supplies HTML, CSS, behavior and registration. Copy the `components/`
+directory from the ZIP; no separate stylesheet or initialization is required.
+[Try the live demo](https://timvw.github.io/timvw-design-system/examples/packaged-components.html)
+or read [slots, forms and component modules](WEB_COMPONENTS.md).
+
+For the existing class-based components, copy `css/timvw.css`, plus `css/components.css` for the extended components and `icons.svg` for icons. For interactive components, copy the runtime `js/` directory, keeping their relative paths. Keep [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and the referenced upstream license with redistributed copies. Start from [starter.html](starter.html) or use this markup:
 
 ```html
 <link rel="stylesheet" href="./css/timvw.css">
@@ -47,6 +62,7 @@ The header's version switcher links to the latest demo and frozen releases:
 | Demo | Contents |
 | --- | --- |
 | [Latest](https://timvw.github.io/timvw-design-system/) | The current demo, updated from `main` |
+| [v0.8.0](https://timvw.github.io/timvw-design-system/v0.8.0/) | One-import dialog/card components with native slots and encapsulated styles |
 | [v0.7.0](https://timvw.github.io/timvw-design-system/v0.7.0/) | Reusable HTML tags, template registration and forced-color fixes |
 | [v0.6.0](https://timvw.github.io/timvw-design-system/v0.6.0/) | Modular imports, native templates, localization and connected workflows |
 | [v0.5.0](https://timvw.github.io/timvw-design-system/v0.5.0/) | Guided forms, searchable documentation, file states, chart and website patterns |
@@ -102,7 +118,7 @@ Color tokens include `bg`, `surface`, `subtle`, `text`, `muted`, `border`, `cont
 
 `.tvw-stack` creates a vertical grid; `.tvw-cluster` creates a wrapping horizontal group. Both use spacing tokens. `.tvw-muted`, `.tvw-sr-only`, and `.tvw-skip` cover secondary text, visually hidden labels, and skip links.
 
-Base element styles are scoped to `.tvw`. Component classes use the `tvw-` prefix. Tokens and `color-scheme` are document-level; this is not a Shadow DOM isolation system. CSS layers are ordered `timvw.tokens`, `timvw.base`, `timvw.components`, and `timvw.utilities`. Unlayered application styles can override them.
+Base element styles are scoped to `.tvw`. Component classes use the `tvw-` prefix. For these class-based components, tokens and `color-scheme` are document-level. The optional packaged tags use Shadow DOM and inherit public tokens. CSS layers are ordered `timvw.tokens`, `timvw.base`, `timvw.components`, and `timvw.utilities`. Unlayered application styles can override them.
 
 ## JavaScript API
 

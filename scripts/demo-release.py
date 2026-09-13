@@ -48,7 +48,9 @@ PUBLIC_FILES = (
     'css/parts/tabs.css',
     'css/parts/theme.css',
     'css/parts/workflows.css',
-    'downloads/timvw-0.7.0.zip', 'ACCESSIBILITY_REVIEW.md',
+    'downloads/timvw-0.8.0.zip', 'ACCESSIBILITY_REVIEW.md',
+    'WEB_COMPONENTS.md', 'components/dialog.js', 'components/card.js', 'components/shared.js', 'components/tokens.js',
+    'examples/packaged-components.html', 'examples/packaged-components.js',
     'examples/custom-elements.html', 'examples/custom-elements.js',
 )
 REQUIRED = {'index.html', 'docs.css', 'css/timvw.css', 'js/timvw.js', 'LICENSE'}

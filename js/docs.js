@@ -1,5 +1,5 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { init, notify, setBusy } from './timvw.js?v=0.7.0';
+import { init, notify, setBusy } from './timvw.js?v=0.8.0';
 
 const palette = document.createElement('dialog');
 palette.className = 'tvw-dialog'; palette.id = 'site-commands'; palette.dataset.tvwCommands = ''; palette.setAttribute('aria-labelledby', 'site-commands-title');

@@ -1,6 +1,6 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { registerTemplate } from '../js/templates.js?v=0.7.0';
-import { initDialogs } from '../js/dialogs.js?v=0.7.0';
+import { registerTemplate } from '../js/templates.js?v=0.8.0';
+import { initDialogs } from '../js/dialogs.js?v=0.8.0';
 
 registerTemplate('project-dialog', document.getElementById('project-template'), {
   setup(element) {

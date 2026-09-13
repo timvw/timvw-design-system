@@ -228,5 +228,16 @@
     "css": "Parts used by the template",
     "javascript": "templates.js: registerTemplate",
     "example": "<template id=\"message-template\"><section class=\"tvw-card\"><h3 data-tvw-text=\"heading\">Message</h3><p data-tvw-text=\"message\">No message yet.</p></section></template>\n<message-card heading=\"Ready\" message=\"Your workspace is available.\"></message-card>\n<script type=\"module\">\n  import { registerTemplate } from \"./js/templates.js\";\n  registerTemplate(\"message-card\", document.getElementById(\"message-template\"));\n</script>"
+  },
+  {
+    "id": "web-components",
+    "title": "One-import Web Components",
+    "variants": "Packaged tvw-dialog and tvw-card with native heading, content and action slots.",
+    "states": "Registered, inserted, open/closed, updated slotted content, disconnected/reconnected.",
+    "guidance": "One entry supplies HTML, CSS and behavior. Native slots retain original nodes and form state. Read WEB_COMPONENTS.md for dialog forms, events and styling.",
+    "css": "Included automatically; no foundation stylesheet required",
+    "standalone": true,
+    "javascript": "components/dialog.js or components/card.js (automatic registration)",
+    "example": "<script type=\"module\" src=\"./components/dialog.js\"></script>\n<tvw-dialog open-label=\"Open project\">\n  <h2 slot=\"heading\">Project Atlas</h2>\n  <p>Your project details.</p>\n</tvw-dialog>"
   }
 ]

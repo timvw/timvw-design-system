@@ -9,7 +9,8 @@ from urllib.parse import urlsplit
 import zipfile
 ROOT = Path(__file__).resolve().parent.parent
 version = json.loads((ROOT/'releases.json').read_text())['latest']
-files = ['starter.html', 'icons.svg', 'favicon.svg', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'MODULES.md', 'COMPONENTS.md', 'MIGRATING.md', 'CHANGELOG.md', 'ACCESSIBILITY_REVIEW.md', 'CONTRIBUTING.md', 'QUALITY.md']
+files = ['starter.html', 'icons.svg', 'favicon.svg', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'MODULES.md', 'COMPONENTS.md', 'MIGRATING.md', 'CHANGELOG.md', 'ACCESSIBILITY_REVIEW.md', 'CONTRIBUTING.md', 'QUALITY.md', 'WEB_COMPONENTS.md']
+files += [str(p.relative_to(ROOT)) for p in sorted((ROOT/'components').glob('*.js'))]
 files += [str(p.relative_to(ROOT)) for p in sorted((ROOT/'css').rglob('*.css'))]
 files += [f'js/{name}.js' for name in ['timvw','controls','overlays','table','select','workflow','files','forms','locale','interactions','tabs','dialogs','templates']]
 files += [str(p.relative_to(ROOT)) for p in sorted((ROOT/'third-party').glob('*.txt'))]
@@ -32,6 +33,7 @@ For example: `python3 -m http.server 8080`, then http://localhost:8080/starter.h
 JavaScript ES modules require HTTP; opening directly from disk may be restricted.
 
 For the complete set, load css/timvw.css and css/components.css, and call init() from js/timvw.js.
+For one-import tags with native slots, import components/dialog.js or components/card.js; read WEB_COMPONENTS.md.
 For selective loading and reusable native HTML templates, read MODULES.md.
 Preserve relative paths and third-party notices when copying files.
 

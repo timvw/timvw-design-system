@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Reusable HTML tags · timvw</title>
   <link rel="icon" href="../favicon.svg">
-  <link rel="stylesheet" href="../css/foundation.css?v=0.7.0">
-  <link rel="stylesheet" href="../css/parts/buttons.css?v=0.7.0">
-  <link rel="stylesheet" href="../css/parts/cards.css?v=0.7.0">
-  <link rel="stylesheet" href="../css/parts/forms.css?v=0.7.0">
-  <link rel="stylesheet" href="../css/parts/dialogs.css?v=0.7.0">
+  <link rel="stylesheet" href="../css/foundation.css?v=0.8.0">
+  <link rel="stylesheet" href="../css/parts/buttons.css?v=0.8.0">
+  <link rel="stylesheet" href="../css/parts/cards.css?v=0.8.0">
+  <link rel="stylesheet" href="../css/parts/forms.css?v=0.8.0">
+  <link rel="stylesheet" href="../css/parts/dialogs.css?v=0.8.0">
   <style>
     main { max-width: 64rem; margin: auto; padding: clamp(1rem, 4vw, 2.5rem); }
     main > section { margin-block: 2rem; }
@@ -18,7 +18,7 @@
     .tag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1rem; }
     project-dialog, status-card { display: block; min-width: 0; }
   </style>
-  <script type="module" src="./custom-elements.js?v=0.7.0"></script>
+  <script type="module" src="./custom-elements.js?v=0.8.0"></script>
 </head>
 <body class="tvw">
   <a class="tvw-skip" href="#main">Skip to content</a>
@@ -67,7 +67,8 @@
     setup: initDialogs
   });
 &lt;/script&gt;</code></pre>
-      <p>Attributes fill <code>data-tvw-text</code> slots as text. Changing a declared attribute updates those text nodes without rebuilding the component. Your CSS reaches the ordinary HTML inside the tag.</p>
+      <p>Attributes fill <code>data-tvw-text</code> bindings as text. Changing a declared attribute updates those text nodes without rebuilding the component. Your CSS reaches the ordinary HTML inside the tag.</p>
+      <p>For a single import with real native slots and included styles, try <a href="./packaged-components.html">packaged Web Components</a>.</p>
       <p>Load foundation CSS and the parts used by your template. This page loads only five CSS files and three JavaScript files.</p>
       <p><a href="../MODULES.md#reusable-html-tags">Registration, attributes and cleanup</a> · <a href="./templates.html">Manual template cloning</a> · <a href="../guide.html">Component recipes</a></p>
     </section>

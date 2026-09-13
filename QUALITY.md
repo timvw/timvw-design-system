@@ -12,8 +12,9 @@ GitHub Actions runs the following on pushes and pull requests:
 - Complete project creation, review, local persistence, expandable rows, column visibility, simulated upload failures/retries, documentation search, and archive-navigation workflows.
 - Narrow-screen overflow and no-JavaScript fallback checks.
 - Asynchronous validation and stale results, editing recovery, cancelled uploads, grouped remote options, URL filters, Dutch formatting, command navigation, safe template cloning and selective network imports.
-- Automated axe-core 4.10.3 checks against WCAG A/AA rules on 16 current pages in both themes, plus error, grouped-option and open modal states. This covers rendered states exercised by the tests; it does not establish complete conformance.
+- Automated axe-core 4.10.3 checks against WCAG A/AA rules on 17 current pages in both themes, plus error, grouped-option and open modal states. This covers rendered states exercised by the tests; it does not establish complete conformance.
 - Chromium screenshot comparisons in both themes, including desktop and mobile compositions.
+- Packaged Web Components: isolated one-import loading, native slot names/content, retained listeners and form values, validation/cancel/submitter semantics, reconnection, theme overrides, modal focus and narrow-screen actions.
 - Reusable custom tags: existing and inserted instances, isolated IDs and form values, reactive text, native registry validation and connection cleanup.
 - Forced-color state regressions with full/selective CSS, native modal accessibility semantics, and touch-event workflows. These are browser emulation checks, not physical-device or screen-reader sessions.
 

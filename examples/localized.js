@@ -1,4 +1,4 @@
-import { init, setLocale, formatNumber, formatDate, notify } from '../js/timvw.js?v=0.7.0';
+import { init, setLocale, formatNumber, formatDate, notify } from '../js/timvw.js?v=0.8.0';
 const locale = new URLSearchParams(location.search).get('lang') === 'nl' ? 'nl-BE' : 'en-GB';
 const nl = locale.startsWith('nl');
 setLocale(locale);

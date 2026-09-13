@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.8.0
+
+- Add one-import `<tvw-dialog>` and `<tvw-card>` entries: native slots, encapsulated
+  styles, automatic registration and shared canonical color-token defaults.
+- Support slotted dialog forms with native validation, cancellation and return
+  values; preserve original nodes/listeners, input state and focus on close.
+- Add standalone demos, own-component authoring guidance, selective network and
+  independent ZIP checks, keyboard/theme/accessibility and visual regressions.
+- Preserve the light DOM template API and all earlier frozen demos.
+
 ## 0.7.0
 
 - Add `registerTemplate`: register native HTML templates as reusable custom tags, with isolated IDs, safe reactive text attributes, automatic initialization and connection cleanup.

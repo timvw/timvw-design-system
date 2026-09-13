@@ -43,7 +43,7 @@ for path in sorted(pages):
     assert len(doc.ids) == len(set(doc.ids)), f'Duplicate IDs in {path}'
     assert all(ref in doc.ids for ref in doc.references), f'Missing label/ARIA target in {path}: {set(doc.references) - set(doc.ids)}'
     for link in doc.links: check_link(path, link)
-for folder in [ROOT / 'js', ROOT / 'examples', ROOT / 'tests']:
+for folder in [ROOT / 'js', ROOT / 'components', ROOT / 'examples', ROOT / 'tests']:
     for path in folder.glob('*.js'):
         for link in re.findall(r'(?:from\s+|import\s*)[\'"](\.[^\'"]+)[\'"]', path.read_text()): check_link(path, link)
 for folder in ROOT.glob('v[0-9]*'):

@@ -1,6 +1,10 @@
 {
-  "latest": "0.7.0",
+  "latest": "0.8.0",
   "versions": [
+    {
+      "version": "0.8.0",
+      "description": "One-import Web Components & native slots"
+    },
     {
       "version": "0.7.0",
       "description": "Reusable HTML tags & native template registration"

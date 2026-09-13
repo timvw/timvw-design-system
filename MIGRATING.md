@@ -1,5 +1,16 @@
 # Upgrading
 
+## v0.7.0 → v0.8.0
+
+Existing CSS, initializers and `registerTemplate()` remain supported. Packaged
+`<tvw-dialog>` and `<tvw-card>` are optional new entries with native Shadow DOM
+slots. Copy `components/` together and import only the component you need; no
+separate CSS or initialization is required. See [WEB_COMPONENTS.md](WEB_COMPONENTS.md).
+
+The light DOM helper keeps its existing behavior. Global CSS reaches authored
+slotted content; customize packaged internals with public tokens and `::part()`.
+Do not load different versions of the same custom tag into one document.
+
 ## v0.6.0 → v0.7.0
 
 Existing markup and JavaScript APIs remain supported. `registerTemplate` is an optional new export from `templates.js` and the full entry point; see [reusable HTML tags](MODULES.md#reusable-html-tags) for registration and lifecycle details. No global registration happens automatically when importing the library.
