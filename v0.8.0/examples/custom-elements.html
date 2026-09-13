@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reusable HTML tags · timvw</title>
+  <link rel="icon" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/foundation.css?v=0.8.0">
+  <link rel="stylesheet" href="../css/parts/buttons.css?v=0.8.0">
+  <link rel="stylesheet" href="../css/parts/cards.css?v=0.8.0">
+  <link rel="stylesheet" href="../css/parts/forms.css?v=0.8.0">
+  <link rel="stylesheet" href="../css/parts/dialogs.css?v=0.8.0">
+  <style>
+    main { max-width: 64rem; margin: auto; padding: clamp(1rem, 4vw, 2.5rem); }
+    main > section { margin-block: 2rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; letter-spacing: -.04em; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: 1rem; background: var(--tvw-subtle); border: 1px solid var(--tvw-border); border-radius: var(--tvw-radius); }
+    .tag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1rem; }
+    project-dialog, status-card { display: block; min-width: 0; }
+  </style>
+  <script type="module" src="./custom-elements.js?v=0.8.0"></script>
+</head>
+<body class="tvw">
+  <a class="tvw-skip" href="#main">Skip to content</a>
+  <main id="main" tabindex="-1">
+    <p><a href="../">timvw / design system</a></p>
+    <h1>Define a tag.<br>Reuse it anywhere.</h1>
+    <p>Register a native HTML template once. Use your own tag in the page, or add more instances later. Every dialog gets its own labels, IDs and input state.</p>
+    <noscript><p>These custom tags need JavaScript. The <a href="../guide.html#dialogs">ordinary HTML recipes</a> remain available without registration.</p></noscript>
+    <section aria-labelledby="instances-heading">
+      <h2 id="instances-heading">Two tags. Two independent dialogs.</h2>
+      <div class="tag-grid" id="tag-instances">
+        <project-dialog id="atlas-tag" heading="Atlas workspace" action="Open Atlas" description="A shared space for the design team."></project-dialog>
+        <project-dialog id="beacon-tag" heading="Beacon workspace" action="Open Beacon" description="A separate instance of the same template."></project-dialog>
+      </div>
+    </section>
+    <section class="tvw-card tvw-stack" id="tag-controls" aria-labelledby="controls-heading" hidden>
+      <h2 id="controls-heading">Update the HTML. Keep the state.</h2>
+      <label class="tvw-field" for="tag-heading">Atlas heading<input class="tvw-input" id="tag-heading" value="Atlas workspace" maxlength="120"></label>
+      <p>Type a note inside Atlas, close it, and change this heading. Reopen it: the heading updates and your note stays in place.</p>
+      <div class="tvw-cluster"><button class="tvw-button" type="button" id="add-tag">Add a project tag</button><button class="tvw-button tvw-button--secondary" type="button" id="remove-tag" disabled>Remove added tag</button></div>
+      <p class="tvw-help" role="status" id="tag-status"></p>
+    </section>
+    <section aria-labelledby="other-heading">
+      <h2 id="other-heading">Use the same helper for other markup.</h2>
+      <status-card heading="Ready to reuse" message="This card is another custom tag, registered from a different template."></status-card>
+    </section>
+    <section aria-labelledby="recipe-heading">
+      <h2 id="recipe-heading">Define once. Write ordinary HTML.</h2>
+      <pre><code>&lt;template id="project-template"&gt;
+  &lt;button type="button" data-tvw-open="details"
+    data-tvw-text="action" hidden&gt;Open details&lt;/button&gt;
+  &lt;dialog id="details" class="tvw-dialog" aria-labelledby="heading"&gt;
+    &lt;h2 id="heading" data-tvw-text="heading"&gt;Project&lt;/h2&gt;
+    &lt;form method="dialog"&gt;&lt;button autofocus&gt;Close&lt;/button&gt;&lt;/form&gt;
+  &lt;/dialog&gt;
+&lt;/template&gt;
+
+&lt;project-dialog heading="Atlas" action="Open Atlas"&gt;&lt;/project-dialog&gt;
+&lt;project-dialog heading="Beacon" action="Open Beacon"&gt;&lt;/project-dialog&gt;
+
+&lt;script type="module"&gt;
+  import { registerTemplate } from '../js/templates.js';
+  import { initDialogs } from '../js/dialogs.js';
+
+  registerTemplate('project-dialog', document.getElementById('project-template'), {
+    setup: initDialogs
+  });
+&lt;/script&gt;</code></pre>
+      <p>Attributes fill <code>data-tvw-text</code> bindings as text. Changing a declared attribute updates those text nodes without rebuilding the component. Your CSS reaches the ordinary HTML inside the tag.</p>
+      <p>For a single import with real native slots and included styles, try <a href="./packaged-components.html">packaged Web Components</a>.</p>
+      <p>Load foundation CSS and the parts used by your template. This page loads only five CSS files and three JavaScript files.</p>
+      <p><a href="../MODULES.md#reusable-html-tags">Registration, attributes and cleanup</a> · <a href="./templates.html">Manual template cloning</a> · <a href="../guide.html">Component recipes</a></p>
+    </section>
+  </main>
+  <template id="project-template">
+    <section class="tvw-card">
+      <h3 data-tvw-text="heading">Project workspace</h3>
+      <p data-tvw-text="description">A reusable project dialog.</p>
+      <button type="button" class="tvw-button tvw-button--secondary" data-tvw-open="details" data-tvw-text="action" hidden>Open details</button>
+    </section>
+    <dialog id="details" class="tvw-dialog" aria-labelledby="heading" aria-describedby="description">
+        <h2 id="heading" data-tvw-text="heading">Project workspace</h2>
+        <p id="description" data-tvw-text="description">A reusable project dialog.</p>
+        <form method="dialog" class="tvw-stack">
+          <label class="tvw-field" for="note">Note for this project<input class="tvw-input" id="note" name="note" autocomplete="off"></label>
+          <div><button class="tvw-button" autofocus>Close</button></div>
+        </form>
+    </dialog>
+  </template>
+  <template id="status-template"><section class="tvw-card"><h3 data-tvw-text="heading">Status</h3><p data-tvw-text="message">No message yet.</p></section></template>
+</body>
+</html>

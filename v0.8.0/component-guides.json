@@ -1,0 +1,243 @@
+[
+  {
+    "id": "buttons",
+    "title": "Buttons & icons",
+    "variants": "Primary, secondary, quiet, danger; small, default, large, icon-only.",
+    "states": "Default, hover, focus, disabled, busy.",
+    "guidance": "Enter/Space activates a button. Give icon-only buttons an accessible name. Use links for navigation.",
+    "css": "buttons",
+    "javascript": "controls.js: setBusy",
+    "example": "<button class=\"tvw-button\" type=\"button\">Save changes</button>\n<button class=\"tvw-button tvw-button--secondary\" type=\"button\">Cancel</button>"
+  },
+  {
+    "id": "forms",
+    "title": "Inputs & choices",
+    "variants": "Text, email, date/time, range, textarea, checkbox, radio, switch and segmented radio groups.",
+    "states": "Empty, populated, required, readonly, disabled, invalid; labels remain visible.",
+    "guidance": "Use visible labels, fieldset/legend for related choices, and aria-describedby for help. Native keys and validation remain available.",
+    "css": "forms",
+    "javascript": "controls.js: initControls (password visibility only)",
+    "example": "<div class=\"tvw-field\">\n  <label for=\"email\">Email address</label>\n  <input class=\"tvw-input\" id=\"email\" name=\"email\" type=\"email\" required aria-describedby=\"email-help\">\n  <small class=\"tvw-help\" id=\"email-help\">Use your work address.</small>\n</div>"
+  },
+  {
+    "id": "validation",
+    "title": "Form validation",
+    "variants": "Native constraints, custom errors, asynchronous validation and cross-field rules.",
+    "states": "Unsubmitted, invalid, validating, valid, service unavailable. Values survive failures.",
+    "guidance": "Submit focuses a linked error summary. Correcting an input cancels stale checks. Server messages are text.",
+    "css": "forms, feedback, buttons",
+    "javascript": "forms.js: initForms, getForm, watchChanges",
+    "example": "<form data-tvw-validate>\n  <div data-tvw-errors class=\"tvw-notice tvw-notice--danger\" tabindex=\"-1\" hidden></div>\n  <label for=\"name\">Name</label><input class=\"tvw-input\" id=\"name\" name=\"name\" required>\n  <button class=\"tvw-button\">Save</button>\n</form>"
+  },
+  {
+    "id": "cards",
+    "title": "Cards",
+    "variants": "Plain content, heading/action, image and metric compositions.",
+    "states": "Static; optional child links and buttons.",
+    "guidance": "Keep the heading hierarchy logical. Avoid clickable containers around nested interactive controls.",
+    "css": "cards",
+    "javascript": "None",
+    "example": "<article class=\"tvw-card\"><h2>Project Atlas</h2><p>A clear summary of the work.</p><a href=\"./examples/projects.html\">View projects</a></article>"
+  },
+  {
+    "id": "feedback",
+    "title": "Badges, notices & empty states",
+    "variants": "Neutral, success, danger, warning, information; empty and error panels.",
+    "states": "Static information or dynamically announced updates.",
+    "guidance": "Pair status colors with words. Add role=status for new nonurgent messages and role=alert only when immediate attention is needed.",
+    "css": "feedback",
+    "javascript": "workflow.js: setRegionState (switching panels)",
+    "example": "<div class=\"tvw-notice tvw-notice--success\" role=\"status\">Your changes have been saved.</div>"
+  },
+  {
+    "id": "navigation",
+    "title": "Navigation & breadcrumbs",
+    "variants": "Horizontal navigation, grouped sidebar, breadcrumbs and pagination.",
+    "states": "Current page, expanded group, collapsed mobile navigation.",
+    "guidance": "Use nav landmarks and aria-current. Native details/summary works with Enter and Space. Preserve ordinary links.",
+    "css": "navigation, layout",
+    "javascript": "controls.js: initControls (mobile navigation)",
+    "example": "<nav class=\"tvw-nav\" aria-label=\"Workspace\"><a href=\"./examples/dashboard.html\" aria-current=\"page\">Overview</a><a href=\"./examples/projects.html\">Projects</a></nav>"
+  },
+  {
+    "id": "accordion",
+    "title": "Accordions",
+    "variants": "Independent native details; multiple sections may stay open.",
+    "states": "Open, closed, focus.",
+    "guidance": "Summary toggles with Enter/Space. Put headings inside the content at the appropriate level. Essential content remains in HTML.",
+    "css": "accordion",
+    "javascript": "None",
+    "example": "<details class=\"tvw-accordion\"><summary>What is included?</summary><div><p>All the source HTML, CSS and JavaScript.</p></div></details>"
+  },
+  {
+    "id": "tabs",
+    "title": "Tabs",
+    "variants": "Horizontal, vertical, right-to-left; automatic activation.",
+    "states": "Selected tab, focused tab; all panels readable without JavaScript.",
+    "guidance": "Arrows switch tabs; Home/End move to boundaries; Tab exits the tablist. Keep labels concise.",
+    "css": "tabs",
+    "javascript": "tabs.js: initTabs",
+    "example": "<div class=\"tvw-tabs\" data-tvw-tabs>\n  <div data-tvw-tablist aria-label=\"Project views\" hidden><button id=\"tab-one\" aria-controls=\"panel-one\">Overview</button><button id=\"tab-two\" aria-controls=\"panel-two\">Activity</button></div>\n  <section id=\"panel-one\"><h2>Overview</h2><p>Project summary.</p></section>\n  <section id=\"panel-two\"><h2>Activity</h2><p>Recent changes.</p></section>\n</div>"
+  },
+  {
+    "id": "dialogs",
+    "title": "Dialogs & drawers",
+    "variants": "Centered modal; edge-aligned detail drawer. Native dialog with reusable templates.",
+    "states": "Closed, open, keyboard focus contained, focus returned on close.",
+    "guidance": "Give the dialog a heading with aria-labelledby. Escape closes. Use a visible close button and concise content.",
+    "css": "dialogs, buttons",
+    "javascript": "dialogs.js: initDialogs",
+    "example": "<button type=\"button\" class=\"tvw-button\" data-tvw-open=\"details\" hidden>View details</button>\n<dialog class=\"tvw-dialog\" id=\"details\" aria-labelledby=\"details-title\">\n  <h2 id=\"details-title\">Project details</h2><p>Context for this project.</p>\n  <form method=\"dialog\"><button class=\"tvw-button\" autofocus>Close</button></form>\n</dialog>"
+  },
+  {
+    "id": "overlays",
+    "title": "Menus, popovers & tooltips",
+    "variants": "Action menus, supplemental content popovers and noninteractive descriptions.",
+    "states": "Open, closed, focused item; disabled actions skipped.",
+    "guidance": "Menus support arrows, Home/End, typeahead and Escape. Tooltips must never contain essential instructions or interactive controls.",
+    "css": "overlays, buttons",
+    "javascript": "overlays.js: initOverlays",
+    "example": "<button class=\"tvw-button tvw-button--secondary\" popovertarget=\"actions\">Actions</button>\n<div class=\"tvw-menu\" id=\"actions\" popover role=\"menu\" data-tvw-menu aria-label=\"Project actions\">\n  <button role=\"menuitem\" type=\"button\">Archive project</button>\n  <button role=\"menuitem\" type=\"button\" disabled>Delete project</button>\n</div>"
+  },
+  {
+    "id": "notifications",
+    "title": "Toast notifications",
+    "variants": "Info, success, warning, danger; persistent or timed.",
+    "states": "Visible, dismissed, timeout paused on hover/focus or hidden tab.",
+    "guidance": "Use for background feedback. Important errors belong beside the affected control. Dismiss is keyboard accessible.",
+    "css": "overlays, feedback, buttons",
+    "javascript": "overlays.js: notify",
+    "example": "// JavaScript\nimport { notify } from './js/overlays.js';\nnotify('Changes saved.', { tone: 'success' });"
+  },
+  {
+    "id": "tables",
+    "title": "Tables, filters & pagination",
+    "variants": "Search, exact filters, date range, sort, row selection, column visibility, expandable details.",
+    "states": "Populated, no results, selected rows, sorted column, expanded row.",
+    "guidance": "Caption and scoped headers describe data. Selection survives filtering. ISO date filters use unique names; URL persistence is opt-in.",
+    "css": "tables, forms, buttons, chips",
+    "javascript": "table.js: initTables, getTable",
+    "example": "<div data-tvw-table data-tvw-url=\"projects\">\n  <label for=\"query\">Search</label><input class=\"tvw-input\" id=\"query\" name=\"q\" data-tvw-search>\n  <div data-tvw-filter-chips></div><p data-tvw-result-count role=\"status\"></p>\n  <div class=\"tvw-table-wrap\"><table class=\"tvw-table\"><caption>Projects</caption><thead><tr><th scope=\"col\">Name</th></tr></thead><tbody><tr><td>Atlas</td></tr></tbody></table></div>\n</div>"
+  },
+  {
+    "id": "selection",
+    "title": "Combobox & multiple selection",
+    "variants": "Local options, optgroups, multiple choices, asynchronous option adapter.",
+    "states": "Query, loading, matches, empty, failed with retry, selected chips, disabled, required.",
+    "guidance": "Arrows highlight; Enter selects; Escape closes; Tab leaves. Native select owns submitted values. Remote requests use AbortSignal and ignore stale results.",
+    "css": "select, forms, buttons, chips",
+    "javascript": "select.js: initSelects, getCombobox",
+    "example": "<div class=\"tvw-field\" data-tvw-combobox>\n  <label for=\"owner\">Owner</label><select id=\"owner\" name=\"owner\" required>\n    <option value=\"\">Choose</option><optgroup label=\"Design\"><option value=\"alex\">Alex Rivera</option><option value=\"sam\">Sam Chen</option></optgroup>\n  </select>\n</div>"
+  },
+  {
+    "id": "wizard",
+    "title": "Multi-step forms",
+    "variants": "Ordered steps, optional back navigation, review before completion.",
+    "states": "Current, completed, invalid step; data retained on Back.",
+    "guidance": "Focus moves to the step heading. Hidden steps still submit their values. Use native constraints; supply application validation before final persistence.",
+    "css": "workflows, forms, buttons",
+    "javascript": "workflow.js: initWorkflows, getWizard",
+    "example": "<form data-tvw-wizard>\n  <ol class=\"tvw-step-list\" data-tvw-step-list></ol><p data-tvw-step-error role=\"alert\" hidden></p>\n  <section data-tvw-step=\"Name\"><h2>Name</h2><label for=\"project\">Project</label><input class=\"tvw-input\" id=\"project\" name=\"project\" required></section>\n  <section data-tvw-step=\"Review\"><h2>Review</h2><p>Confirm your project details.</p></section>\n  <div data-tvw-wizard-controls hidden><button type=\"button\" data-tvw-previous>Back</button><button type=\"button\" data-tvw-next>Continue</button><button data-tvw-finish>Finish</button></div>\n</form>"
+  },
+  {
+    "id": "files",
+    "title": "Files & upload cancellation",
+    "variants": "Single/multiple, drag/drop, type/size/count validation, adapter-driven progress.",
+    "states": "Ready, uploading, complete, failed, cancelled; retry unfinished files.",
+    "guidance": "Keep the native file input. Cancel passes a signal to the adapter; the adapter must abort its own request. Server validation remains required.",
+    "css": "files, forms, buttons, feedback",
+    "javascript": "files.js: initFiles, getFilePicker",
+    "example": "<div class=\"tvw-file-drop\" data-tvw-files data-max-files=\"3\">\n  <label for=\"attachments\">Attachments</label><input class=\"tvw-input\" id=\"attachments\" name=\"attachments\" type=\"file\" multiple accept=\".pdf,.txt\">\n  <ul class=\"tvw-file-list\" data-tvw-file-list></ul><p data-tvw-file-status role=\"status\"></p>\n</div>"
+  },
+  {
+    "id": "loading",
+    "title": "Progress, skeleton & region states",
+    "variants": "Determinate/indeterminate progress; skeleton blocks; ready/loading/empty/error panels.",
+    "states": "One region state at a time; aria-busy tracks loading.",
+    "guidance": "Hide decorative skeletons from assistive technology. Give progress a label. Preserve focus when replacing a panel. Respect reduced motion.",
+    "css": "feedback",
+    "javascript": "workflow.js: setRegionState",
+    "example": "<label for=\"progress\">Upload progress</label><progress class=\"tvw-progress\" id=\"progress\" value=\"45\" max=\"100\">45%</progress>"
+  },
+  {
+    "id": "people",
+    "title": "Avatars & account menus",
+    "variants": "Initials, image fallback, large size and avatar groups.",
+    "states": "Image loaded or failed; named identity.",
+    "guidance": "Name the avatar when it conveys identity; hide it when adjacent text already names the person. Account actions use the menu pattern.",
+    "css": "people, overlays, buttons",
+    "javascript": "workflow.js: initAvatars; overlays.js: initOverlays",
+    "example": "<span class=\"tvw-avatar\" role=\"img\" aria-label=\"Alex Rivera\">AR</span>"
+  },
+  {
+    "id": "layout",
+    "title": "Application layouts",
+    "variants": "Responsive header/sidebar/main, cards, grid, stack, cluster and metrics.",
+    "states": "Desktop sidebar, mobile expandable navigation; content available without enhancement.",
+    "guidance": "Use header/nav/main landmarks and a skip link. Test long content and 320px width. Density customization must preserve touch targets.",
+    "css": "layout, navigation",
+    "javascript": "controls.js: initControls",
+    "example": "<main class=\"tvw-container\"><div class=\"tvw-grid\"><section><h2>Overview</h2><p>Primary content.</p></section><aside><h2>Context</h2><p>Supporting information.</p></aside></div></main>"
+  },
+  {
+    "id": "details",
+    "title": "Detail lists, inline editing & activity",
+    "variants": "Label/value definition lists, one-field editing, chronological activity lists.",
+    "states": "Reading, editing, saving, saved, failed, cancelled.",
+    "guidance": "Cancel/Escape preserves the last saved value. Save errors keep the draft focused. Use time datetime attributes for activity timestamps.",
+    "css": "details, forms, buttons",
+    "javascript": "interactions.js: initInteractions, getEditor",
+    "example": "<dl class=\"tvw-detail-list\"><dt>Owner</dt><dd>Alex Rivera</dd><dt>Started</dt><dd><time datetime=\"2026-09-01\">1 September 2026</time></dd></dl>\n\n<div data-tvw-editor>\n  <span data-tvw-value>Studio workspace</span><button type=\"button\" data-tvw-edit hidden>Edit name</button>\n  <form hidden><label for=\"edit-name\">Name</label><input class=\"tvw-input\" id=\"edit-name\" data-tvw-edit-input required>\n    <button>Save</button><button type=\"button\" data-tvw-edit-cancel>Cancel</button>\n  </form><p data-tvw-edit-status role=\"status\"></p>\n</div>"
+  },
+  {
+    "id": "charts",
+    "title": "Accessible SVG charts",
+    "variants": "Bar and line examples with an equivalent data table.",
+    "states": "Static values; optional application-supplied updates.",
+    "guidance": "Every figure needs a title, description and readable values. Preserve the table, and never encode a category with color alone.",
+    "css": "charts, tables",
+    "javascript": "None",
+    "example": "<figure class=\"tvw-chart\"><figcaption>Completed tasks: 12 in August, 18 in September.</figcaption><svg viewBox=\"0 0 240 100\" role=\"img\" aria-labelledby=\"chart-title chart-desc\"><title id=\"chart-title\">Completed tasks</title><desc id=\"chart-desc\">12 in August and 18 in September.</desc><rect class=\"chart-bar\" x=\"20\" y=\"40\" width=\"70\" height=\"40\"/><rect class=\"chart-bar\" x=\"140\" y=\"20\" width=\"70\" height=\"60\"/><text x=\"20\" y=\"30\">12</text><text x=\"140\" y=\"15\">18</text></svg><table class=\"tvw-table\"><caption>Completed tasks by month</caption><thead><tr><th scope=\"col\">Month</th><th scope=\"col\">Tasks</th></tr></thead><tbody><tr><th scope=\"row\">August</th><td>12</td></tr><tr><th scope=\"row\">September</th><td>18</td></tr></tbody></table></figure>"
+  },
+  {
+    "id": "commands",
+    "title": "Command palette",
+    "variants": "Searchable page links or application actions in a native modal.",
+    "states": "Open, filtered, no matches, focused result, closed.",
+    "guidance": "Ctrl/\u2318 K opens when no other modal is active. Arrow keys focus results; Enter activates; Tab remains ordinary navigation; Escape closes.",
+    "css": "commands, dialogs, forms, buttons",
+    "javascript": "interactions.js: initInteractions, getCommands",
+    "example": "<button data-tvw-command-open=\"commands\" type=\"button\" hidden>Go to\u2026</button>\n<dialog class=\"tvw-dialog\" data-tvw-commands id=\"commands\" aria-labelledby=\"commands-title\"><h2 id=\"commands-title\">Go to\u2026</h2><label for=\"command-search\">Find a page</label><input id=\"command-search\" class=\"tvw-input\" data-tvw-command-search><p data-tvw-command-status role=\"status\"></p><ul class=\"tvw-command-list\"><li><a href=\"./examples/projects.html\" data-tvw-command>Projects</a></li></ul><form method=\"dialog\"><button>Close</button></form></dialog>"
+  },
+  {
+    "id": "theme",
+    "title": "Theme picker",
+    "variants": "Light, dark and system with sun/moon/computer icons.",
+    "states": "Selected preference; multiple pickers synchronized; storage optional.",
+    "guidance": "Use named buttons and aria-pressed. Native system colors still depend on the OS/browser.",
+    "css": "theme, buttons",
+    "javascript": "controls.js: initControls, setTheme",
+    "example": "<div class=\"tvw-theme-picker\" data-tvw-theme-picker role=\"group\" aria-label=\"Color theme\" hidden><button type=\"button\" data-theme=\"light\">Light</button><button type=\"button\" data-theme=\"dark\">Dark</button><button type=\"button\" data-theme=\"system\">System</button></div>"
+  },
+  {
+    "id": "custom-tags",
+    "title": "Reusable HTML tags",
+    "variants": "Register any trusted native template as your own custom element; light DOM uses the existing CSS.",
+    "states": "Already in HTML, inserted later, attribute update, disconnected and reconnected.",
+    "guidance": "Use a hyphenated tag name. data-tvw-text keys bind attributes as text. Register once with registerTemplate; use setup for component initialization and connection cleanup.",
+    "css": "Parts used by the template",
+    "javascript": "templates.js: registerTemplate",
+    "example": "<template id=\"message-template\"><section class=\"tvw-card\"><h3 data-tvw-text=\"heading\">Message</h3><p data-tvw-text=\"message\">No message yet.</p></section></template>\n<message-card heading=\"Ready\" message=\"Your workspace is available.\"></message-card>\n<script type=\"module\">\n  import { registerTemplate } from \"./js/templates.js\";\n  registerTemplate(\"message-card\", document.getElementById(\"message-template\"));\n</script>"
+  },
+  {
+    "id": "web-components",
+    "title": "One-import Web Components",
+    "variants": "Packaged tvw-dialog and tvw-card with native heading, content and action slots.",
+    "states": "Registered, inserted, open/closed, updated slotted content, disconnected/reconnected.",
+    "guidance": "One entry supplies HTML, CSS and behavior. Native slots retain original nodes and form state. Read WEB_COMPONENTS.md for dialog forms, events and styling.",
+    "css": "Included automatically; no foundation stylesheet required",
+    "standalone": true,
+    "javascript": "components/dialog.js or components/card.js (automatic registration)",
+    "example": "<script type=\"module\" src=\"./components/dialog.js\"></script>\n<tvw-dialog open-label=\"Open project\">\n  <h2 slot=\"heading\">Project Atlas</h2>\n  <p>Your project details.</p>\n</tvw-dialog>"
+  }
+]

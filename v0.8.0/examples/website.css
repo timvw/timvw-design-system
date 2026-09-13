@@ -1,0 +1,23 @@
+/* Example website composition; all base components come from timvw. */
+.site-header, .site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.site-header { border-bottom: 1px solid var(--tvw-border); }
+.site-dot, .site-eyebrow { color: var(--tvw-link); }
+.site-hero { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 4rem; padding-block: 5rem; }
+.site-hero h1 { font-size: clamp(2.75rem, 6vw, 5.5rem); line-height: 1.05; letter-spacing: -.055em; margin-block: 1.5rem; }
+.site-lead { font-size: 1.25rem; color: var(--tvw-muted); max-width: 34rem; }
+.site-preview { background: var(--tvw-subtle); box-shadow: var(--tvw-shadow); transform: rotate(-1deg); }
+.site-preview-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 1rem; border-top: 1px solid var(--tvw-border); }
+.site-brands { border-block: 1px solid var(--tvw-border); }
+.site-brands .tvw-cluster { justify-content: space-between; gap: 2rem; font-size: 1.5rem; color: var(--tvw-muted); }
+.site-section { padding-block: 4rem; }
+.site-section h2, .site-cta h2 { font-size: clamp(1.75rem, 4vw, 3rem); letter-spacing: -.035em; }
+.site-eyebrow { font-size: .875rem; font-weight: 650; }
+.site-quote { background: var(--tvw-subtle); }
+.site-quote blockquote { margin: 1rem 0; max-width: 55rem; font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.4; }
+.site-price { font-size: 2rem; font-weight: 700; margin: 0; }
+.site-price small { font-size: .875rem; font-weight: 400; color: var(--tvw-muted); }
+.site-featured { border: 2px solid var(--tvw-focus); }
+.site-cta { padding-block: 4rem; text-align: center; border-top: 1px solid var(--tvw-border); }
+.site-footer { border-top: 1px solid var(--tvw-border); align-items: start; padding-block: 3rem; }
+@media (max-width: 52rem) { .site-hero { grid-template-columns: 1fr; gap: 2rem; padding-block: 3rem; } .site-preview { transform: none; } .site-header nav { gap: .75rem; } }
+@media (prefers-reduced-motion: reduce) { .site-preview { transform: none; } }

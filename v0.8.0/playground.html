@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The timvw design system. Original components, light and dark themes, and copyable examples in plain HTML, CSS, and JavaScript.">
+  <meta name="color-scheme" content="light dark">
+  <title>Make it your own. · timvw</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/timvw.css?v=0.8.0">
+  <link rel="stylesheet" href="./css/components.css?v=0.8.0">
+  <link rel="stylesheet" href="./docs.css">
+  <link rel="stylesheet" href="./demo-controls.css">
+  <script type="module" src="./js/docs.js?v=0.8.0"></script>
+  <script type="module" src="../js/demo-versions.js"></script>
+
+<script type="module" src="./js/playground.js?v=0.8.0"></script></head><body class="tvw"><a class="tvw-skip" href="#main">Skip to content</a><header class="docs-header">
+  <a class="docs-brand" href="./"><span class="docs-mark" aria-hidden="true">tw</span><span><strong>timvw</strong><small>Design system</small></span></a>
+  <div class="docs-controls">
+    <a class="tvw-button tvw-button--quiet" href="./explore.html"><svg class="tvw-icon" aria-hidden="true"><use href="./icons.svg#search"></use></svg> Search</a>
+    <details class="docs-version" data-version-picker data-demo-version="0.8.0"><summary aria-label="Demo version: v0.8.0">v0.8.0</summary><nav aria-label="Demo versions"><a href="../"><strong>Latest</strong><small>Current development</small></a><a href="../v0.8.0/" aria-current="page"><strong>v0.8.0</strong><small>One-import Web Components &amp; native slots</small></a><a href="../v0.7.0/"><strong>v0.7.0</strong><small>Reusable HTML tags &amp; native template registration</small></a><a href="../v0.6.0/"><strong>v0.6.0</strong><small>Modular imports, native templates &amp; connected workflows</small></a><a href="../v0.5.0/"><strong>v0.5.0</strong><small>Guided forms, component explorer &amp; website patterns</small></a><a href="../v0.4.0/"><strong>v0.4.0</strong><small>Application components &amp; complete examples</small></a><a href="../v0.3.0/"><strong>v0.3.0</strong><small>Versioned demos &amp; theme icons</small></a><a href="../v0.2.0/"><strong>v0.2.0</strong><small>QuantumBlack palette</small></a><a href="../v0.1.0/"><strong>v0.1.0</strong><small>Original blue palette</small></a></nav></details>
+    <div class="tvw-theme-picker" data-tvw-theme-picker role="group" aria-label="Color theme" hidden>
+      <button class="tvw-button tvw-button--icon" type="button" data-theme="light" title="Light" aria-label="Light theme" aria-pressed="false">
+        <svg class="tvw-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+      </button>
+      <button class="tvw-button tvw-button--icon" type="button" data-theme="dark" title="Dark" aria-label="Dark theme" aria-pressed="false">
+        <svg class="tvw-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13A8.6 8.6 0 0 1 11 3.5a8.6 8.6 0 1 0 9.5 9.5Z"/></svg>
+      </button>
+      <button class="tvw-button tvw-button--icon" type="button" data-theme="system" title="System" aria-label="Use system theme" aria-pressed="false">
+        <svg class="tvw-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 17v4m-4 0h8"/></svg>
+      </button>
+    </div>
+    <a class="tvw-button tvw-button--secondary" href="https://github.com/timvw/timvw-design-system" aria-label="GitHub repository"><svg class="tvw-icon" aria-hidden="true"><use href="./icons.svg?v=github#github"></use></svg> GitHub</a>
+  </div>
+</header>
+<aside class="docs-archive" aria-label="Archived demo"><p>Frozen demo · v0.8.0. <a href="../">View the latest version →</a></p></aside><main class="docs-main tvw-container" id="main" tabindex="-1"><p class="tvw-eyebrow">Built with timvw</p><h1>Make it your own.</h1><p class="tvw-lead">Explore component variants and copy the resulting HTML. No framework or build tools required.</p><noscript><p>The interactive playground requires JavaScript. <a href="./guide.html">Browse the static HTML recipes instead.</a></p></noscript><div class="tvw-grid"><form class="tvw-card tvw-stack" id="playground-controls" hidden><div class="tvw-field"><label for="play-component">Component</label><select id="play-component" class="tvw-input"><option value="button">Button</option><option value="notice">Notice</option><option value="input">Input</option><option value="card">Card</option></select></div><div class="tvw-field"><label for="play-label">Label / message</label><input class="tvw-input" id="play-label" value="Save changes" maxlength="120"></div><div class="tvw-field"><label for="play-variant">Variant</label><select class="tvw-input" id="play-variant"><option value="primary">Primary</option><option value="secondary">Secondary</option><option value="quiet">Quiet</option><option value="danger">Danger</option></select></div><div class="tvw-field" id="play-size-field"><label for="play-size">Size</label><select class="tvw-input" id="play-size"><option value="default">Default</option><option value="sm">Small</option><option value="lg">Large</option></select></div><label class="tvw-choice" id="play-disabled-field"><input type="checkbox" id="play-disabled"> Disabled</label><label class="tvw-choice" id="play-invalid-field" hidden><input type="checkbox" id="play-invalid"> Invalid</label><label class="tvw-choice"><input type="checkbox" id="play-rtl"> Right-to-left preview</label><p class="tvw-help">Use the theme icons above to compare light and dark. Controls change the preview and the copyable markup together.</p></form><section class="tvw-card"><h2>Live preview</h2><div id="play-preview" style="padding-block:2rem"></div><p class="tvw-help" id="play-dependencies"></p><p id="play-status" role="status"></p></section></div><section><h2>Take it with you.</h2><pre><code id="play-source"></code></pre><button class="tvw-button tvw-button--secondary" id="play-copy" type="button" hidden>Copy HTML</button><span id="copy-status" role="status"></span><p><a href="./guide.html#imports">Load only these component styles</a> · <a href="./examples/templates.html">Reuse markup with native templates</a></p></section><footer class="tvw-cluster"><a href="./guide.html">Component guide</a><a href="./playground.html">Playground</a><a href="./explore.html">Explorer</a><a href="./downloads/timvw-0.8.0.zip">Download v0.7.0</a></footer></main></body></html>

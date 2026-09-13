@@ -1,0 +1,11 @@
+/* Documentation composition only. */
+#component-catalog, #icon-browser, #token-browser { margin-top: 2rem; }
+#component-catalog > .tvw-grid { --tvw-grid-min: 18rem; }
+#component-results h3 { font-size: 1.25rem; margin-block: 1rem .5rem; }
+#component-results p { font-size: .9375rem; }
+.icon-grid, .token-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: 1rem; }
+.icon-tile { display: flex; flex-direction: column; gap: .75rem; padding: 1.5rem .75rem; }
+.token-card { display: grid; gap: .75rem; padding: 1rem; }
+.token-swatch { height: 4rem; border: 1px solid var(--tvw-control-border); border-radius: .25rem; }
+.token-card code, .token-card small { overflow-wrap: anywhere; }
+#project-wizard { max-width: 52rem; }
