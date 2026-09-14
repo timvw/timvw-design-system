@@ -49,7 +49,7 @@ test('text attributes update safely and removal restores the registered default'
 test('late registration upgrades existing tags and disposes connection listeners', async ({ page }) => {
   await page.goto('/examples/custom-elements.html');
   const result = await page.evaluate(async () => {
-    const { registerTemplate } = await import('/js/templates.js?v=0.8.0');
+    const { registerTemplate } = await import('/js/templates.js?v=0.9.0');
     const form = document.createElement('form'); form.innerHTML = '<test-profile heading="Existing"><span>Authored content</span></test-profile>'; document.body.append(form);
     const template = document.createElement('template'); template.innerHTML = '<h2 data-tvw-text="heading">Default</h2><label for="field">Note</label><input id="field" name="note">';
     let setups = 0, cleanups = 0, events = 0;
@@ -70,7 +70,7 @@ test('late registration upgrades existing tags and disposes connection listeners
 test('registration rejects invalid definitions and cannot replace an existing tag', async ({ page }) => {
   await page.goto('/examples/custom-elements.html');
   const errors = await page.evaluate(async () => {
-    const { registerTemplate } = await import('/js/templates.js?v=0.8.0'); const template = document.createElement('template'); template.innerHTML = '<p data-tvw-text="message">Text</p>';
+    const { registerTemplate } = await import('/js/templates.js?v=0.9.0'); const template = document.createElement('template'); template.innerHTML = '<p data-tvw-text="message">Text</p>';
     const result = [];
     for (const run of [() => registerTemplate('dialog', template), () => registerTemplate('status-card', template), () => registerTemplate('bad-setup', template, {setup:42}), () => {
       const invalid = document.createElement('template'); invalid.innerHTML = '<p id="same"></p><p id="same"></p>'; registerTemplate('bad-ids', invalid);

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.0
+
+- Make packaged imports the default in the starter, guide, playground and standard
+  demos. Add selective packages for native HTML families and a complete page entry.
+- Automatically load required styles and enhance new native HTML instances; retain
+  manual loading and template registration as documented alternatives.
+- Give desktop documentation navigation its own viewport-sized scroll area, with
+  independent wheel/keyboard scrolling and a normal flowing layout on mobile.
+
 ## 0.8.0
 
 - Add one-import `<tvw-dialog>` and `<tvw-card>` entries: native slots, encapsulated

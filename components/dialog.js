@@ -1,5 +1,5 @@
 // Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0
-import { createShadow, connectTheme } from './shared.js?v=0.8.0';
+import { createShadow, connectTheme } from './shared.js?v=0.9.0';
 
 export class TvwDialog extends HTMLElement {
   static observedAttributes = ['heading', 'open-label', 'close-label', 'disabled'];

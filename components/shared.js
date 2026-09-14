@@ -1,5 +1,5 @@
 // Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0
-import tokens from './tokens.js?v=0.8.0';
+import tokens from './tokens.js?v=0.9.0';
 
 const sheets = new Map();
 function stylesheet(css) {

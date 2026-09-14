@@ -8,40 +8,33 @@ The theme adapts QuantumBlack’s mist and slate palettes, monochrome actions, a
 
 ## Start using it
 
-[Download v0.8.0](https://timvw.github.io/timvw-design-system/downloads/timvw-0.8.0.zip) · [Component guide](https://timvw.github.io/timvw-design-system/guide.html) · [Selective imports and native templates](MODULES.md) · [Reusable HTML tags](https://timvw.github.io/timvw-design-system/examples/custom-elements.html) · [Upgrade guide](MIGRATING.md)
+[Download v0.9.0](https://timvw.github.io/timvw-design-system/downloads/timvw-0.9.0.zip) · [Component guide](https://timvw.github.io/timvw-design-system/guide.html) · [Selective imports and native templates](MODULES.md) · [Reusable HTML tags](https://timvw.github.io/timvw-design-system/examples/custom-elements.html) · [Upgrade guide](MIGRATING.md)
 
 
-For packaged tags, import once and write ordinary HTML:
+Start with the packaged components. One import supplies their styles, registration
+and automatic behavior:
 
 ```html
-<script type="module" src="./components/dialog.js"></script>
-<tvw-dialog open-label="Open project">
+<script type="module" src="./components/page.js"></script>
+<tvw-card>
   <h2 slot="heading">Project Atlas</h2>
   <p>Your project details.</p>
-</tvw-dialog>
+  <tvw-dialog slot="actions" open-label="Open project">
+    <h2 slot="heading">Edit Atlas</h2>
+    <p>A focused task.</p>
+  </tvw-dialog>
+</tvw-card>
 ```
 
-The import supplies HTML, CSS, behavior and registration. Copy the `components/`
-directory from the ZIP; no separate stylesheet or initialization is required.
-[Try the live demo](https://timvw.github.io/timvw-design-system/examples/packaged-components.html)
-or read [slots, forms and component modules](WEB_COMPONENTS.md).
+Start from [starter.html](starter.html). For selective loading, import only
+`components/card.js`, `components/dialog.js` or the native HTML packages listed in
+[MODULES.md](MODULES.md). The [component guide](guide.html) and [playground](playground.html)
+include ready-to-copy imports. No separate CSS link or `init()` is needed.
+Copy the bundle directories together and keep [LICENSE](LICENSE),
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and upstream licenses.
 
-For the existing class-based components, copy `css/timvw.css`, plus `css/components.css` for the extended components and `icons.svg` for icons. For interactive components, copy the runtime `js/` directory, keeping their relative paths. Keep [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and the referenced upstream license with redistributed copies. Start from [starter.html](starter.html) or use this markup:
-
-```html
-<link rel="stylesheet" href="./css/timvw.css">
-<link rel="stylesheet" href="./css/components.css">
-<body class="tvw">
-  <main>
-    <h1>Hello, timvw.</h1>
-    <button class="tvw-button" type="button">Continue</button>
-  </main>
-  <script type="module">
-    import { init } from './js/timvw.js';
-    init();
-  </script>
-</body>
-```
+The [manual loading alternative](MODULES.md#manual-loading-alternative) remains
+available for applications that manage styles and initialization themselves.
 
 Serve the directory with any static HTTP server to use JavaScript modules. For example, if Python is already installed:
 
@@ -62,6 +55,7 @@ The header's version switcher links to the latest demo and frozen releases:
 | Demo | Contents |
 | --- | --- |
 | [Latest](https://timvw.github.io/timvw-design-system/) | The current demo, updated from `main` |
+| [v0.9.0](https://timvw.github.io/timvw-design-system/v0.9.0/) | Packaged defaults throughout the guide, starter and examples; independently scrollable navigation |
 | [v0.8.0](https://timvw.github.io/timvw-design-system/v0.8.0/) | One-import dialog/card components with native slots and encapsulated styles |
 | [v0.7.0](https://timvw.github.io/timvw-design-system/v0.7.0/) | Reusable HTML tags, template registration and forced-color fixes |
 | [v0.6.0](https://timvw.github.io/timvw-design-system/v0.6.0/) | Modular imports, native templates, localization and connected workflows |
@@ -120,19 +114,13 @@ Color tokens include `bg`, `surface`, `subtle`, `text`, `muted`, `border`, `cont
 
 Base element styles are scoped to `.tvw`. Component classes use the `tvw-` prefix. For these class-based components, tokens and `color-scheme` are document-level. The optional packaged tags use Shadow DOM and inherit public tokens. CSS layers are ordered `timvw.tokens`, `timvw.base`, `timvw.components`, and `timvw.utilities`. Unlayered application styles can override them.
 
-## JavaScript API
+## Application behavior
 
-```js
-import { init } from './js/timvw.js';
-init(); // Enhance descendants of document.
-init(document.getElementById('new-content')); // Enhance descendants of a container.
-```
-
-Call `init()` after markup is available. Repeated calls on existing components are safe. The root itself is not selected; pass the parent container when adding a component. For table row updates, call `getTable(container).refresh()`. Otherwise, replacing a component's internal markup after initialization is not supported; replace the whole component and initialize its parent instead.
-
-Tabs require a `data-tvw-tabs` container, a `data-tvw-tablist` with a label, and buttons with unique IDs and `aria-controls` pointing to panels inside the container. Keep the tablist `hidden` and all panels visible in the source. Initialization adds the tab roles, reveals the controls, and selects the first panel. Arrow keys use automatic activation; Home and End select the first and last tabs. Right-to-left direction and vertical tablists (`aria-orientation="vertical"`) are supported. Nested tabsets and disabled tabs are outside the initial component contract.
-
-Dialog triggers use `data-tvw-open="dialog-id"` and start `hidden`. Give the native `<dialog>` an accessible name through `aria-labelledby`. Use a `form method="dialog"` close button. The browser handles modal focus containment and Escape; the module restores focus to the opener. Critical information or actions should also be available outside a dialog when JavaScript is unavailable.
+Packages initialize existing native HTML and later inserted components automatically.
+Import controller APIs from the same package when your application needs to save
+values, configure adapters or refresh an existing table after replacing its rows.
+See [COMPONENTS.md](COMPONENTS.md) for those application contracts and
+[WEB_COMPONENTS.md](WEB_COMPONENTS.md) for slotted dialog actions and form submission.
 
 ## Accessibility and browser expectations
 

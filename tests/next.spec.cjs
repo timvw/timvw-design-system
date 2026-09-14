@@ -117,7 +117,7 @@ test('new compositions fit narrow screens in both directions', async ({ page }) 
 test('template helper rewrites references and treats supplied values as text', async ({ page }) => {
   await page.goto('/examples/templates.html');
   const result = await page.evaluate(async () => {
-    const { instantiateTemplate } = await import('/js/templates.js?v=0.8.0');
+    const { instantiateTemplate } = await import('/js/templates.js?v=0.9.0');
     const template = document.createElement('template');
     template.innerHTML = '<label for="field" id="label">Name</label><input id="field" aria-labelledby="label" aria-describedby="help"><p id="help" data-tvw-text="message"></p><a href="#field">Focus</a>';
     const instance = instantiateTemplate(template, { values: { message: '<img src=x onerror=alert(1)>' } });
@@ -130,7 +130,7 @@ test('template helper rewrites references and treats supplied values as text', a
 test('server errors target enhanced native selections without overwriting help text', async ({ page }) => {
   await page.goto('/examples/localized.html?lang=en');
   await page.evaluate(async () => {
-    const { getForm } = await import('/js/timvw.js?v=0.8.0');
+    const { getForm } = await import('/components/page.js?v=0.9.0');
     getForm(document.getElementById('locale-form')).setErrors({ owner: 'This owner is no longer available.' });
   });
   await page.locator('[data-tvw-errors] a').first().click(); await expect(page.getByRole('combobox', { name:'Owner', exact:true })).toBeFocused();
@@ -140,7 +140,7 @@ test('server errors target enhanced native selections without overwriting help t
 test('date range filtering includes boundaries and hides rows outside the interval', async ({ page }) => {
   await page.goto('/examples/projects.html');
   const result = await page.evaluate(async () => {
-    const { initTables } = await import('/js/table.js?v=0.8.0');
+    const { initTables } = await import('/js/table.js?v=0.9.0');
     const holder = document.createElement('div'); holder.innerHTML = '<div data-tvw-table><input type="date" data-tvw-filter="due" data-filter-mode="min" value="2026-09-01"><input type="date" data-tvw-filter="due" data-filter-mode="max" value="2026-09-30"><table><thead><tr><th>Project</th></tr></thead><tbody><tr data-due="2026-08-31"><td>Before</td></tr><tr data-due="2026-09-01"><td>Start</td></tr><tr data-due="2026-09-30"><td>End</td></tr><tr data-due="2026-10-01"><td>After</td></tr></tbody></table></div>'; document.body.append(holder); initTables(holder);
     return [...holder.querySelectorAll('tbody tr:not([hidden])')].map(row => row.textContent);
   }); expect(result).toEqual(['Start','End']);
@@ -149,7 +149,7 @@ test('date range filtering includes boundaries and hides rows outside the interv
 test('late option responses cannot replace results for a newer query', async ({ page }) => {
   await page.goto('/examples/workflows.html');
   await page.evaluate(async () => {
-    const { getCombobox } = await import('/js/timvw.js?v=0.8.0');
+    const { getCombobox } = await import('/js/timvw.js?v=0.9.0');
     window.pendingOptions = {};
     getCombobox(document.getElementById('remote-people')).configure({ debounce:0, loadOptions: query => new Promise(resolve => { window.pendingOptions[query] = resolve; }) });
   });

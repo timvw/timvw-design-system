@@ -1,14 +1,62 @@
-# Loading only what you use
+# Component packages: the default
 
-The library has three supported entry styles. All run directly in current browsers without a build step.
+Load `components/page.js` for a complete page. It supplies foundation and component
+styles, registers `<tvw-card>` and `<tvw-dialog>`, and enhances ordinary native HTML.
+There are no separate stylesheet links or `init()` calls. The starter, guide,
+playground and standard demos all use these packaged entries.
 
-## One import for packaged tags
+For selective loading, import only what the page needs:
 
-Import `components/dialog.js` for `<tvw-dialog>` or `components/card.js` for
-`<tvw-card>`. Each entry supplies HTML, scoped CSS, behavior and automatic
-registration. Both support native slots, with no separate stylesheet or `init()`.
-See [Web Components](WEB_COMPONENTS.md) and the [working demo](examples/packaged-components.html).
-These entries are opt-in and are not imported by `js/timvw.js`.
+| Feature | Package |
+| --- | --- |
+| Slotted card / dialog | `components/card.js` / `components/dialog.js` |
+| Existing native dialog / drawer | `components/dialogs.js` |
+| Buttons / forms | `components/buttons.js` / `components/forms.js` |
+| Notices, badges, progress | `components/feedback.js` |
+| Navigation / layouts | `components/navigation.js` / `components/layout.js` |
+| Accordion / tabs | `components/accordion.js` / `components/tabs.js` |
+| Menus, popovers, notifications | `components/overlays.js` |
+| Tables / combobox | `components/tables.js` / `components/select.js` |
+| Wizard / files | `components/workflows.js` / `components/files.js` |
+| Avatars / editing / charts | `components/people.js` / `components/details.js` / `components/charts.js` |
+| Commands / theme picker | `components/commands.js` / `components/theme.js` |
+
+```html
+<script type="module" src="./components/buttons.js"></script>
+<button class="tvw-button" type="button">Save changes</button>
+```
+
+Card and dialog are encapsulated custom tags with native slots; the other packages
+style and enhance ordinary semantic HTML. Native HTML packages automatically apply
+the `tvw` page base class and load foundation plus their own CSS parts. Shared CSS
+requests and initializers are deduplicated. Component-specific application adapters
+and persistence remain application code, imported from the same package:
+
+```js
+import { getForm } from './components/forms.js';
+getForm(document.querySelector('form')).configure({ validate });
+```
+
+Module evaluation waits for the styles and initial enhancement. Await a dynamic
+import before accessing controllers. Later native HTML insertions enhance in the
+next mutation-observer microtask; let that microtask finish before programmatically
+activating newly inserted controls. Existing table data changes still need the
+controller's `refresh()`. Changing attributes on an already enhanced native control
+does not rebuild it. Preserve existing disposal contracts for pending application work.
+
+Select the locale before loading an enhancing package, using `js/locale.js` as a
+configuration module; then dynamically import the package. See the localized example.
+Copy `components/`, `css/` and `js/` together from the ZIP. Only imported packages and
+their dependencies are fetched. `card.js` and `dialog.js` remain standalone and need
+only the component directory. See [Web Components](WEB_COMPONENTS.md) for slots.
+
+## Manual loading alternative
+
+The following low-level CSS and initializer APIs remain supported for applications
+that deliberately manage their own lifecycle. They are not required by the default
+packages. The [manual template example](examples/templates.html) and
+[manual custom-tag registration example](examples/custom-elements.html) illustrate
+these advanced alternatives.
 
 ## Full entry points
 

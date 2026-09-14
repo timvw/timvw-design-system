@@ -1,5 +1,13 @@
 # Upgrading
 
+## v0.8.0 → v0.9.0
+
+Use `components/page.js` for a complete page, or one of the selective packages in
+[MODULES.md](MODULES.md). Remove the matching component stylesheet links and manual
+`init()` calls. Keep application-specific CSS and event handlers. Await the package
+import before accessing controllers; automatic enhancement of later native HTML
+runs in a mutation-observer microtask. The existing manual APIs remain supported.
+
 ## v0.7.0 → v0.8.0
 
 Existing CSS, initializers and `registerTemplate()` remain supported. Packaged

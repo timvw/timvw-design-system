@@ -1,6 +1,10 @@
 {
-  "latest": "0.8.0",
+  "latest": "0.9.0",
   "versions": [
+    {
+      "version": "0.9.0",
+      "description": "Packaged defaults & independently scrolling navigation"
+    },
     {
       "version": "0.8.0",
       "description": "One-import Web Components & native slots"

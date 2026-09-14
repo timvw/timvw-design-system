@@ -1,5 +1,5 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { init, notify, setTheme, setBusy, getTable } from '../js/timvw.js?v=0.8.0';
+import { notify, setTheme, setBusy, getTable } from '../components/page.js?v=0.9.0';
 import { sampleProjects, readProjects, storeProjects } from './data.js';
 
 const currency = new Intl.NumberFormat('en', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
@@ -94,7 +94,7 @@ function drawRows() {
     detail.append(cell); body.append(row, detail);
   });
   getTable(projectTable)?.refresh();
-  init(projectTable);
+
 }
 
 function persistProjects(message) {
@@ -199,7 +199,9 @@ if (dashboard) {
   });
 }
 
-init();
+
+// Let automatic enhancement process the rows before following a deep link.
+await new Promise(queueMicrotask);
 if (projectTable) {
   const id = new URLSearchParams(location.search).get('project');
   const button = [...projectTable.querySelectorAll('[data-project-details]')].find(button => button.dataset.projectDetails === id);

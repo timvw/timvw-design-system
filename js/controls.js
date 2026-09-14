@@ -3,7 +3,7 @@ const enhanced = new WeakSet();
 const busyButtons = new WeakMap();
 let preference;
 let mode = 'system';
-import { translate as t } from './locale.js?v=0.8.0';
+import { translate as t } from './locale.js?v=0.9.0';
 
 function applyTheme() {
   const resolved = mode === 'system' ? (preference.matches ? 'dark' : 'light') : mode;

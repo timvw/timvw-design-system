@@ -1,4 +1,4 @@
-import { init, setLocale, formatNumber, formatDate, notify } from '../js/timvw.js?v=0.8.0';
+import { setLocale, formatNumber, formatDate } from '../js/locale.js?v=0.9.0';
 const locale = new URLSearchParams(location.search).get('lang') === 'nl' ? 'nl-BE' : 'en-GB';
 const nl = locale.startsWith('nl');
 setLocale(locale);
@@ -7,5 +7,5 @@ if (nl) document.querySelectorAll('[data-text]').forEach(node => { node.textCont
 document.title = nl ? 'Nederlandstalige werkruimte · timvw' : 'English workspace · timvw';
 document.getElementById('locale-number').textContent = formatNumber(12345.67, { style: 'currency', currency: 'EUR' });
 document.getElementById('locale-date').textContent = formatDate(new Date('2026-09-11T12:00:00Z'), { dateStyle: 'long', timeZone: 'UTC' });
-init(); document.getElementById('locale-save').hidden = false;
+const { notify } = await import('../components/page.js?v=0.9.0'); document.getElementById('locale-save').hidden = false;
 document.getElementById('locale-form').addEventListener('tvw:valid-submit', event => { event.preventDefault(); const message = nl ? 'Voorbeeld opgeslagen. Er is niets verzonden.' : 'Example saved. Nothing was sent.'; document.getElementById('locale-status').textContent = message; notify(message); });

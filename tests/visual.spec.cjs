@@ -27,3 +27,21 @@ for (const theme of ['light', 'dark']) test(`packaged dialog ${theme}`, async ({
   await page.getByRole('button', {name: 'Open Atlas'}).click();
   await expect(page).toHaveScreenshot(`packaged-dialog-${theme}.png`);
 });
+
+for (const theme of ['light', 'dark']) {
+  test(`navigation short viewport ${theme}`, async ({ page, browserName }) => {
+    test.skip(browserName !== 'chromium' || process.env.VISUAL_TESTS !== 'true', 'Visual baselines use pinned Chromium on Linux.');
+    await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
+    await page.setViewportSize({ width: 1280, height: 600 }); await page.goto('/'); await page.waitForLoadState('networkidle');
+    await page.locator('html').evaluate((el, value) => el.dataset.tvwTheme = value, theme);
+    await page.locator('.docs-sidebar').evaluate(el => el.scrollTop = el.scrollHeight);
+    await expect(page).toHaveScreenshot(`navigation-short-${theme}.png`);
+  });
+  test(`packaged starter ${theme}`, async ({ page, browserName }) => {
+    test.skip(browserName !== 'chromium' || process.env.VISUAL_TESTS !== 'true', 'Visual baselines use pinned Chromium on Linux.');
+    await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
+    await page.goto('/starter.html'); await page.waitForLoadState('networkidle');
+    await page.locator('html').evaluate((el, value) => el.dataset.tvwTheme = value, theme);
+    await expect(page).toHaveScreenshot(`starter-${theme}.png`);
+  });
+}

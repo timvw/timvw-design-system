@@ -8,8 +8,8 @@ test('downloaded runtime bundle works independently of the repository modules', 
   await page.goto(`/test-results/bundle-${test.info().project.name}/timvw-${latest}/starter.html`);
   await expect(page.getByRole('heading',{name:'Hello, timvw.'})).toBeVisible();
   await page.evaluate(async () => {
-    const {init,registerTemplate}=await import('./js/timvw.js');
-    const holder=document.createElement('section');holder.innerHTML='<button type="button" data-tvw-open="bundle-dialog">Open dialog</button><dialog id="bundle-dialog" class="tvw-dialog" aria-labelledby="bundle-title"><h2 id="bundle-title">Bundled dialog</h2><form method="dialog"><button>Close</button></form></dialog>';document.querySelector('main').append(holder);init(holder);
+    const {registerTemplate}=await import('./components/page.js');
+    const holder=document.createElement('section');holder.innerHTML='<button type="button" data-tvw-open="bundle-dialog">Open dialog</button><dialog id="bundle-dialog" class="tvw-dialog" aria-labelledby="bundle-title"><h2 id="bundle-title">Bundled dialog</h2><form method="dialog"><button>Close</button></form></dialog>';document.querySelector('main').append(holder);
     const template=document.createElement('template');template.innerHTML='<h2 data-tvw-text="heading">Default card</h2>';
     registerTemplate('bundled-card',template);const card=document.createElement('bundled-card');card.setAttribute('heading','Bundled custom tag');holder.append(card);
   });

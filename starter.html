@@ -4,17 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My project · timvw</title>
-  <link rel="stylesheet" href="./css/timvw.css">
+  <script type="module" src="./components/page.js"></script>
 </head>
-<body class="tvw">
-  <main class="tvw-card">
-    <h1>Hello, timvw.</h1>
-    <p>Your next project starts with HTML.</p>
-    <button class="tvw-button" type="button">A native button</button>
+<body>
+  <main style="max-width: 48rem; margin: 2rem auto; padding: 1rem;">
+    <tvw-card>
+      <h1 slot="heading">Hello, timvw.</h1>
+      <p>Your next project starts with reusable HTML.</p>
+      <tvw-dialog slot="actions" open-label="Open project">
+        <h2 slot="heading">My project</h2>
+        <p>One import includes the components, styles and behavior.</p>
+      </tvw-dialog>
+    </tvw-card>
   </main>
-  <script type="module">
-    import { init } from './js/timvw.js';
-    init();
-  </script>
 </body>
 </html>

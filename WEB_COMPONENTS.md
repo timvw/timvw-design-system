@@ -31,8 +31,10 @@ default buttons and modal need none of that page CSS.
 | `components/dialog.js` | `<tvw-dialog>` | `trigger`, `heading`, default content, `actions` |
 | `components/card.js` | `<tvw-card>` | `heading`, default content, `actions` |
 
-These two packaged components are opt-in. Importing `js/timvw.js` does not register
-them. Other components continue to use the [full or selective entries](MODULES.md).
+These tags are the default card/dialog recipes. `components/page.js` registers both
+and supplies styles and automatic enhancement for the rest of the page. For other
+native HTML components use the [selective packages](MODULES.md). Importing the
+low-level `js/timvw.js` alone does not register tags.
 All instances share their definition. Tags already in the document upgrade when
 the module loads; tags inserted later work automatically.
 

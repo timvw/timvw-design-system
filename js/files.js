@@ -1,5 +1,5 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { translate as t, formatNumber } from './locale.js?v=0.8.0';
+import { translate as t, formatNumber } from './locale.js?v=0.9.0';
 const controllers = new WeakMap();
 export const getFilePicker = element => controllers.get(element);
 export function initFiles(root = document) {

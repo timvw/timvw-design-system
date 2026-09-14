@@ -1,6 +1,6 @@
 /* Example service adapters only: nothing is transmitted or persisted. */
-import { init, getForm, watchChanges, getEditor, getCombobox, getFilePicker } from '../js/timvw.js?v=0.8.0';
-init();
+import { getForm, watchChanges, getEditor, getCombobox, getFilePicker } from '../components/page.js?v=0.9.0';
+
 document.querySelectorAll('[data-tvw-js-only]').forEach(element => { element.hidden = false; });
 export function delay(ms, signal) {
   return new Promise((resolve, reject) => {

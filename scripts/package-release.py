@@ -32,9 +32,9 @@ Serve this directory with any static HTTP server and open starter.html.
 For example: `python3 -m http.server 8080`, then http://localhost:8080/starter.html.
 JavaScript ES modules require HTTP; opening directly from disk may be restricted.
 
-For the complete set, load css/timvw.css and css/components.css, and call init() from js/timvw.js.
+For a complete page, import components/page.js: styles, registration and behavior are included automatically.
 For one-import tags with native slots, import components/dialog.js or components/card.js; read WEB_COMPONENTS.md.
-For selective loading and reusable native HTML templates, read MODULES.md.
+For selective component packages and the advanced manual-loading alternative, read MODULES.md.
 Preserve relative paths and third-party notices when copying files.
 
 Documentation and examples: https://timvw.github.io/timvw-design-system/v{version}/
