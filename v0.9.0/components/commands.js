@@ -2,4 +2,5 @@
 import { install } from './package.js?v=0.9.0';
 import { initInteractions } from '../js/interactions.js?v=0.9.0';
 export * from '../js/interactions.js?v=0.9.0';
-await install(["commands", "dialogs", "forms", "buttons"], [initInteractions]);
+export const ready = install(["commands", "dialogs", "forms", "buttons"], [initInteractions]);
+await ready;

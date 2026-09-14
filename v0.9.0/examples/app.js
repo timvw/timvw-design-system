@@ -1,6 +1,7 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { notify, setTheme, setBusy, getTable } from '../components/page.js?v=0.9.0';
+import { ready, notify, setTheme, setBusy, getTable } from '../components/page.js?v=0.9.0';
 import { sampleProjects, readProjects, storeProjects } from './data.js';
+await ready;
 
 const currency = new Intl.NumberFormat('en', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
 let projects = readProjects();

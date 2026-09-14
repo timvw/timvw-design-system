@@ -2,4 +2,5 @@
 import { install } from './package.js?v=0.9.0';
 import { initWorkflows } from '../js/workflow.js?v=0.9.0';
 export * from '../js/workflow.js?v=0.9.0';
-await install(["workflows", "forms", "buttons"], [initWorkflows]);
+export const ready = install(["workflows", "forms", "buttons"], [initWorkflows]);
+await ready;

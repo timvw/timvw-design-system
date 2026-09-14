@@ -1,4 +1,4 @@
-/* Showcase layout only. Consumers need css/timvw.css, not this file. */
+/* Showcase layout only. Component packages supply runtime styles. */
 .docs-header { min-height: 5rem; border-bottom: 1px solid var(--tvw-border); background: var(--tvw-surface); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 2rem; }
 .docs-brand { display: flex; align-items: center; gap: .875rem; text-decoration: none; color: var(--tvw-text) !important; }
 .docs-mark { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; background: var(--tvw-highlight); color: var(--tvw-on-highlight); border-radius: .375rem; font: 750 1rem var(--tvw-mono); }

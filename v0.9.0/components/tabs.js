@@ -2,4 +2,5 @@
 import { install } from './package.js?v=0.9.0';
 import { initTabs } from '../js/tabs.js?v=0.9.0';
 export * from '../js/tabs.js?v=0.9.0';
-await install(["tabs"], [initTabs]);
+export const ready = install(["tabs"], [initTabs]);
+await ready;

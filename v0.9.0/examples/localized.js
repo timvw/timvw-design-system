@@ -7,5 +7,5 @@ if (nl) document.querySelectorAll('[data-text]').forEach(node => { node.textCont
 document.title = nl ? 'Nederlandstalige werkruimte · timvw' : 'English workspace · timvw';
 document.getElementById('locale-number').textContent = formatNumber(12345.67, { style: 'currency', currency: 'EUR' });
 document.getElementById('locale-date').textContent = formatDate(new Date('2026-09-11T12:00:00Z'), { dateStyle: 'long', timeZone: 'UTC' });
-const { notify } = await import('../components/page.js?v=0.9.0'); document.getElementById('locale-save').hidden = false;
+const { notify, ready } = await import('../components/page.js?v=0.9.0'); await ready; document.getElementById('locale-save').hidden = false;
 document.getElementById('locale-form').addEventListener('tvw:valid-submit', event => { event.preventDefault(); const message = nl ? 'Voorbeeld opgeslagen. Er is niets verzonden.' : 'Example saved. Nothing was sent.'; document.getElementById('locale-status').textContent = message; notify(message); });

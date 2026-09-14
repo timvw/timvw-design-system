@@ -4,4 +4,5 @@ import { initControls } from '../js/controls.js?v=0.9.0';
 export * from '../js/controls.js?v=0.9.0';
 import { initForms } from '../js/forms.js?v=0.9.0';
 export * from '../js/forms.js?v=0.9.0';
-await install(["forms", "feedback", "buttons"], [initControls, initForms]);
+export const ready = install(["forms", "feedback", "buttons"], [initControls, initForms]);
+await ready;

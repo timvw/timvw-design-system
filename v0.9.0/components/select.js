@@ -2,4 +2,5 @@
 import { install } from './package.js?v=0.9.0';
 import { initSelects } from '../js/select.js?v=0.9.0';
 export * from '../js/select.js?v=0.9.0';
-await install(["select", "forms", "buttons", "chips"], [initSelects]);
+export const ready = install(["select", "forms", "buttons", "chips"], [initSelects]);
+await ready;

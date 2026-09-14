@@ -33,12 +33,14 @@ requests and initializers are deduplicated. Component-specific application adapt
 and persistence remain application code, imported from the same package:
 
 ```js
-import { getForm } from './components/forms.js';
+import { getForm, ready } from './components/forms.js';
+await ready;
 getForm(document.querySelector('form')).configure({ validate });
 ```
 
-Module evaluation waits for the styles and initial enhancement. Await a dynamic
-import before accessing controllers. Later native HTML insertions enhance in the
+The exported `ready` promise resolves after styles and initial enhancement. Await
+`ready` before accessing controllers, including when imports happen concurrently.
+Ordinary component markup needs no readiness or initialization code. Later native HTML insertions enhance in the
 next mutation-observer microtask; let that microtask finish before programmatically
 activating newly inserted controls. Existing table data changes still need the
 controller's `refresh()`. Changing attributes on an already enhanced native control
