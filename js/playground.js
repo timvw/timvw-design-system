@@ -1,4 +1,5 @@
-import '../components/page.js?v=0.9.0';
+import { ready } from '../components/page.js?v=0.9.0';
+await ready;
 document.getElementById('playground-controls').hidden = false;
 const component = document.getElementById('play-component'), label = document.getElementById('play-label'), variant = document.getElementById('play-variant');
 const preview = document.getElementById('play-preview'), source = document.getElementById('play-source');

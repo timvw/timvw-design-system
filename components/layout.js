@@ -2,4 +2,5 @@
 import { install } from './package.js?v=0.9.0';
 import { initControls } from '../js/controls.js?v=0.9.0';
 export * from '../js/controls.js?v=0.9.0';
-await install(["layout", "navigation", "buttons"], [initControls]);
+export const ready = install(["layout", "navigation", "buttons"], [initControls]);
+await ready;

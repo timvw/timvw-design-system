@@ -1,6 +1,7 @@
 /* Copyright 2026 Tim Van Wassenhove. SPDX-License-Identifier: Apache-2.0 */
-import { getFilePicker, setBusy, notify } from '../components/page.js?v=0.9.0';
+import { ready, getFilePicker, setBusy, notify } from '../components/page.js?v=0.9.0';
 import { readProjects, storeProjects } from './data.js';
+await ready;
 const form = document.getElementById('project-wizard');
 form.addEventListener('tvw:stepchange', event => {
   if (event.detail.index !== 3) return;

@@ -130,7 +130,8 @@ test('template helper rewrites references and treats supplied values as text', a
 test('server errors target enhanced native selections without overwriting help text', async ({ page }) => {
   await page.goto('/examples/localized.html?lang=en');
   await page.evaluate(async () => {
-    const { getForm } = await import('/components/page.js?v=0.9.0');
+    const { getForm, ready } = await import('/components/page.js?v=0.9.0');
+    await ready;
     getForm(document.getElementById('locale-form')).setErrors({ owner: 'This owner is no longer available.' });
   });
   await page.locator('[data-tvw-errors] a').first().click(); await expect(page.getByRole('combobox', { name:'Owner', exact:true })).toBeFocused();

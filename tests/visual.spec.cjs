@@ -25,6 +25,7 @@ for (const theme of ['light', 'dark']) test(`packaged dialog ${theme}`, async ({
   await page.setViewportSize({ width: 375, height: 700 });
   await page.goto('/examples/packaged-components.html');
   await page.getByRole('button', {name: 'Open Atlas'}).click();
+  await page.evaluate(() => window.scrollTo(0, 0));
   await expect(page).toHaveScreenshot(`packaged-dialog-${theme}.png`);
 });
 

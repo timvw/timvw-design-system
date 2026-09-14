@@ -92,7 +92,7 @@
     "title": "Dialogs & drawers",
     "variants": "Centered modal; edge-aligned detail drawer. Native dialog with reusable templates.",
     "states": "Closed, open, keyboard focus contained, focus returned on close.",
-    "guidance": "Give the dialog a heading with aria-labelledby. Escape closes. Use a visible close button and concise content.",
+    "guidance": "Put a meaningful heading in slot=\"heading\". The tag manages its accessible name, Escape and focus return. A built-in close button stays available.",
     "css": "dialogs, buttons",
     "javascript": "dialogs.js: initDialogs",
     "example": "<script type=\"module\" src=\"./components/dialog.js\"></script>\n<tvw-dialog open-label=\"Open dialog\"><h2 slot=\"heading\">A focused conversation</h2><p>Keep the task short. Escape or the close button returns you to the page.</p></tvw-dialog>",
@@ -117,7 +117,7 @@
     "guidance": "Use for background feedback. Important errors belong beside the affected control. Dismiss is keyboard accessible.",
     "css": "overlays, feedback, buttons",
     "javascript": "overlays.js: notify",
-    "example": "// JavaScript\nimport { notify } from './components/overlays.js';\nnotify('Changes saved.', { tone: 'success' });",
+    "example": "// JavaScript\nimport { notify, ready } from './components/overlays.js';\nawait ready;\nnotify('Changes saved.', { tone: 'success' });",
     "package": "overlays"
   },
   {

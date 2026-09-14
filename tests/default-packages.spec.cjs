@@ -36,7 +36,7 @@ test('selective packages share CSS, enhance later markup and expose ready contro
   page.on('pageerror', e => errors.push(e.message));
   await page.route('**/package-test.html', route => route.fulfill({ contentType: 'text/html', body: '<!doctype html><html lang="en"><title>Package test</title><script type="module" src="/components/forms.js?v=0.9.0"></script><script type="module" src="/components/buttons.js?v=0.9.0"></script><main><form data-tvw-validate><div data-tvw-errors hidden></div><label for="name">Name</label><input id="name" name="name" class="tvw-input" required><button class="tvw-button">Save</button></form></main></html>' }));
   await page.goto('/package-test.html');
-  expect(await page.evaluate(async () => { const { getForm } = await import('/components/forms.js?v=0.9.0'); return !!getForm(document.querySelector('form')); })).toBeTruthy();
+  expect(await page.evaluate(async () => { const { getForm, ready } = await import('/components/forms.js?v=0.9.0'); await ready; return !!getForm(document.querySelector('form')); })).toBeTruthy();
   await page.getByRole('button', { name: 'Save', exact: true }).click(); await expect(page.locator('[data-tvw-errors]')).toBeVisible();
   await page.evaluate(() => document.querySelector('main').insertAdjacentHTML('beforeend', '<label for="secret">Secret</label><input type="password" id="secret"><button type="button" data-tvw-password aria-controls="secret" hidden>Show password</button>'));
   await expect(page.getByRole('button', { name: 'Show password', exact: true })).toBeVisible();
